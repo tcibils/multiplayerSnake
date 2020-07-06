@@ -95,6 +95,11 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionDown 2
 #define directionLeft 3
 
+#define directionNorth 4
+#define directionEast 5
+#define directionSouth 6
+#define directionWest 7
+
 unsigned const int growthSpeed = 1500;  // In miliseconds. Can be used to make something happen every X miliseconds.
 
 
@@ -113,7 +118,7 @@ struct Player {
   pointOnMatrix newBodyPosition[maxSnakeSize];
   byte colour;
   pointOnMatrix initialPosition;
-  byte initialDirection;
+  byte goingDirection;
   byte appleCaught;
 };
 
@@ -132,8 +137,8 @@ Player players[NUMBER_PLAYERS] = {
     Blue,
     // Initial Position
     {0,0},
-    //Initial Direction
-    directionRight,
+    // goingDirection
+    directionEast,
     // Apple Caught
     0
   }, 
@@ -152,8 +157,8 @@ Player players[NUMBER_PLAYERS] = {
     Red,
     // Initial Position
     {totalDisplayNumberOfRows-1,0},
-    // Initial Direction
-    directionDown,
+    // goingDirection
+    directionSouth,
     // Apple Caught
     0
   },
@@ -172,8 +177,8 @@ Player players[NUMBER_PLAYERS] = {
     Green,
     // Initial Position
     {0,totalDisplayNumberOfColumns-1},
-    // Initial Direction
-    directionLeft,
+    // goingDirection
+    directionWest,
     // Apple Caught
     0
   },
@@ -192,8 +197,8 @@ Player players[NUMBER_PLAYERS] = {
     Purple,
     // Initial Position
     {totalDisplayNumberOfRows-1,totalDisplayNumberOfColumns-1},
-    // Initial Direction
-    directionUp,
+    // goingDirection
+    directionNorth,
     // Apple Caught
     0
   }
