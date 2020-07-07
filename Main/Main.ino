@@ -100,8 +100,8 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionSouth 6
 #define directionWest 7
 
-unsigned const int growthSpeed = 1500;  // In miliseconds. Can be used to make something happen every X miliseconds.
-
+unsigned const int moveSpeed = 1500;  // In miliseconds. Can be used to make something happen every X miliseconds.
+#define mapIsWalled 0 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side.
 
 // ----------------------------------------------------------------------------------------------------
 // -------------------------------------   OTHER TECHNICALS   -----------------------------------------
@@ -239,12 +239,6 @@ void setup() {
 }
 
 void loop() {
-
-if(millis() - lastMillis > 200) {
-
-  
-  lastMillis = millis();
-}
 
   clearLEDMatrix();
   outputDisplay();
