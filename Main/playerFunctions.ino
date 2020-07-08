@@ -103,8 +103,11 @@ void movePlayer(const byte playerID) {
     }
   }
 
+  checkIfAppleEatedAllPlayers();
   
 }
+
+
 
 void checkIfPlayerDied(const byte playerID) {
   
