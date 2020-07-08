@@ -120,7 +120,8 @@ struct Player {
   byte colour;
   pointOnMatrix initialPosition;
   byte goingDirection;
-  byte appleCaught;
+  byte appleCaught;                               // 1 means apple eaten, 0 means no
+  byte isAlive;                                   // 1 means alive, 0 means dead
 };
 
 pointOnMatrix apples[numberOfApples] = {
@@ -148,7 +149,9 @@ Player players[NUMBER_PLAYERS] = {
     // goingDirection
     directionEast,
     // Apple Caught
-    0
+    0,
+    // is alive
+    1
   }, 
 
     // Player 2
@@ -168,7 +171,9 @@ Player players[NUMBER_PLAYERS] = {
     // goingDirection
     directionSouth,
     // Apple Caught
-    0
+    0,
+    // is alive
+    1
   },
 
     // Player 1
@@ -188,7 +193,9 @@ Player players[NUMBER_PLAYERS] = {
     // goingDirection
     directionWest,
     // Apple Caught
-    0
+    0,
+    // is alive
+    1
   },
 
     // Player 1
@@ -208,7 +215,9 @@ Player players[NUMBER_PLAYERS] = {
     // goingDirection
     directionNorth,
     // Apple Caught
-    0
+    0,
+    // is alive
+    1
   }
 };
 

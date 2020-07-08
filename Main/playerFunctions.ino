@@ -110,7 +110,19 @@ void movePlayer(const byte playerID) {
 
 
 void checkIfPlayerDied(const byte playerID) {
-  
+  // we check if we've hit any player
+  for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+    // For each alive player
+    if(players[playerID].isAlive == 1) {
+      // ITERATOR STARTS AT 1 - THAT WAS MEANINGFULL FOR A SINGLE PLAYER SNAKE; NEEDS TO BE TWISTED HERE
+      for (int snakeBodyIterator = 1; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
+        // If the head of the snake is on the same position as one of the body parts, we end the game.
+        if (players[playerID].bodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].bodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+          players[playerID].isAlive = 0;
+        }
+      }
+    }
+  }
 }
 
 void checkIfAnyPlayerDied() {
