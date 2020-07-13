@@ -88,7 +88,7 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 // -------------------------------------   GAME PARAMETERS   ------------------------------------------
 // ----------------------------------------------------------------------------------------------------
 
-#define maxSnakeSize 40
+#define maxSnakeSize 40             // Defines the maximum size of a snake. Should be equal or lower than 255, as iterators on body size are "byte" type !
 
 #define directionUp 0
 #define directionRight 1
@@ -101,8 +101,9 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionWest 7
 
 unsigned const int moveSpeed = 1500;  // In miliseconds. Can be used to make something happen every X miliseconds.
-#define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side.
+#define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
 #define numberOfApples 4              // Defines how many apples are present in the game
+#define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
 
 // ----------------------------------------------------------------------------------------------------
 // -------------------------------------   OTHER TECHNICALS   -----------------------------------------

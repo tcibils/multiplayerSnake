@@ -104,21 +104,48 @@ void movePlayer(const byte playerID) {
   }
 
   checkIfAppleEatedAllPlayers();
+  checkIfAnyPlayerDied();
   
 }
 
+// Displays a player's snake on the LEDMatrix
+void displayPlayerSnake(const byte playerID) {
+  // If we do not show dead players
+  if(deadPlayersRemain == 0) {
+    // And if the player is alive
+    if(players[playerID].isAlive == 1) {
+      // Then we iterate on the player's snake body, to plot it on the LED Matrix.
+      // WE NEED A CHECK ON THE BODY FOR -1 OF 255 VALUES, WHICH MEAN THE SNAKE ISN'T THAT LONG!
+      for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
+        LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+      }
+    }
+  }
+  else if(deadPlayersRemain == 1) {
+    
+  }
+}
+
+void displayAllPlayerSnakes() {
+  for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+    displayPlayerSnake(playerIndex);
+  }
+}
 
 
 void checkIfPlayerDied(const byte playerID) {
   // we check if we've hit any player
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-    // For each alive player
-    if(players[playerID].isAlive == 1) {
-      // ITERATOR STARTS AT 1 - THAT WAS MEANINGFULL FOR A SINGLE PLAYER SNAKE; NEEDS TO BE TWISTED HERE
-      for (int snakeBodyIterator = 1; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
-        // If the head of the snake is on the same position as one of the body parts, we end the game.
-        if (players[playerID].bodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].bodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
-          players[playerID].isAlive = 0;
+    // If we're erasing dead players,
+    if(deadPlayersRemain == 0) {
+      // Then we check that we haven't hit an alive player
+      if(players[playerID].isAlive == 1) {
+        // ITERATOR STARTS AT 1 - THAT WAS MEANINGFULL FOR A SINGLE PLAYER SNAKE; NEEDS TO BE TWISTED HERE
+        for (int snakeBodyIterator = 1; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
+          // If the head of the snake is on the same position as one of the body parts, we end the game.
+          if (players[playerID].bodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].bodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+            players[playerID].isAlive = 0;
+          }
         }
       }
     }
