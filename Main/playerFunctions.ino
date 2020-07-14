@@ -1,11 +1,12 @@
 void changeAllPlayerDirections() {
+  checkAllButtons();
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
     changePlayerDirection(playerIndex);
   }
 }
 
 void changePlayerDirection(const byte playerID) {
-  if(playerID == 0) {
+  if(playerID == 0) {     
     if(playerButtonPushed[0][0] == 1) {
       players[0].goingDirection = directionNorth;
     }
@@ -21,15 +22,48 @@ void changePlayerDirection(const byte playerID) {
   }
 
   if(playerID == 1) {
-    // To be filled depending on how I built stuff
+    if(playerButtonPushed[1][0] == 1) {
+      players[1].goingDirection = directionWest;
+    }
+    if(playerButtonPushed[1][1] == 1) {
+      players[1].goingDirection = directionNorth;
+    }
+    if(playerButtonPushed[1][2] == 1) {
+      players[1].goingDirection = directionEast;
+    }
+    if(playerButtonPushed[1][3] == 1) {
+      players[1].goingDirection = directionSouth;
+    }
   }
 
   if(playerID == 2) {
-    
+    if(playerButtonPushed[2][0] == 1) {
+      players[2].goingDirection = directionNorth;
+    }
+    if(playerButtonPushed[2][1] == 1) {
+      players[2].goingDirection = directionEast;
+    }
+    if(playerButtonPushed[2][2] == 1) {
+      players[2].goingDirection = directionSouth;
+    }
+    if(playerButtonPushed[2][3] == 1) {
+      players[2].goingDirection = directionWest;
+    }
   }
 
   if(playerID == 3) {
-    
+    if(playerButtonPushed[3][0] == 1) {
+      players[3].goingDirection = directionEast;
+    }
+    if(playerButtonPushed[3][1] == 1) {
+      players[3].goingDirection = directionSouth;
+    }
+    if(playerButtonPushed[3][2] == 1) {
+      players[3].goingDirection = directionWest;
+    }
+    if(playerButtonPushed[3][3] == 1) {
+      players[3].goingDirection = directionNorth;
+    }
   }
 }
 

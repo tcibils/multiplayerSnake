@@ -269,9 +269,12 @@ void setup() {
 }
 
 void loop() {
-  clearLEDMatrix();
-  moveAllPlayers();
-  displayAllPlayerSnakes();
-  outputDisplay();
+  changeAllPlayerDirections();
+  if (millis() - lastMillis >= moveSpeed) {
+    clearLEDMatrix();
+    moveAllPlayers();
+    displayAllPlayerSnakes();
+    outputDisplay();
+  }
   delay(1);
 }
