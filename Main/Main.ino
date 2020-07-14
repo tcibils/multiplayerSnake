@@ -7,6 +7,17 @@
 #include "FastLED.h"
 #include <avr/pgmspace.h>
 
+/* TODO
+ *  
+ *  - Manage player death
+ *  - Slow time
+ *  - Change player colours (heads != than body, and apple different colour)
+ *  - Maybe add a white frame around the table or something to show the boundaries?
+ *  - Experiment with more or less apples
+ *  - Support various number of player from 1 to 4
+ *  - Make start game and end game screens, with choices and or scores, that kind of stuff
+ */
+
 
 // ----------------------------------------------------------------------------------------------------
 // ----------------------------------   LED MATRIX CODE   ---------------------------------------------

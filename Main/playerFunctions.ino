@@ -108,12 +108,7 @@ void movePlayer(const byte playerID) {
 
   // If enough time has passed,
   if (millis() - lastMillis >= moveSpeed) {
-    
-    // Copy snake in previousSnake, with 1 of difference
-    // Add as first dot the point in which the player is going
-    // Check if the player dies
-    // If the player ate an apple, keep the last place of the snake body
-  
+      
     // First, move the snake head
     // if we're going up,
     if(players[playerID].goingDirection == directionNorth) {
