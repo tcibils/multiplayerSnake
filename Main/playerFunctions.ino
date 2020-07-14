@@ -83,7 +83,7 @@ void checkIfPlayerDied(const byte playerID) {
         // ITERATOR STARTS AT 1 - THAT WAS MEANINGFULL FOR A SINGLE PLAYER SNAKE; NEEDS TO BE TWISTED HERE
         for (int snakeBodyIterator = 1; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
           // If the head of the snake is on the same position as one of the body parts, we end the game.
-          if (players[playerID].bodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].bodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+          if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
             players[playerID].isAlive = 0;
           }
         }
@@ -189,7 +189,7 @@ void movePlayer(const byte playerID) {
     }
   
     // Checking if an apple was eaten or if the player died
-    // checkIfAppleEatedAllPlayers();
+    checkIfAppleEatedAllPlayers();
     // checkIfAnyPlayerDied();
   
     // We copy the previous snake in the new snake
@@ -210,6 +210,11 @@ void movePlayer(const byte playerID) {
           players[playerID].newBodyPosition[playerBodyIndex].columnCoordinate = 255;
         }
       }
+    }
+
+    // If the apple was caught, it did its job of making the snake longer, and thus we reset the parameter.
+    if(players[playerID].appleCaught == 1) {
+      players[playerID].appleCaught = 0;
     }
   
     // And finally we copy the new snake in the old snake back

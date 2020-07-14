@@ -27,21 +27,54 @@ void generateApple(const byte replacedAppleID) {
   }
 }
 
+void displayAllApples() {
+  for(byte displayAppleID = 0; displayAppleID < numberOfApples; displayAppleID++) {
+    LEDMatrix[apples[displayAppleID].lineCoordinate][apples[displayAppleID].columnCoordinate] = Green;
+  }
+}
+
 void checkIfAppleEatedAllPlayers() {
+  
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
     checkIfAppleEated(playerIndex);
   }
 }
 
 void checkIfAppleEated(const byte playerID) {
+  /*
+  Serial.print("Called for playerID ");
+  Serial.print(playerID);
+  Serial.print("\n");
+  */
   // for a given player, for each apple
-  for(byte appleID; appleID < numberOfApples; appleID++) {
+  for(byte appleIndex=0; appleIndex < numberOfApples; appleIndex++) {
     // We check if the snake head is on the apple
-    if(players[playerID].bodyPosition[0].columnCoordinate == apples[appleID].columnCoordinate && players[playerID].bodyPosition[0].lineCoordinate == apples[appleID].lineCoordinate) {
+    /*
+    Serial.print("For player ");
+    Serial.print(playerID);
+    Serial.print(", we check for apple ");
+    Serial.print(appleIndex);
+    Serial.print("\n");
+    Serial.print("players[playerID].newBodyPosition[0].columnCoordinate: ");
+    Serial.print(players[playerID].newBodyPosition[0].columnCoordinate);
+    Serial.print(" = ");
+    Serial.print(apples[appleIndex].columnCoordinate);
+    Serial.print(" :apples[appleIndex].columnCoordinate");
+    Serial.print("\n");
+    Serial.print("players[playerID].newBodyPosition[0].lineCoordinate: ");
+    Serial.print(players[playerID].newBodyPosition[0].lineCoordinate);
+    Serial.print(" = ");
+    Serial.print(apples[appleIndex].lineCoordinate);
+    Serial.print(" :apples[appleIndex].lineCoordinate");
+    Serial.print("\n");
+    Serial.print("\n");
+    */
+    
+    if(players[playerID].newBodyPosition[0].columnCoordinate == apples[appleIndex].columnCoordinate && players[playerID].newBodyPosition[0].lineCoordinate == apples[appleIndex].lineCoordinate) {
       // In which case, we set the apple caught parameter of this player to 1
        players[playerID].appleCaught = 1;
        // And we generate a new apple straight away
-       generateApple(appleID);
+       generateApple(appleIndex);
     }
   }
 }

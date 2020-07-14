@@ -30,7 +30,7 @@ void checkButtons(const byte playerID) {
     uint16_t btns = getSnesButtons(playerID); // Valeurs actuelles des boutons
   
     if(btns & NO_GAMEPAD) {
-      Serial.println(F("No gamepad connected"));
+      // Serial.println(F("No gamepad connected"));
       return;
     }
 

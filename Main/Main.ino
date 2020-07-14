@@ -100,7 +100,7 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionSouth 6
 #define directionWest 7
 
-unsigned const int moveSpeed = 1500;  // In miliseconds. Can be used to make something happen every X miliseconds.
+#define moveSpeed 6000  // In miliseconds. Can be used to make something happen every X miliseconds.
 #define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
 #define numberOfApples 4              // Defines how many apples are present in the game
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
@@ -270,8 +270,13 @@ void setup() {
 
 void loop() {
   changeAllPlayerDirections();
+  
+  
   if (millis() - lastMillis >= moveSpeed) {
+    Serial.print("we're int");
+    Serial.print("\n");
     clearLEDMatrix();
+    displayAllApples();
     moveAllPlayers();
     displayAllPlayerSnakes();
     outputDisplay();
