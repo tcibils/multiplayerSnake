@@ -108,11 +108,11 @@ unsigned const int moveSpeed = 1500;  // In miliseconds. Can be used to make som
 #define initialPositionLinePlayerOne 0
 #define initialPositionColumnPlayerOne 0
 
-#define initialPositionLinePlayerTwo 31
-#define initialPositionColumnPlayerTwo 0
+#define initialPositionLinePlayerTwo 0
+#define initialPositionColumnPlayerTwo 31
 
-#define initialPositionLinePlayerThree 0
-#define initialPositionColumnPlayerThree 31
+#define initialPositionLinePlayerThree 31
+#define initialPositionColumnPlayerThree 0
 
 #define initialPositionLinePlayerFour 31
 #define initialPositionColumnPlayerFour 31
@@ -204,14 +204,14 @@ Player players[NUMBER_PLAYERS] = {
     // Initial Position
     {0,totalDisplayNumberOfColumns-1},
     // goingDirection
-    directionWest,
+    directionNorth,
     // Apple Caught
     0,
     // is alive
     1
   },
 
-    // Player 1
+    // Player 4
   { // Body Position
     {
       {initialPositionLinePlayerFour, initialPositionColumnPlayerFour}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255} 
@@ -226,7 +226,7 @@ Player players[NUMBER_PLAYERS] = {
     // Initial Position
     {totalDisplayNumberOfRows-1,totalDisplayNumberOfColumns-1},
     // goingDirection
-    directionNorth,
+    directionWest,
     // Apple Caught
     0,
     // is alive
@@ -270,6 +270,7 @@ void setup() {
 
 void loop() {
   clearLEDMatrix();
+  moveAllPlayers();
   displayAllPlayerSnakes();
   outputDisplay();
   delay(1);
