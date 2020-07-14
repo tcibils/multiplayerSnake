@@ -227,9 +227,12 @@ void displayPlayerSnake(const byte playerID) {
     // And if the player is alive
     if(players[playerID].isAlive == 1) {
       // Then we iterate on the player's snake body, to plot it on the LED Matrix.
-      // WE NEED A CHECK ON THE BODY FOR -1 OF 255 VALUES, WHICH MEAN THE SNAKE ISN'T THAT LONG!
       for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
-        LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+        // If we didn't reach the snake's end
+        if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
+          // We add the player snake position to the matrix
+          LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+        }
       }
     }
   }
