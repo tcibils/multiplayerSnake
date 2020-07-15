@@ -110,18 +110,21 @@ void moveAllPlayers() {
 
 // Checks if player "playerID" has hit any player's snake body, including life/death logic of the players
 void checkIfPlayerDied(const byte playerID) {
-  // we check if we've hit any player
-  for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-    // If we're erasing dead players,
-    if(deadPlayersRemain == 0) {
-      // Then we check that we haven't hit an alive player
-      if(players[playerID].isAlive == 1) {
-        checkIfPlayerHeadHitSnake(playerID, playerIndex);
+  // We only make the check if the player we're talking about isn't dead already
+  if(players[playerID].isAlive == 1) {
+    // we check if we've hit any player
+    for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+      // If we're erasing dead players,
+      if(deadPlayersRemain == 0) {
+        // Then we check that we haven't hit an alive player
+        if(players[playerIndex].isAlive == 1) {
+          checkIfPlayerHeadHitSnake(playerID, playerIndex);
+        }
       }
-    }
-    // If dead players can be hit
-    else if(deadPlayersRemain == 1) {
-        checkIfPlayerHeadHitSnake(playerID, playerIndex);
+      // If dead players can be hit
+      else if(deadPlayersRemain == 1) {
+          checkIfPlayerHeadHitSnake(playerID, playerIndex);
+      }
     }
   }
 }
@@ -130,6 +133,9 @@ void checkIfPlayerDied(const byte playerID) {
 void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
       // We iterate on each snake body
       for (int snakeBodyIterator = 0; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
+    //    Serial.print("Snake body iterator: ");
+    //    Serial.print(snakeBodyIterator);
+    //    Serial.print("\n");
         // If we're iterating and finding the actual player, and we're considering the snake head
         if(playerID == playerIndex &&  snakeBodyIterator == 0) {
           // Then we do nothing, as we don't want the snake's head to hit itself
@@ -138,8 +144,29 @@ void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
         else {
           // If the head of the snake is on the same position as one of the body parts, we end the game.
           // In the direction changes, there is some logic to avoid the player to get back on itself
-          if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
-            players[playerID].isAlive = 0;
+          if(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate != 255 && players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate!= 255) {
+            if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+              players[playerID].isAlive = 0;
+              /*
+                Serial.print("playerID :");
+                Serial.print(playerID);
+                Serial.print(" is now ");
+                Serial.print(players[playerID].isAlive);
+                Serial.print(", because his head, in (");
+                Serial.print(players[playerID].newBodyPosition[0].lineCoordinate);
+                Serial.print(", ");
+                Serial.print(players[playerID].newBodyPosition[0].columnCoordinate);
+                Serial.print(") hit player ");
+                Serial.print(playerIndex);
+                Serial.print(" body part number ");
+                Serial.print(snakeBodyIterator);
+                Serial.print(" which is in (");
+                Serial.print(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate);
+                Serial.print(", ");
+                Serial.print(players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate);
+                Serial.print("). \n");
+              */
+            }
           }
         }
       }
