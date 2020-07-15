@@ -6,63 +6,98 @@ void changeAllPlayerDirections() {
 }
 
 void changePlayerDirection(const byte playerID) {
+  // Each player is placed on a different side of the table
+  // Hence, their perspective on the snake going "left" or "right" is different
   if(playerID == 0) {     
     if(playerButtonPushed[0][0] == 1) {
-      players[0].goingDirection = directionNorth;
+      // We want to avoid the snake going back on itself
+      if(players[0].goingDirection != directionSouth) {
+        players[0].goingDirection = directionNorth;
+      }
     }
     if(playerButtonPushed[0][1] == 1) {
-      players[0].goingDirection = directionEast;
+      if(players[0].goingDirection != directionWest) {
+        players[0].goingDirection = directionEast;
+      }
     }
     if(playerButtonPushed[0][2] == 1) {
-      players[0].goingDirection = directionSouth;
+      if(players[0].goingDirection != directionNorth) {
+        players[0].goingDirection = directionSouth;
+      }
     }
     if(playerButtonPushed[0][3] == 1) {
-      players[0].goingDirection = directionWest;
+      if(players[0].goingDirection != directionEast) {
+        players[0].goingDirection = directionWest;
+      }
     }
   }
 
   if(playerID == 1) {
     if(playerButtonPushed[1][0] == 1) {
+      if(players[1].goingDirection != directionEast) {
       players[1].goingDirection = directionWest;
+      }
     }
     if(playerButtonPushed[1][1] == 1) {
+      if(players[1].goingDirection != directionSouth) {
       players[1].goingDirection = directionNorth;
+      }
     }
     if(playerButtonPushed[1][2] == 1) {
+      if(players[1].goingDirection != directionWest) {
       players[1].goingDirection = directionEast;
+      }
     }
     if(playerButtonPushed[1][3] == 1) {
+      if(players[1].goingDirection != directionNorth) {
       players[1].goingDirection = directionSouth;
+      }
     }
   }
 
   if(playerID == 2) {
     if(playerButtonPushed[2][0] == 1) {
+      if(players[2].goingDirection != directionSouth) {
       players[2].goingDirection = directionNorth;
+      }
     }
     if(playerButtonPushed[2][1] == 1) {
+      if(players[2].goingDirection != directionWest) {
       players[2].goingDirection = directionEast;
+      }
     }
     if(playerButtonPushed[2][2] == 1) {
+      if(players[2].goingDirection != directionNorth) {
       players[2].goingDirection = directionSouth;
+      }
     }
     if(playerButtonPushed[2][3] == 1) {
+      if(players[2].goingDirection != directionEast) {
       players[2].goingDirection = directionWest;
+      }
     }
   }
 
   if(playerID == 3) {
     if(playerButtonPushed[3][0] == 1) {
+      if(players[3].goingDirection != directionWest) {
       players[3].goingDirection = directionEast;
+      }
     }
     if(playerButtonPushed[3][1] == 1) {
+      if(players[3].goingDirection != directionNorth) {
       players[3].goingDirection = directionSouth;
+      }
     }
     if(playerButtonPushed[3][2] == 1) {
+      if(players[3].goingDirection != directionEast) {
       players[3].goingDirection = directionWest;
+      }
     }
     if(playerButtonPushed[3][3] == 1) {
+      if(players[3].goingDirection != directionSouth) {
       players[3].goingDirection = directionNorth;
+      }
     }
   }
 }
