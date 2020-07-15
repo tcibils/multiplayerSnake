@@ -115,14 +115,25 @@ void checkIfPlayerDied(const byte playerID) {
     if(deadPlayersRemain == 0) {
       // Then we check that we haven't hit an alive player
       if(players[playerID].isAlive == 1) {
-        // ITERATOR STARTS AT 1 - THAT WAS MEANINGFULL FOR A SINGLE PLAYER SNAKE; NEEDS TO BE TWISTED HERE
-        for (int snakeBodyIterator = 1; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
-          // If the head of the snake is on the same position as one of the body parts, we end the game.
-          if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
-            players[playerID].isAlive = 0;
+        // We iterate on each snake body
+        for (int snakeBodyIterator = 0; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
+          // If we're iterating and finding the actual player, and we're considering the snake head
+          if(playerID == playerIndex &&  snakeBodyIterator == 0) {
+            // Then we do nothing, as we don't want the snake's head to hit itself
+          }
+          // If we're iterating on anything else - and we want the snake to be able to hit its own body !
+          else {
+            // If the head of the snake is on the same position as one of the body parts, we end the game.
+            // In the direction changes, there is some logic to avoid the player to get back on itself
+            if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+              players[playerID].isAlive = 0;
+            }
           }
         }
       }
+    }
+    else if(deadPlayersRemain == 1) {
+    
     }
   }
 }
@@ -220,7 +231,7 @@ void movePlayer(const byte playerID) {
   
     // Checking if an apple was eaten or if the player died
     checkIfAppleEatedAllPlayers();
-    // checkIfAnyPlayerDied();
+    checkIfAnyPlayerDied();
   
     // We copy the previous snake in the new snake
     for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize - 1; playerBodyIndex++) {
@@ -272,7 +283,15 @@ void displayPlayerSnake(const byte playerID) {
     }
   }
   else if(deadPlayersRemain == 1) {
-    
+      // We iterate on the player's snake body, to plot it on the LED Matrix.
+      for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
+        // If we didn't reach the snake's end
+        if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
+          // We add the player snake position to the matrix
+          LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+        }
+      }
+    }    
   }
 }
 

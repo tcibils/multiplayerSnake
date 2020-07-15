@@ -280,12 +280,12 @@ void setup() {
 }
 
 void loop() {
-  changeAllPlayerDirections();
   
   
   if (millis() - lastMillis >= moveSpeed) {
     Serial.print("we're int");
     Serial.print("\n");
+  changeAllPlayerDirections();
     clearLEDMatrix();
     displayAllApples();
     moveAllPlayers();
