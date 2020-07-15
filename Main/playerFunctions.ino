@@ -272,6 +272,18 @@ void movePlayer(const byte playerID) {
     }
   }
 }
+
+// Takes a snake, and displays it on the matrix, regardless of the player's status
+void displaySnake(const byte playerID) {
+  // Then we iterate on the player's snake body, to plot it on the LED Matrix.
+  for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
+    // If we didn't reach the snake's end
+    if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
+      // We add the player snake position to the matrix
+      LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+    }
+  }
+}
   
 // Displays a player's snake on the LEDMatrix, depending if he's alive or dead
 void displayPlayerSnake(const byte playerID) {
@@ -288,20 +300,10 @@ void displayPlayerSnake(const byte playerID) {
           // We display the snake
       displaySnake(playerID);
     }    
-  }
+  
 }
 
-// Takes a snake, and displays it on the matrix, regardless of the player's status
-void displaySnake(const byte playerID) {
-  // Then we iterate on the player's snake body, to plot it on the LED Matrix.
-  for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
-    // If we didn't reach the snake's end
-    if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
-      // We add the player snake position to the matrix
-      LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
-    }
-  }
-}
+
 
 void displayAllPlayerSnakes() {
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
