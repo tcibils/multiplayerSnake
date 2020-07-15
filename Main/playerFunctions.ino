@@ -108,6 +108,7 @@ void moveAllPlayers() {
   }
 }
 
+// Checks if player "playerID" has hit any player's snake body, including life/death logic of the players
 void checkIfPlayerDied(const byte playerID) {
   // we check if we've hit any player
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
@@ -115,27 +116,33 @@ void checkIfPlayerDied(const byte playerID) {
     if(deadPlayersRemain == 0) {
       // Then we check that we haven't hit an alive player
       if(players[playerID].isAlive == 1) {
-        // We iterate on each snake body
-        for (int snakeBodyIterator = 0; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
-          // If we're iterating and finding the actual player, and we're considering the snake head
-          if(playerID == playerIndex &&  snakeBodyIterator == 0) {
-            // Then we do nothing, as we don't want the snake's head to hit itself
-          }
-          // If we're iterating on anything else - and we want the snake to be able to hit its own body !
-          else {
-            // If the head of the snake is on the same position as one of the body parts, we end the game.
-            // In the direction changes, there is some logic to avoid the player to get back on itself
-            if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
-              players[playerID].isAlive = 0;
-            }
+        checkIfPlayerHeadHitSnake(playerID, playerIndex);
+      }
+    }
+    // If dead players can be hit
+    else if(deadPlayersRemain == 1) {
+        checkIfPlayerHeadHitSnake(playerID, playerIndex);
+    }
+  }
+}
+
+// checks if the head of player "playerID" has hit the body of player "playerIndex", without life/death logic of the players
+void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
+      // We iterate on each snake body
+      for (int snakeBodyIterator = 0; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
+        // If we're iterating and finding the actual player, and we're considering the snake head
+        if(playerID == playerIndex &&  snakeBodyIterator == 0) {
+          // Then we do nothing, as we don't want the snake's head to hit itself
+        }
+        // If we're iterating on anything else - and we want the snake to be able to hit its own body !
+        else {
+          // If the head of the snake is on the same position as one of the body parts, we end the game.
+          // In the direction changes, there is some logic to avoid the player to get back on itself
+          if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+            players[playerID].isAlive = 0;
           }
         }
       }
-    }
-    else if(deadPlayersRemain == 1) {
-    
-    }
-  }
 }
 
 
@@ -266,32 +273,33 @@ void movePlayer(const byte playerID) {
   }
 }
   
-// Displays a player's snake on the LEDMatrix
+// Displays a player's snake on the LEDMatrix, depending if he's alive or dead
 void displayPlayerSnake(const byte playerID) {
   // If we do not show dead players
   if(deadPlayersRemain == 0) {
     // And if the player is alive
     if(players[playerID].isAlive == 1) {
-      // Then we iterate on the player's snake body, to plot it on the LED Matrix.
-      for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
-        // If we didn't reach the snake's end
-        if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
-          // We add the player snake position to the matrix
-          LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
-        }
-      }
+      // We display the snake
+        displaySnake(playerID);
     }
   }
+  // If dead players remain, then we keep on displaying all snakes, dead or alive
   else if(deadPlayersRemain == 1) {
-      // We iterate on the player's snake body, to plot it on the LED Matrix.
-      for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
-        // If we didn't reach the snake's end
-        if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
-          // We add the player snake position to the matrix
-          LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
-        }
-      }
+          // We display the snake
+      displaySnake(playerID);
     }    
+  }
+}
+
+// Takes a snake, and displays it on the matrix, regardless of the player's status
+void displaySnake(const byte playerID) {
+  // Then we iterate on the player's snake body, to plot it on the LED Matrix.
+  for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
+    // If we didn't reach the snake's end
+    if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
+      // We add the player snake position to the matrix
+      LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+    }
   }
 }
 
