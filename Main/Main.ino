@@ -9,13 +9,13 @@
 
 /* TODO
  *  
- *  - Manage player death
- *  - Slow time
+ *  - Manage time decrease
  *  - Change player colours (heads != than body, and apple different colour)
  *  - Maybe add a white frame around the table or something to show the boundaries?
  *  - Experiment with more or less apples
  *  - Support various number of player from 1 to 4
  *  - Make start game and end game screens, with choices and or scores, that kind of stuff
+ *  - Have different speed per player, with a tradeoff speed vs long snake ???
  */
 
 
@@ -111,7 +111,7 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionSouth 6
 #define directionWest 7
 
-#define moveSpeed 6000  // In miliseconds. Can be used to make something happen every X miliseconds.
+#define moveSpeed 100  // In miliseconds. Can be used to make something happen every X miliseconds.
 #define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
 #define numberOfApples 4              // Defines how many apples are present in the game
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
@@ -281,14 +281,14 @@ void setup() {
 
 void loop() {
   
-  
   if (millis() - lastMillis >= moveSpeed) {
-  changeAllPlayerDirections();
+    changeAllPlayerDirections();
     clearLEDMatrix();
     displayAllApples();
     moveAllPlayers();
     displayAllPlayerSnakes();
     outputDisplay();
+    lastMillis = millis();
   }
   delay(1);
 }
