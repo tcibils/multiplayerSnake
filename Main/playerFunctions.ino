@@ -307,7 +307,12 @@ void displaySnake(const byte playerID) {
     // If we didn't reach the snake's end
     if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && players[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
       // We add the player snake position to the matrix
-      LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+      if(playerBodyIndex == 0) {
+        LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].headColour;
+      }
+      else {
+        LEDMatrix[players[playerID].bodyPosition[playerBodyIndex].lineCoordinate][players[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = players[playerID].colour;
+      }
     }
   }
 }

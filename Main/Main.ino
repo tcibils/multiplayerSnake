@@ -10,7 +10,6 @@
 /* TODO
  *  
  *  - Manage time decrease
- *  - Change player colours (heads != than body, and apple different colour)
  *  - Maybe add a white frame around the table or something to show the boundaries?
  *  - Experiment with more or less apples
  *  - Support various number of player from 1 to 4
@@ -55,6 +54,12 @@ const byte Blue = 2;
 const byte Red = 3;
 const byte Green = 4;
 const byte Purple = 5;
+const byte LightBlue = 6;
+const byte Pink = 7;
+const byte Orange = 8;
+const byte Yellow = 9;
+const byte LightPurple = 10;
+
 
 
 // ----------------------------------------------------------------------------------------------------
@@ -141,6 +146,7 @@ struct pointOnMatrix {
 struct Player {
   pointOnMatrix bodyPosition[maxSnakeSize];
   pointOnMatrix newBodyPosition[maxSnakeSize];
+  byte headColour;
   byte colour;
   pointOnMatrix initialPosition;
   byte goingDirection;
@@ -166,8 +172,10 @@ Player players[NUMBER_PLAYERS] = {
     {
       {initialPositionLinePlayerOne, initialPositionColumnPlayerOne}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
     },
-    // Colour
+    // Head Colour
     Blue,
+    // Colour
+    LightBlue,
     // Initial Position
     {0,0},
     // goingDirection
@@ -188,8 +196,10 @@ Player players[NUMBER_PLAYERS] = {
     {
       {initialPositionLinePlayerTwo, initialPositionColumnPlayerTwo}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
     },
-    // Colour
+    // Head Colour
     Red,
+    // Colour
+    Pink,
     // Initial Position
     {totalDisplayNumberOfRows-1,0},
     // goingDirection
@@ -210,8 +220,10 @@ Player players[NUMBER_PLAYERS] = {
     {
       {initialPositionLinePlayerThree, initialPositionColumnPlayerThree}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
     },
+    // Head Colour
+    Purple,
     // Colour
-    Green,
+    LightPurple,
     // Initial Position
     {0,totalDisplayNumberOfColumns-1},
     // goingDirection
@@ -232,8 +244,10 @@ Player players[NUMBER_PLAYERS] = {
     {
       {initialPositionLinePlayerFour, initialPositionColumnPlayerFour}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
     },
+    // Head Colour
+    Orange,
     // Colour
-    Purple,
+    Yellow,
     // Initial Position
     {totalDisplayNumberOfRows-1,totalDisplayNumberOfColumns-1},
     // goingDirection
