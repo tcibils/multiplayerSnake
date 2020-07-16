@@ -17,7 +17,7 @@ void generateApple(const byte replacedAppleID) {
   for (int i = 0; i < maxSnakeSize; i++) {
     // and if the apple drops on any snake
     for(int snakeID = 0; snakeID < NUMBER_PLAYERS; snakeID++) {
-      if (apples[replacedAppleID].lineCoordinate == players[snakeID].bodyPosition[i].lineCoordinate && apples[replacedAppleID].columnCoordinate == players[snakeID].bodyPosition[i].columnCoordinate) {
+      if (apples[replacedAppleID].applePosition.lineCoordinate == players[snakeID].bodyPosition[i].lineCoordinate && apples[replacedAppleID].applePosition.columnCoordinate == players[snakeID].bodyPosition[i].columnCoordinate) {
         // We re-create a new apple, hopefully somewhere else - in the worst case, we will again generate a new one.
         generateApple(replacedAppleID);
         // Serial.print("But the snake was already there, so we re-generate an apple. \n");
@@ -29,7 +29,7 @@ void generateApple(const byte replacedAppleID) {
 
 void displayAllApples() {
   for(byte displayAppleID = 0; displayAppleID < numberOfApples; displayAppleID++) {
-    LEDMatrix[apples[displayAppleID].lineCoordinate][apples[displayAppleID].columnCoordinate] = Green;
+    LEDMatrix[apples[displayAppleID].applePosition.lineCoordinate][apples[displayAppleID].applePosition.columnCoordinate] = apples[displayAppleID].colour;
   }
 }
 
@@ -70,7 +70,7 @@ void checkIfAppleEated(const byte playerID) {
     Serial.print("\n");
     */
     
-    if(players[playerID].newBodyPosition[0].columnCoordinate == apples[appleIndex].columnCoordinate && players[playerID].newBodyPosition[0].lineCoordinate == apples[appleIndex].lineCoordinate) {
+    if(players[playerID].newBodyPosition[0].columnCoordinate == apples[appleIndex].applePosition.columnCoordinate && players[playerID].newBodyPosition[0].lineCoordinate == apples[appleIndex].applePosition.lineCoordinate) {
       // In which case, we set the apple caught parameter of this player to 1
        players[playerID].appleCaught = 1;
        // And we generate a new apple straight away

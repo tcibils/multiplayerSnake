@@ -148,122 +148,21 @@ struct Player {
   pointOnMatrix newBodyPosition[maxSnakeSize];
   byte headColour;
   byte colour;
-  pointOnMatrix initialPosition;
   byte goingDirection;
   byte appleCaught;                               // 1 means apple eaten, 0 means no
   byte isAlive;                                   // 1 means alive, 0 means dead
 };
 
-pointOnMatrix apples[numberOfApples] = {
-  {9,9},
-  {9, 22},
-  {22, 9},
-  {22, 22}  
+struct Apple {
+  pointOnMatrix applePosition;
+  byte colour;
 };
 
-Player players[NUMBER_PLAYERS] = {
-  // Player 1
-  { // Body Position
-    {
-      {initialPositionLinePlayerOne, initialPositionColumnPlayerOne}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255} 
-    },
-    
-    // newBodyPosition
-    {
-      {initialPositionLinePlayerOne, initialPositionColumnPlayerOne}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
-    },
-    // Head Colour
-    Blue,
-    // Colour
-    LightBlue,
-    // Initial Position
-    {0,0},
-    // goingDirection
-    directionEast,
-    // Apple Caught
-    0,
-    // is alive
-    1
-  }, 
+Apple apples[numberOfApples];
 
-    // Player 2
-  { // Body Position
-    {
-      {initialPositionLinePlayerTwo, initialPositionColumnPlayerTwo}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255} 
-    },
-    
-    // newBodyPosition
-    {
-      {initialPositionLinePlayerTwo, initialPositionColumnPlayerTwo}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
-    },
-    // Head Colour
-    Red,
-    // Colour
-    Pink,
-    // Initial Position
-    {totalDisplayNumberOfRows-1,0},
-    // goingDirection
-    directionSouth,
-    // Apple Caught
-    0,
-    // is alive
-    1
-  },
-
-    // Player 3
-  { // Body Position
-    {
-      {initialPositionLinePlayerThree, initialPositionColumnPlayerThree}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255} 
-    },
-    
-    // newBodyPosition
-    {
-      {initialPositionLinePlayerThree, initialPositionColumnPlayerThree}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
-    },
-    // Head Colour
-    Purple,
-    // Colour
-    LightPurple,
-    // Initial Position
-    {0,totalDisplayNumberOfColumns-1},
-    // goingDirection
-    directionNorth,
-    // Apple Caught
-    0,
-    // is alive
-    1
-  },
-
-    // Player 4
-  { // Body Position
-    {
-      {initialPositionLinePlayerFour, initialPositionColumnPlayerFour}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255} 
-    },
-    
-    // newBodyPosition
-    {
-      {initialPositionLinePlayerFour, initialPositionColumnPlayerFour}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}, {255, 255}
-    },
-    // Head Colour
-    Orange,
-    // Colour
-    Yellow,
-    // Initial Position
-    {totalDisplayNumberOfRows-1,totalDisplayNumberOfColumns-1},
-    // goingDirection
-    directionWest,
-    // Apple Caught
-    0,
-    // is alive
-    1
-  }
-};
+Player players[NUMBER_PLAYERS];
 
 unsigned long lastMillis = 0;
-
-
-
-
 
 void setup() {
 
@@ -291,6 +190,10 @@ void setup() {
   pinMode(CONTROLLER_FOUR_PIN_LATCH, OUTPUT);
   pinMode(CONTROLLER_FOUR_PIN_CLOCK, OUTPUT);
   pinMode(CONTROLLER_FOUR_PIN_DATA, INPUT); 
+
+  // Set basic player values
+  initializePlayers(NUMBER_PLAYERS);
+  initializeApples(numberOfApples);
 }
 
 void loop() {
