@@ -1,6 +1,30 @@
+void initializeApples(const byte quantityOfApples) {
+  apples[0].applePosition.lineCoordinate = 9;
+  apples[0].applePosition.columnCoordinate = 9;
+  apples[0].colour = White;
+  apples[0].appleType = 1;
+  
+  apples[1].applePosition.lineCoordinate = 9;
+  apples[1].applePosition.columnCoordinate = 22;
+  apples[1].colour = White;
+  apples[1].appleType = 1;  
+
+  apples[2].applePosition.lineCoordinate = 22;
+  apples[2].applePosition.columnCoordinate = 9;
+  apples[2].colour = White;
+  apples[2].appleType = 1;
+
+  apples[3].applePosition.lineCoordinate = 22;
+  apples[3].applePosition.columnCoordinate = 22;
+  apples[3].colour = White;
+  apples[3].appleType = 1;
+
+}
+
 void generateApple(const byte replacedAppleID) {
   const byte appleLineNumber = random(totalDisplayNumberOfRows);
   const byte appleColumnNumber = random (totalDisplayNumberOfColumns);
+  const byte randomNumberForAppleType = random(100);
   /*
   Serial.print("The apple will be in ");
   Serial.print("{");
@@ -12,6 +36,15 @@ void generateApple(const byte replacedAppleID) {
   // And we set the apple to the coordinates created
   apples[replacedAppleID].applePosition.lineCoordinate = appleLineNumber;
   apples[replacedAppleID].applePosition.columnCoordinate = appleColumnNumber;
+
+  if(randomNumberForAppleType < chancesOfSpeedyApple) {
+    apples[replacedAppleID].appleType = 2;
+    apples[replacedAppleID].colour = Purple;
+  }
+  else {
+    apples[replacedAppleID].appleType = 1;
+    apples[replacedAppleID].colour = White;
+  }
 
   // We check that the apple didn't appear on the snake.
   // We scan the whole grid
@@ -73,8 +106,9 @@ void checkIfAppleEated(const byte playerID) {
     */
     
     if(players[playerID].newBodyPosition[0].columnCoordinate == apples[appleIndex].applePosition.columnCoordinate && players[playerID].newBodyPosition[0].lineCoordinate == apples[appleIndex].applePosition.lineCoordinate) {
-      // In which case, we set the apple caught parameter of this player to 1
-       players[playerID].appleCaught = 1;
+      // In which case, we set the apple caught parameter of this player to 1 if the apple is a "normal one"
+      // And set parameter to 2 if the apple is a speeding one
+       players[playerID].appleCaught = apples[appleIndex].appleType;
        // And we generate a new apple straight away
        generateApple(appleIndex);
     }

@@ -126,10 +126,13 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionSouth 6
 #define directionWest 7
 
-#define moveSpeed 100  // In miliseconds. Can be used to make something happen every X miliseconds.
+#define moveSpeed 100                 // In miliseconds. Can be used to make something happen every X miliseconds.
+#define initialPlayerMovingSpeed 250  // Base speed of all players, in miliseconds
+#define playerMovingSpeedDecrease 20  // How quickly will the player speed improve if eating a quickening apple
 #define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
 #define numberOfApples 4              // Defines how many apples are present in the game
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
+#define chancesOfSpeedyApple 30       // chances, in percentage, that an apple is one that speeds the player
 
 #define initialPositionLinePlayerOne 0
 #define initialPositionColumnPlayerOne 0
@@ -159,9 +162,11 @@ struct Player {
   byte headColour;
   byte colour;
   byte goingDirection;
-  byte appleCaught;                               // 1 means apple eaten, 0 means no
+  byte appleCaught;                               // 1 means normalapple eaten, 0 means no, 2 means speeding apple eaten
   byte isAlive;                                   // 1 means alive, 0 means dead
   byte isActive;                                  // 1 means that the player is actually playing, 0 means that he isn't
+  unsigned int movingSpeed;                       // Speed at which the player will move
+  unsigned long lastMovingTime;                   // When did the player move for the last time
 };
 
 
@@ -177,6 +182,7 @@ struct MockPlayer {
 struct Apple {
   pointOnMatrix applePosition;
   byte colour;
+  byte appleType;                         // 1 means "making the snake longer", 2 means "make the snake faster"
 };
 
 Apple apples[numberOfApples];             // Contains the apples
@@ -239,21 +245,18 @@ void setup() {
   }
 }
 
-void loop() {
-  
-  if (millis() - lastMillis >= moveSpeed) {
-    checkAllButtons();
-    
-    // If we're in the pre-launch screen
-    if(gameState == 0) {
+void loop() {  
+  checkAllButtons();
+
+   // If we're in the pre-launch screen
+   if(gameState == 0) {
       clearLEDMatrix();
       expectStartingGame();
       startPage();
-      // Call playerChoices() to define active players
-    }
+   }
 
     // If we're playing the game
-    if(gameState == 1) {
+   if(gameState == 1) {
       clearLEDMatrix();
       // It gets played
       changeAllPlayerDirections();
@@ -261,16 +264,15 @@ void loop() {
       moveAllPlayers();
       displayAllPlayerSnakes();
       checkIfAPlayerWon();
-    }
+   }
 
-    if(gameState == 2) {
+   // If the game is over
+   if(gameState == 2) {
       clearLEDMatrix();
       displayWinningMessage(winningPlayer);
       expectStartingGame();
-    }
+   }
 
-    outputDisplay();
-    lastMillis = millis();
-  }
+   outputDisplay();
   delay(1);
 }

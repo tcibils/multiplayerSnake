@@ -191,13 +191,8 @@ void checkIfAnyPlayerDied() {
 
 void movePlayer(const byte playerID) {
 
-  if (millis() - lastMillis < moveSpeed) {
- //   Serial.print("Time interval too short. Snake not moved \n");
-  }
-
-
   // If enough time has passed,
-  if (millis() - lastMillis >= moveSpeed) {
+  if (millis() - players[playerID].lastMovingTime >= players[playerID].movingSpeed) {
       
     // First, move the snake head
     // if we're going up,
@@ -288,8 +283,8 @@ void movePlayer(const byte playerID) {
     
       // If we reached the end of the snake body
       if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate == 255 || players[playerID].bodyPosition[playerBodyIndex].columnCoordinate == 255) {
-        // And if the player did not caught the apple
-        if(players[playerID].appleCaught == 0) {
+        // And if the player did not caught the normal apple
+        if(players[playerID].appleCaught == 0 || players[playerID].appleCaught == 2) {
           // Then the new snake should have the last bite of the previous snake erased
           players[playerID].newBodyPosition[playerBodyIndex].lineCoordinate = 255;
           players[playerID].newBodyPosition[playerBodyIndex].columnCoordinate = 255;
@@ -297,8 +292,13 @@ void movePlayer(const byte playerID) {
       }
     }
 
+    // If the player did catch a speeding apple
+    if(players[playerID].appleCaught == 2) {
+      players[playerID].movingSpeed -= playerMovingSpeedDecrease;
+    }
+
     // If the apple was caught, it did its job of making the snake longer, and thus we reset the parameter.
-    if(players[playerID].appleCaught == 1) {
+    if(players[playerID].appleCaught == 1 || players[playerID].appleCaught == 2) {
       players[playerID].appleCaught = 0;
     }
   
@@ -307,6 +307,7 @@ void movePlayer(const byte playerID) {
       players[playerID].bodyPosition[playerBodyIndex].lineCoordinate = players[playerID].newBodyPosition[playerBodyIndex].lineCoordinate;
       players[playerID].bodyPosition[playerBodyIndex].columnCoordinate = players[playerID].newBodyPosition[playerBodyIndex].columnCoordinate;    
     }
+    players[playerID].lastMovingTime = millis();
   }
 }
 
@@ -374,6 +375,12 @@ void digitalOutputPlayer(const byte playerID) {
   Serial.print("\n");
   Serial.print("has caught an apple: ");
   Serial.print(players[playerID].appleCaught);
+  Serial.print("\n");
+  Serial.print("movingSpeed: ");
+  Serial.print(players[playerID].movingSpeed);
+  Serial.print("\n");
+  Serial.print("lastMovingTime: ");
+  Serial.print(players[playerID].lastMovingTime);
   Serial.print("\n");
   Serial.print("Body position: ");
   for(byte i = 0; i < maxSnakeSize; i++) {

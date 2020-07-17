@@ -3,24 +3,7 @@ void initializeGame() {
   initializeApples(numberOfApples);
 }
 
-void initializeApples(const byte quantityOfApples) {
-  apples[0].applePosition.lineCoordinate = 9;
-  apples[0].applePosition.columnCoordinate = 9;
-  apples[0].colour = White;
-  
-  apples[1].applePosition.lineCoordinate = 9;
-  apples[1].applePosition.columnCoordinate = 22;
-  apples[1].colour = White;
-  
-  apples[2].applePosition.lineCoordinate = 22;
-  apples[2].applePosition.columnCoordinate = 9;
-  apples[2].colour = White;
-  
-  apples[3].applePosition.lineCoordinate = 22;
-  apples[3].applePosition.columnCoordinate = 22;
-  apples[3].colour = White;
-  
-}
+
 
 // While the game state is 0, that function manages the starting page
 void startPage() {
@@ -130,6 +113,8 @@ void initializePlayers() {
     players[0].goingDirection = directionEast;
     players[0].appleCaught = 0;
     players[0].isAlive = 1;
+    players[0].movingSpeed = initialPlayerMovingSpeed;
+    players[0].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[0].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[0].bodyPosition[bodyIndex].columnCoordinate = 255;
@@ -147,6 +132,8 @@ void initializePlayers() {
     players[0].colour = White;
     players[0].appleCaught = 0;
     players[0].isAlive = 0;
+    players[0].movingSpeed = initialPlayerMovingSpeed;
+    players[0].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[0].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[0].bodyPosition[bodyIndex].columnCoordinate = 255;
@@ -163,6 +150,8 @@ void initializePlayers() {
     players[1].goingDirection = directionSouth;
     players[1].appleCaught = 0;
     players[1].isAlive = 1;
+    players[1].movingSpeed = initialPlayerMovingSpeed;
+    players[1].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[1].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[1].bodyPosition[bodyIndex].columnCoordinate = 255;
@@ -180,6 +169,8 @@ void initializePlayers() {
     players[1].colour = White;
     players[1].appleCaught = 0;
     players[1].isAlive = 0;
+    players[1].movingSpeed = initialPlayerMovingSpeed;
+    players[1].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[1].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[1].bodyPosition[bodyIndex].columnCoordinate = 255;
@@ -196,6 +187,8 @@ void initializePlayers() {
     players[2].goingDirection = directionNorth;
     players[2].appleCaught = 0;
     players[2].isAlive = 1;
+    players[2].movingSpeed = initialPlayerMovingSpeed;
+    players[2].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[2].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[2].bodyPosition[bodyIndex].columnCoordinate = 255;
@@ -213,6 +206,8 @@ void initializePlayers() {
     players[2].colour = White;
     players[2].appleCaught = 0;
     players[2].isAlive = 0;
+    players[2].movingSpeed = initialPlayerMovingSpeed;
+    players[2].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[2].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[2].bodyPosition[bodyIndex].columnCoordinate = 255;
@@ -229,6 +224,8 @@ void initializePlayers() {
     players[3].goingDirection = directionWest;
     players[3].appleCaught = 0;
     players[3].isAlive = 1;
+    players[3].movingSpeed = initialPlayerMovingSpeed;
+    players[3].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[3].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[3].bodyPosition[bodyIndex].columnCoordinate = 255;
@@ -245,7 +242,9 @@ void initializePlayers() {
     players[3].headColour = White;
     players[3].colour = White;
     players[3].appleCaught = 0;
-    players[3].isAlive = 0;
+    players[3].isAlive = 0;    
+    players[3].movingSpeed = initialPlayerMovingSpeed;
+    players[3].lastMovingTime = millis();
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
       players[3].bodyPosition[bodyIndex].lineCoordinate = 255;
       players[3].bodyPosition[bodyIndex].columnCoordinate = 255;
