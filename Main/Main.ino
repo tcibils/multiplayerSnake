@@ -126,7 +126,9 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionSouth 6
 #define directionWest 7
 
-#define moveSpeed 100  // In miliseconds. Can be used to make something happen every X miliseconds.
+#define moveSpeed 100                 // In miliseconds. Can be used to make something happen every X miliseconds.
+#define initialPlayerMovingSpeed 200  // Base speed of all players, in miliseconds
+#define playerMovingSpeedDecrease 20  // How quickly will the player speed improve if eating a quickening apple
 #define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
 #define numberOfApples 4              // Defines how many apples are present in the game
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
@@ -160,9 +162,10 @@ struct Player {
   byte headColour;
   byte colour;
   byte goingDirection;
-  byte appleCaught;                               // 1 means apple eaten, 0 means no
+  byte appleCaught;                               // 1 means normalapple eaten, 0 means no, 2 means speeding apple eaten
   byte isAlive;                                   // 1 means alive, 0 means dead
   byte isActive;                                  // 1 means that the player is actually playing, 0 means that he isn't
+  unsigned int movingSpeed;                       // Speed at which the player will move
 };
 
 

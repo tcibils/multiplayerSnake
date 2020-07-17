@@ -288,8 +288,8 @@ void movePlayer(const byte playerID) {
     
       // If we reached the end of the snake body
       if(players[playerID].bodyPosition[playerBodyIndex].lineCoordinate == 255 || players[playerID].bodyPosition[playerBodyIndex].columnCoordinate == 255) {
-        // And if the player did not caught the apple
-        if(players[playerID].appleCaught == 0) {
+        // And if the player did not caught the normal apple
+        if(players[playerID].appleCaught == 0 || players[playerID].appleCaught == 2) {
           // Then the new snake should have the last bite of the previous snake erased
           players[playerID].newBodyPosition[playerBodyIndex].lineCoordinate = 255;
           players[playerID].newBodyPosition[playerBodyIndex].columnCoordinate = 255;
@@ -297,8 +297,13 @@ void movePlayer(const byte playerID) {
       }
     }
 
+    // If the player did catch a speeding apple
+    if(players[playerID].appleCaught == 2) {
+      players[playerID].movingSpeed -= playerMovingSpeedDecrease;
+    }
+
     // If the apple was caught, it did its job of making the snake longer, and thus we reset the parameter.
-    if(players[playerID].appleCaught == 1) {
+    if(players[playerID].appleCaught == 1 || players[playerID].appleCaught == 2) {
       players[playerID].appleCaught = 0;
     }
   

@@ -106,8 +106,9 @@ void checkIfAppleEated(const byte playerID) {
     */
     
     if(players[playerID].newBodyPosition[0].columnCoordinate == apples[appleIndex].applePosition.columnCoordinate && players[playerID].newBodyPosition[0].lineCoordinate == apples[appleIndex].applePosition.lineCoordinate) {
-      // In which case, we set the apple caught parameter of this player to 1
-       players[playerID].appleCaught = 1;
+      // In which case, we set the apple caught parameter of this player to 1 if the apple is a "normal one"
+      // And set parameter to 2 if the apple is a speeding one
+       players[playerID].appleCaught = apples[appleIndex].appleType;
        // And we generate a new apple straight away
        generateApple(appleIndex);
     }
