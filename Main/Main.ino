@@ -164,7 +164,7 @@ struct Player {
   byte isActive;                                  // 1 means that the player is actually playing, 0 means that he isn't
 };
 
-/*
+
 // This is use for player colour selection only.
 struct MockPlayer {
   pointOnMatrix bodyPosition[maxSnakeSize];
@@ -172,7 +172,7 @@ struct MockPlayer {
   byte headColour;
   byte colour;
 };
-*/
+
 
 struct Apple {
   pointOnMatrix applePosition;
@@ -181,7 +181,7 @@ struct Apple {
 
 Apple apples[numberOfApples];             // Contains the apples
 Player players[NUMBER_PLAYERS];           // Contains the players
-// MockPlayer mockPlayers[NUMBER_PLAYERS];
+MockPlayer mockPlayers[NUMBER_PLAYERS];
 unsigned int applesEaten = 0;             // Counts how many apples were eaten in total
 
 /*
@@ -238,6 +238,7 @@ void loop() {
       clearLEDMatrix();
       expectStartingGame();
       displayStartPage();
+      // Call playerChoices() to define active players
     }
 
     // If we're playing the game

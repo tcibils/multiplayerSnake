@@ -22,12 +22,40 @@ void initializeApples(const byte quantityOfApples) {
   
 }
 
+void playerChoices() {
+  for(byte i = 0; i < NUMBER_PLAYERS; i++) {
+    players[i].isActive = 0;
+  }
+
+  TODO
+
+  // Display mock snakes
+  // If the player choses a colour with ABXY, change the mock snake colour, head and body
+  // Use a global "available colour" arrow to let the player chose only available colour
+  // If player choses a colour, it passes him as "is active", and sets both his mock and real snake with the said colour
+  // Use "displayMockSnake" here on in the loop to display the mocksnake (see function below)
+  // if the player clicks "select", put the snake back to white, player isn't active anymore
+  // And all this is until an active player clicks on start, in which case the game starts with a gamestate change
+}
+
+void displayMockSnake(const byte playerID) {
+  // We iterate on the player's snake body, to plot it on the LED Matrix.
+  for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize; playerBodyIndex++) {
+    // If we didn't reach the snake's end
+    if(mockPlayers[playerID].bodyPosition[playerBodyIndex].lineCoordinate != 255 && mockPlayers[playerID].bodyPosition[playerBodyIndex].columnCoordinate != 255) {
+      // We add the player snake position to the matrix
+      if(playerBodyIndex == 0) {
+        LEDMatrix[mockPlayers[playerID].bodyPosition[playerBodyIndex].lineCoordinate][mockPlayers[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = mockPlayers[playerID].headColour;
+      }
+      else {
+        LEDMatrix[mockPlayers[playerID].bodyPosition[playerBodyIndex].lineCoordinate][mockPlayers[playerID].bodyPosition[playerBodyIndex].columnCoordinate] = mockPlayers[playerID].colour;
+      }
+    }
+  }
+}
+
 // Reset player data based on pre-defined constants
 void initializePlayers() {
-  players[0].isActive = 1;
-  players[1].isActive = 0;
-  players[2].isActive = 1;
-  players[3].isActive = 0;
   
   if(players[0].isActive == 1) {
     players[0].bodyPosition[0].lineCoordinate = initialPositionLinePlayerOne;
@@ -205,11 +233,8 @@ void checkIfAPlayerWon() {
 }
 
 void displayStartPage() {
-  displaySnakeWord(5,5);
-  displayShapeSnakeOne(15, 5);
-  displayShapeSnakeTwo(15, 10);
-  displayShapeSnakeThree(15, 15);
-  displayShapeSnakeFour(15, 20);
+  displaySnakeWord(13,7);
+  SHOULD EVOLVE
 }
 
 

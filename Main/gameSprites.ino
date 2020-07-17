@@ -143,94 +143,23 @@ void displayWordWon (byte startingLine, byte startingColumn) {
 // ----------------------------- SHAPES DISPLAYING SPRITES --------------
 // ----------------------------------------------------------------------
 
-void displayShapeSnakeOne (byte startingLine, byte startingColumn) {
-  const static byte PROGMEM snakeOne[5][3] = {
-    {1,1,1},
-    {1,0,0},
-    {1,1,0},
-    {0,1,0},
-    {0,1,0}
-  };
-
-  for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 3; j++) {
-      LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&snakeOne[i][j]);
-    }
-  }
+TO BE COMPLETED HERE
+void defineMockSnakesZeroPositions() {
+  mockPlayers[0].bodyPosition[0].lineCoordinate = 21;
+  mockPlayers[0].bodyPosition[0].columnCoordinate = 20;
 }
 
-void displayShapeSnakeTwo (byte startingLine, byte startingColumn) {
-  const static byte PROGMEM snakeTwo[5][3] = {
-    {1,1,0},
-    {0,1,0},
-    {0,1,1},
-    {0,0,1},
-    {0,0,1}
-  };
-
-  for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 3; j++) {
-      LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&snakeTwo[i][j]);
-    }
-  }
+void defineMockSnakesOnePositions() {
+  mockPlayers[1].bodyPosition[0].lineCoordinate = 0;
+  mockPlayers[1].bodyPosition[0].columnCoordinate = 0;
 }
 
-void displayShapeSnakeThree (byte startingLine, byte startingColumn) {
-  const static byte PROGMEM snakeThree[5][3] = {
-   {1,0,0},
-   {1,0,0},
-   {1,1,0},
-   {0,1,0},
-   {1,1,0}
-  };
-
-  for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 3; j++) {
-      LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&snakeThree[i][j]);
-    }
-  }
+void defineMockSnakesTwoPositions() {
+  mockPlayers[2].bodyPosition[0].lineCoordinate = 1;
+  mockPlayers[2].bodyPosition[0].columnCoordinate = 1;
 }
 
-void displayShapeSnakeFour (byte startingLine, byte startingColumn) {
-  const static byte PROGMEM snakeFour[5][3] = {
-   { 1,1,0},
-   {1,0,0},
-   {1,1,1},
-   {0,0,1},
-   {0,0,1}
-  };
-
-  for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 3; j++) {
-      LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&snakeFour[i][j]);
-    }
-  }
+void defineMockSnakesThreePositions() {
+  mockPlayers[3].bodyPosition[0].lineCoordinate = 2;
+  mockPlayers[3].bodyPosition[0].columnCoordinate = 2;
 }
-
-void displayShapeSnakeWest (byte startingLine, byte startingColumn) {
-   const static byte PROGMEM snakeWest[15][3] = {
-    {0,1,1},
-    {0,0,1},
-    {0,0,1},
-    {0,0,1},
-    {0,0,1},
-    {0,0,1},
-    {1,1,1},
-    {1,0,0},
-    {1,0,0},
-    {1,0,0},
-    {1,0,0},
-    {1,0,0},
-    {1,0,0},
-    {1,0,0},
-    {1,1,1}
-  };
-
-  for(byte i = 0; i < 15; i++) {
-    for(byte j = 0; j < 3; j++) {
-      LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&snakeWest[i][j]);
-    }
-  }
-}
-    
-  
