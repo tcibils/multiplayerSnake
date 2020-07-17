@@ -166,6 +166,7 @@ struct Player {
   byte isAlive;                                   // 1 means alive, 0 means dead
   byte isActive;                                  // 1 means that the player is actually playing, 0 means that he isn't
   unsigned int movingSpeed;                       // Speed at which the player will move
+  unsigned long lastMovingTime;                   // When did the player move for the last time
 };
 
 
@@ -244,21 +245,18 @@ void setup() {
   }
 }
 
-void loop() {
-  
-  if (millis() - lastMillis >= moveSpeed) {
-    checkAllButtons();
-    
-    // If we're in the pre-launch screen
-    if(gameState == 0) {
+void loop() {  
+  checkAllButtons();
+
+   // If we're in the pre-launch screen
+   if(gameState == 0) {
       clearLEDMatrix();
       expectStartingGame();
       startPage();
-      // Call playerChoices() to define active players
-    }
+   }
 
     // If we're playing the game
-    if(gameState == 1) {
+   if(gameState == 1) {
       clearLEDMatrix();
       // It gets played
       changeAllPlayerDirections();
@@ -266,16 +264,15 @@ void loop() {
       moveAllPlayers();
       displayAllPlayerSnakes();
       checkIfAPlayerWon();
-    }
+   }
 
-    if(gameState == 2) {
+   // If the game is over
+   if(gameState == 2) {
       clearLEDMatrix();
       displayWinningMessage(winningPlayer);
       expectStartingGame();
-    }
+   }
 
-    outputDisplay();
-    lastMillis = millis();
-  }
+   outputDisplay();
   delay(1);
 }
