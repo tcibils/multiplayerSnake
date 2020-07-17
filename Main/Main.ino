@@ -158,9 +158,18 @@ struct Apple {
   byte colour;
 };
 
-Apple apples[numberOfApples];
+Apple apples[numberOfApples];             // Contains the apples
+Player players[NUMBER_PLAYERS];           // Contains the players
+unsigned int applesEaten = 0;             // Counts how many apples were eaten in total
 
-Player players[NUMBER_PLAYERS];
+/*
+Contains the game status.
+ - 0 means the game is starting with welcome screen and all
+ - 1 means that the game is running,
+ - 2 means that we're showing the end-game screen or something
+*/
+
+byte gameState = 0;                      
 
 unsigned long lastMillis = 0;
 
@@ -199,11 +208,30 @@ void setup() {
 void loop() {
   
   if (millis() - lastMillis >= moveSpeed) {
-    changeAllPlayerDirections();
     clearLEDMatrix();
-    displayAllApples();
-    moveAllPlayers();
-    displayAllPlayerSnakes();
+    checkAllButtons();
+
+    // If we're in the pre-launch screen
+    if(gameState == 0) {
+      // If any player
+      for(byte playerIndex; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+        // Is pressing start button
+        if(playerButtonPushed[playerIndex][4] == 1) {
+          // Then we start the game
+          gameState = 1;
+        }
+      }
+    }
+
+    // If we're playing the game
+    if(gameState == 1) {
+      // It gets played
+      changeAllPlayerDirections();
+      displayAllApples();
+      moveAllPlayers();
+      displayAllPlayerSnakes();
+    }
+    
     outputDisplay();
     lastMillis = millis();
   }

@@ -383,13 +383,4 @@ void digitalOutputPlayer(const byte playerID) {
   }
   Serial.print("\n");
 }
-
-  pointOnMatrix bodyPosition[maxSnakeSize];
-  pointOnMatrix newBodyPosition[maxSnakeSize];
-  byte headColour;
-  byte colour;
-  byte goingDirection;
-  byte appleCaught;                               // 1 means apple eaten, 0 means no
-  byte isAlive;                                   // 1 means alive, 0 means dead
-
   
