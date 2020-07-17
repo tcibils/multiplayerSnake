@@ -220,24 +220,24 @@ void defineMockSnakesZeroPositions() {
   mockPlayers[0].bodyPosition[20].columnCoordinate = 14;
   
   mockPlayers[0].bodyPosition[21].lineCoordinate = 26;
-  mockPlayers[0].bodyPosition[22].columnCoordinate = 14;
+  mockPlayers[0].bodyPosition[21].columnCoordinate = 14;
   
+  mockPlayers[0].bodyPosition[22].lineCoordinate = 25;
+  mockPlayers[0].bodyPosition[22].columnCoordinate = 14;
+
   mockPlayers[0].bodyPosition[23].lineCoordinate = 25;
-  mockPlayers[0].bodyPosition[23].columnCoordinate = 14;
+  mockPlayers[0].bodyPosition[23].columnCoordinate = 13;
   
   mockPlayers[0].bodyPosition[24].lineCoordinate = 25;
-  mockPlayers[0].bodyPosition[24].columnCoordinate = 13;
+  mockPlayers[0].bodyPosition[24].columnCoordinate = 12;
   
   mockPlayers[0].bodyPosition[25].lineCoordinate = 25;
-  mockPlayers[0].bodyPosition[25].columnCoordinate = 12;
+  mockPlayers[0].bodyPosition[25].columnCoordinate = 11;
   
   mockPlayers[0].bodyPosition[26].lineCoordinate = 25;
-  mockPlayers[0].bodyPosition[26].columnCoordinate = 11;
-  
-  mockPlayers[0].bodyPosition[27].lineCoordinate = 25;
-  mockPlayers[0].bodyPosition[27].columnCoordinate = 10;
+  mockPlayers[0].bodyPosition[26].columnCoordinate = 10;
 
-  for(byte i = 28; i<maxSnakeSize; i++) {
+  for(byte i = 27; i<maxSnakeSize; i++) {
     mockPlayers[0].bodyPosition[i].lineCoordinate = 255;
     mockPlayers[0].bodyPosition[i].columnCoordinate = 255;
   }
