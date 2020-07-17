@@ -3,24 +3,7 @@ void initializeGame() {
   initializeApples(numberOfApples);
 }
 
-void initializeApples(const byte quantityOfApples) {
-  apples[0].applePosition.lineCoordinate = 9;
-  apples[0].applePosition.columnCoordinate = 9;
-  apples[0].colour = White;
-  
-  apples[1].applePosition.lineCoordinate = 9;
-  apples[1].applePosition.columnCoordinate = 22;
-  apples[1].colour = White;
-  
-  apples[2].applePosition.lineCoordinate = 22;
-  apples[2].applePosition.columnCoordinate = 9;
-  apples[2].colour = White;
-  
-  apples[3].applePosition.lineCoordinate = 22;
-  apples[3].applePosition.columnCoordinate = 22;
-  apples[3].colour = White;
-  
-}
+
 
 // While the game state is 0, that function manages the starting page
 void startPage() {

@@ -130,6 +130,7 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
 #define numberOfApples 4              // Defines how many apples are present in the game
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
+#define chancesOfSpeedyApple 30       // chances, in percentage, that an apple is one that speeds the player
 
 #define initialPositionLinePlayerOne 0
 #define initialPositionColumnPlayerOne 0
@@ -177,6 +178,7 @@ struct MockPlayer {
 struct Apple {
   pointOnMatrix applePosition;
   byte colour;
+  byte appleType;                         // 1 means "making the snake longer", 2 means "make the snake faster"
 };
 
 Apple apples[numberOfApples];             // Contains the apples
