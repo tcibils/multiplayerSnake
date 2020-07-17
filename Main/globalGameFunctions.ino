@@ -304,6 +304,7 @@ void expectStartingGame() {
       // Then we start the game
       gameState = 1;
       initializePlayers();
+      initializeApples(numberOfApples);
     }
   }
 }

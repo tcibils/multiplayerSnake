@@ -10,11 +10,9 @@
 /* TODO
  *  
  *  - Manage time decrease
- *  - Maybe add a white frame around the table or something to show the boundaries?
  *  - Experiment with more or less apples
  *  - Make "snake" word froms tart slightly glow, Aurore found that cool
  *  - Add little fireworks in the win screen
- *  - Have different speed per player, with a tradeoff speed vs long snake ???
  */
 
 
