@@ -60,8 +60,8 @@ void playersChoices() {
       mockPlayers[playerIndex].colour = Yellow;
       
     }
-        // Player 0 pushing button 8 (Y), which is green
-    if(playerButtonPushed[playerIndex][8] == 1) {
+        // Player 0 pushing button 9 (Y), which is green
+    if(playerButtonPushed[playerIndex][9] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Green;
       players[playerIndex].colour = Green;
@@ -69,8 +69,8 @@ void playersChoices() {
       mockPlayers[playerIndex].colour = Green;
       
     }
-        // Player 0 pushing button 9 (X), which is blue
-    if(playerButtonPushed[playerIndex][9] == 1) {
+        // Player 0 pushing button 8 (X), which is blue
+    if(playerButtonPushed[playerIndex][8] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Blue;
       players[playerIndex].colour = LightBlue;
@@ -84,12 +84,12 @@ void playersChoices() {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Purple;
       players[playerIndex].colour = LightPurple;
-      mockPlayers[playerIndex].headColour = Blue;
+      mockPlayers[playerIndex].headColour = Purple;
       mockPlayers[playerIndex].colour = LightPurple;
     }
 
     // Player 0 pushing button 5 (Select)
-    if(playerButtonPushed[playerIndex][9] == 1) {
+    if(playerButtonPushed[playerIndex][5] == 1) {
       players[playerIndex].isActive = 0;
       players[playerIndex].headColour = White;
       players[playerIndex].colour = White;
