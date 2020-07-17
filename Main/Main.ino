@@ -111,8 +111,10 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 // ----------------------------------------------------------------------------------------------------
 // -------------------------------------   GAME PARAMETERS   ------------------------------------------
 // ----------------------------------------------------------------------------------------------------
-
-#define maxSnakeSize 40             // Defines the maximum size of a snake. Should be equal or lower than 255, as iterators on body size are "byte" type !
+// Defines the maximum size of a snake. 
+// Should be equal or lower than 255, as iterators on body size are "byte" type !
+// Should be bigger or equal to 30, due to mock snake sprites
+#define maxSnakeSize 40             
 
 #define directionUp 0
 #define directionRight 1
