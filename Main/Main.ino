@@ -224,8 +224,19 @@ void setup() {
   pinMode(CONTROLLER_FOUR_PIN_DATA, INPUT); 
 
   // Set basic player values
-  initializePlayers();
+  
+  defineMockSnakesInitialColour();
+  defineMockSnakesZeroPositions();
+  defineMockSnakesOnePositions();
+  defineMockSnakesTwoPositions();
+  defineMockSnakesThreePositions();
+  
   initializeApples(numberOfApples);
+
+  // By default, all players aren't active
+  for(byte i = 0; i < NUMBER_PLAYERS; i++) {
+    players[i].isActive = 0;
+  }
 }
 
 void loop() {
@@ -237,7 +248,7 @@ void loop() {
     if(gameState == 0) {
       clearLEDMatrix();
       expectStartingGame();
-      displayStartPage();
+      startPage();
       // Call playerChoices() to define active players
     }
 

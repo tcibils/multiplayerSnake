@@ -143,12 +143,107 @@ void displayWordWon (byte startingLine, byte startingColumn) {
 // ----------------------------- SHAPES DISPLAYING SPRITES --------------
 // ----------------------------------------------------------------------
 
-TO BE COMPLETED HERE
-void defineMockSnakesZeroPositions() {
-  mockPlayers[0].bodyPosition[0].lineCoordinate = 21;
-  mockPlayers[0].bodyPosition[0].columnCoordinate = 20;
+void defineMockSnakesInitialColour() {
+  mockPlayers[0].colour = White;
+  mockPlayers[0].headColour = White;
+  mockPlayers[1].colour = White;
+  mockPlayers[1].headColour = White;
+  mockPlayers[2].colour = White;
+  mockPlayers[2].headColour = White;
+  mockPlayers[3].colour = White;
+  mockPlayers[3].headColour = White;
+  
 }
 
+void defineMockSnakesZeroPositions() {
+  mockPlayers[0].bodyPosition[0].lineCoordinate = 21;
+  mockPlayers[0].bodyPosition[0].columnCoordinate = 24;
+  
+  mockPlayers[0].bodyPosition[1].lineCoordinate = 22;
+  mockPlayers[0].bodyPosition[1].columnCoordinate = 24;
+  
+  mockPlayers[0].bodyPosition[2].lineCoordinate = 23;
+  mockPlayers[0].bodyPosition[2].columnCoordinate = 24;
+  
+  mockPlayers[0].bodyPosition[3].lineCoordinate = 24;
+  mockPlayers[0].bodyPosition[3].columnCoordinate = 24;
+  
+  mockPlayers[0].bodyPosition[4].lineCoordinate = 24;
+  mockPlayers[0].bodyPosition[4].columnCoordinate = 23;
+  
+  mockPlayers[0].bodyPosition[5].lineCoordinate = 24;
+  mockPlayers[0].bodyPosition[5].columnCoordinate = 22;
+  
+  mockPlayers[0].bodyPosition[6].lineCoordinate = 24;
+  mockPlayers[0].bodyPosition[6].columnCoordinate = 21;
+  
+  mockPlayers[0].bodyPosition[7].lineCoordinate = 24;
+  mockPlayers[0].bodyPosition[7].columnCoordinate = 20;
+  
+  mockPlayers[0].bodyPosition[8].lineCoordinate = 25;
+  mockPlayers[0].bodyPosition[8].columnCoordinate = 20;
+  
+  mockPlayers[0].bodyPosition[9].lineCoordinate = 26;
+  mockPlayers[0].bodyPosition[9].columnCoordinate = 20;
+  
+  mockPlayers[0].bodyPosition[10].lineCoordinate = 27;
+  mockPlayers[0].bodyPosition[10].columnCoordinate = 20;
+  
+  mockPlayers[0].bodyPosition[11].lineCoordinate = 28;
+  mockPlayers[0].bodyPosition[11].columnCoordinate = 20;
+  
+  mockPlayers[0].bodyPosition[12].lineCoordinate = 29;
+  mockPlayers[0].bodyPosition[12].columnCoordinate = 20;
+  
+  mockPlayers[0].bodyPosition[13].lineCoordinate = 29;
+  mockPlayers[0].bodyPosition[13].columnCoordinate = 19;
+  
+  mockPlayers[0].bodyPosition[14].lineCoordinate = 29;
+  mockPlayers[0].bodyPosition[14].columnCoordinate = 18;
+  
+  mockPlayers[0].bodyPosition[15].lineCoordinate = 29;
+  mockPlayers[0].bodyPosition[15].columnCoordinate = 17;
+  
+  mockPlayers[0].bodyPosition[16].lineCoordinate = 29;
+  mockPlayers[0].bodyPosition[16].columnCoordinate = 16;
+  
+  mockPlayers[0].bodyPosition[17].lineCoordinate = 29;
+  mockPlayers[0].bodyPosition[17].columnCoordinate = 15;
+  
+  mockPlayers[0].bodyPosition[18].lineCoordinate = 29;
+  mockPlayers[0].bodyPosition[18].columnCoordinate = 14;
+  
+  mockPlayers[0].bodyPosition[19].lineCoordinate = 28;
+  mockPlayers[0].bodyPosition[19].columnCoordinate = 14;
+  
+  mockPlayers[0].bodyPosition[20].lineCoordinate = 27;
+  mockPlayers[0].bodyPosition[20].columnCoordinate = 14;
+  
+  mockPlayers[0].bodyPosition[21].lineCoordinate = 26;
+  mockPlayers[0].bodyPosition[22].columnCoordinate = 14;
+  
+  mockPlayers[0].bodyPosition[23].lineCoordinate = 25;
+  mockPlayers[0].bodyPosition[23].columnCoordinate = 14;
+  
+  mockPlayers[0].bodyPosition[24].lineCoordinate = 25;
+  mockPlayers[0].bodyPosition[24].columnCoordinate = 13;
+  
+  mockPlayers[0].bodyPosition[25].lineCoordinate = 25;
+  mockPlayers[0].bodyPosition[25].columnCoordinate = 12;
+  
+  mockPlayers[0].bodyPosition[26].lineCoordinate = 25;
+  mockPlayers[0].bodyPosition[26].columnCoordinate = 11;
+  
+  mockPlayers[0].bodyPosition[27].lineCoordinate = 25;
+  mockPlayers[0].bodyPosition[27].columnCoordinate = 10;
+
+  for(byte i = 28; i<maxSnakeSize; i++) {
+    mockPlayers[0].bodyPosition[i].lineCoordinate = 255;
+    mockPlayers[0].bodyPosition[i].columnCoordinate = 255;
+  }
+}
+
+// TO BE COMPLETED
 void defineMockSnakesOnePositions() {
   mockPlayers[1].bodyPosition[0].lineCoordinate = 0;
   mockPlayers[1].bodyPosition[0].columnCoordinate = 0;

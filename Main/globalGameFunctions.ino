@@ -6,35 +6,100 @@ void initializeGame() {
 void initializeApples(const byte quantityOfApples) {
   apples[0].applePosition.lineCoordinate = 9;
   apples[0].applePosition.columnCoordinate = 9;
-  apples[0].colour = Green;
+  apples[0].colour = White;
   
   apples[1].applePosition.lineCoordinate = 9;
   apples[1].applePosition.columnCoordinate = 22;
-  apples[1].colour = Green;
+  apples[1].colour = White;
   
   apples[2].applePosition.lineCoordinate = 22;
   apples[2].applePosition.columnCoordinate = 9;
-  apples[2].colour = Green;
+  apples[2].colour = White;
   
   apples[3].applePosition.lineCoordinate = 22;
   apples[3].applePosition.columnCoordinate = 22;
-  apples[3].colour = Green;
+  apples[3].colour = White;
   
 }
 
-void playerChoices() {
-  for(byte i = 0; i < NUMBER_PLAYERS; i++) {
-    players[i].isActive = 0;
+// While the game state is 0, that function manages the starting page
+void startPage() {
+  // It displays the word "snake", centered
+  displaySnakeWord(13,7);
+
+  // It display the 4 mock snakes around, using their colours and placement
+  displayMockSnake(0);
+  displayMockSnake(1);
+  displayMockSnake(2);
+  displayMockSnake(3);
+
+  // It keeps player choices open for colours and game-entering
+  playersChoices();
+
+  // And finally, if a player presses start, then the game starts
+  expectStartingGame();
+}
+
+void playersChoices() {
+
+  for(byte playerIndex = 0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+    // Player 0 pushing button 6 (A), which is red
+    if(playerButtonPushed[playerIndex][6] == 1) {
+      players[playerIndex].isActive = 1;
+      players[playerIndex].headColour = Red;
+      players[playerIndex].colour = Pink;
+      mockPlayers[playerIndex].headColour = Red;
+      mockPlayers[playerIndex].colour = Pink;
+    }
+        // Player 0 pushing button 7 (B), which is yellow
+    if(playerButtonPushed[playerIndex][7] == 1) {
+      players[playerIndex].isActive = 1;
+      players[playerIndex].headColour = Orange;
+      players[playerIndex].colour = Yellow;
+      mockPlayers[playerIndex].headColour = Orange;
+      mockPlayers[playerIndex].colour = Yellow;
+      
+    }
+        // Player 0 pushing button 8 (Y), which is green
+    if(playerButtonPushed[playerIndex][8] == 1) {
+      players[playerIndex].isActive = 1;
+      players[playerIndex].headColour = Green;
+      players[playerIndex].colour = Green;
+      mockPlayers[playerIndex].headColour = Green;
+      mockPlayers[playerIndex].colour = Green;
+      
+    }
+        // Player 0 pushing button 9 (X), which is blue
+    if(playerButtonPushed[playerIndex][9] == 1) {
+      players[playerIndex].isActive = 1;
+      players[playerIndex].headColour = Blue;
+      players[playerIndex].colour = LightBlue;
+      mockPlayers[playerIndex].headColour = Blue;
+      mockPlayers[playerIndex].colour = LightBlue;
+      
+    }
+
+     // Player 0 pushing button 10 and 11 (L and R), secret coulour !
+     if(playerButtonPushed[playerIndex][11] == 1 && playerButtonPushed[playerIndex][10] == 1) {
+      players[playerIndex].isActive = 1;
+      players[playerIndex].headColour = Purple;
+      players[playerIndex].colour = LightPurple;
+      mockPlayers[playerIndex].headColour = Blue;
+      mockPlayers[playerIndex].colour = LightPurple;
+    }
+
+    // Player 0 pushing button 5 (Select)
+    if(playerButtonPushed[playerIndex][9] == 1) {
+      players[playerIndex].isActive = 0;
+      players[playerIndex].headColour = White;
+      players[playerIndex].colour = White;
+      mockPlayers[playerIndex].headColour = White;
+      mockPlayers[playerIndex].colour = White;
+      
+    }
   }
 
-  TODO
-
-  // Display mock snakes
-  // If the player choses a colour with ABXY, change the mock snake colour, head and body
   // Use a global "available colour" arrow to let the player chose only available colour
-  // If player choses a colour, it passes him as "is active", and sets both his mock and real snake with the said colour
-  // Use "displayMockSnake" here on in the loop to display the mocksnake (see function below)
-  // if the player clicks "select", put the snake back to white, player isn't active anymore
   // And all this is until an active player clicks on start, in which case the game starts with a gamestate change
 }
 
@@ -63,8 +128,6 @@ void initializePlayers() {
     players[0].newBodyPosition[0].lineCoordinate = initialPositionLinePlayerOne;
     players[0].newBodyPosition[0].columnCoordinate = initialPositionColumnPlayerOne;
     players[0].goingDirection = directionEast;
-    players[0].headColour = Blue;
-    players[0].colour = LightBlue;
     players[0].appleCaught = 0;
     players[0].isAlive = 1;
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
@@ -98,8 +161,6 @@ void initializePlayers() {
     players[1].newBodyPosition[0].lineCoordinate = initialPositionLinePlayerTwo;
     players[1].newBodyPosition[0].columnCoordinate = initialPositionColumnPlayerTwo;
     players[1].goingDirection = directionSouth;
-    players[1].headColour = Red;
-    players[1].colour = Pink;
     players[1].appleCaught = 0;
     players[1].isAlive = 1;
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
@@ -168,8 +229,6 @@ void initializePlayers() {
     players[3].newBodyPosition[0].lineCoordinate = initialPositionLinePlayerFour;
     players[3].newBodyPosition[0].columnCoordinate = initialPositionColumnPlayerFour;
     players[3].goingDirection = directionWest;
-    players[3].headColour = Orange;
-    players[3].colour = Yellow;
     players[3].appleCaught = 0;
     players[3].isAlive = 1;
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
@@ -232,13 +291,6 @@ void checkIfAPlayerWon() {
    }
 }
 
-void displayStartPage() {
-  displaySnakeWord(13,7);
-  SHOULD EVOLVE
-}
-
-
-
 void expectStartingGame() {
   // If any player
   // Serial.print("we're expecting game start \n");
@@ -254,6 +306,7 @@ void expectStartingGame() {
     if(playerButtonPushed[indexPlayer][4] == 1) {
       // Then we start the game
       gameState = 1;
+      initializePlayers();
     }
   }
 }
