@@ -1,7 +1,9 @@
 void changeAllPlayerDirections() {
   checkAllButtons();
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-    changePlayerDirection(playerIndex);
+    if(players[playerIndex].isActive == 1) {
+      changePlayerDirection(playerIndex);
+    }
   }
 }
 
@@ -104,7 +106,9 @@ void changePlayerDirection(const byte playerID) {
 
 void moveAllPlayers() {
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-    movePlayer(playerIndex);
+    if(players[playerIndex].isActive == 1) {
+      movePlayer(playerIndex);
+    }
   }
 }
 
@@ -114,16 +118,18 @@ void checkIfPlayerDied(const byte playerID) {
   if(players[playerID].isAlive == 1) {
     // we check if we've hit any player
     for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-      // If we're erasing dead players,
-      if(deadPlayersRemain == 0) {
-        // Then we check that we haven't hit an alive player
-        if(players[playerIndex].isAlive == 1) {
-          checkIfPlayerHeadHitSnake(playerID, playerIndex);
+      if(players[playerIndex].isActive == 1) {
+        // If we're erasing dead players,
+        if(deadPlayersRemain == 0) {
+          // Then we check that we haven't hit an alive player
+          if(players[playerIndex].isAlive == 1) {
+            checkIfPlayerHeadHitSnake(playerID, playerIndex);
+          }
         }
-      }
-      // If dead players can be hit
-      else if(deadPlayersRemain == 1) {
-          checkIfPlayerHeadHitSnake(playerID, playerIndex);
+        // If dead players can be hit
+        else if(deadPlayersRemain == 1) {
+            checkIfPlayerHeadHitSnake(playerID, playerIndex);
+        }
       }
     }
   }
@@ -131,51 +137,55 @@ void checkIfPlayerDied(const byte playerID) {
 
 // checks if the head of player "playerID" has hit the body of player "playerIndex", without life/death logic of the players
 void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
-      // We iterate on each snake body
-      for (int snakeBodyIterator = 0; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
-    //    Serial.print("Snake body iterator: ");
-    //    Serial.print(snakeBodyIterator);
-    //    Serial.print("\n");
-        // If we're iterating and finding the actual player, and we're considering the snake head
-        if(playerID == playerIndex &&  snakeBodyIterator == 0) {
-          // Then we do nothing, as we don't want the snake's head to hit itself
-        }
-        // If we're iterating on anything else - and we want the snake to be able to hit its own body !
-        else {
-          // If the head of the snake is on the same position as one of the body parts, we end the game.
-          // In the direction changes, there is some logic to avoid the player to get back on itself
-          if(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate != 255 && players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate!= 255) {
-            if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
-              players[playerID].isAlive = 0;
-              /*
-                Serial.print("playerID :");
-                Serial.print(playerID);
-                Serial.print(" is now ");
-                Serial.print(players[playerID].isAlive);
-                Serial.print(", because his head, in (");
-                Serial.print(players[playerID].newBodyPosition[0].lineCoordinate);
-                Serial.print(", ");
-                Serial.print(players[playerID].newBodyPosition[0].columnCoordinate);
-                Serial.print(") hit player ");
-                Serial.print(playerIndex);
-                Serial.print(" body part number ");
-                Serial.print(snakeBodyIterator);
-                Serial.print(" which is in (");
-                Serial.print(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate);
-                Serial.print(", ");
-                Serial.print(players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate);
-                Serial.print("). \n");
-              */
-            }
+  if(players[playerID].isActive == 1 && players[playerIndex].isActive == 1) {
+    // We iterate on each snake body
+    for (int snakeBodyIterator = 0; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
+  //    Serial.print("Snake body iterator: ");
+  //    Serial.print(snakeBodyIterator);
+  //    Serial.print("\n");
+      // If we're iterating and finding the actual player, and we're considering the snake head
+      if(playerID == playerIndex &&  snakeBodyIterator == 0) {
+        // Then we do nothing, as we don't want the snake's head to hit itself
+      }
+      // If we're iterating on anything else - and we want the snake to be able to hit its own body !
+      else {
+        // If the head of the snake is on the same position as one of the body parts, we end the game.
+        // In the direction changes, there is some logic to avoid the player to get back on itself
+        if(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate != 255 && players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate!= 255) {
+          if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+            players[playerID].isAlive = 0;
+            /*
+              Serial.print("playerID :");
+              Serial.print(playerID);
+              Serial.print(" is now ");
+              Serial.print(players[playerID].isAlive);
+              Serial.print(", because his head, in (");
+              Serial.print(players[playerID].newBodyPosition[0].lineCoordinate);
+              Serial.print(", ");
+              Serial.print(players[playerID].newBodyPosition[0].columnCoordinate);
+              Serial.print(") hit player ");
+              Serial.print(playerIndex);
+              Serial.print(" body part number ");
+              Serial.print(snakeBodyIterator);
+              Serial.print(" which is in (");
+              Serial.print(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate);
+              Serial.print(", ");
+              Serial.print(players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate);
+              Serial.print("). \n");
+            */
           }
         }
       }
+    }
+  }
 }
 
 
 void checkIfAnyPlayerDied() {
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-    checkIfPlayerDied(playerIndex);
+    if(players[playerIndex].isActive == 1) {
+      checkIfPlayerDied(playerIndex);
+    }
   }
 }
 
@@ -319,27 +329,30 @@ void displaySnake(const byte playerID) {
   
 // Displays a player's snake on the LEDMatrix, depending if he's alive or dead
 void displayPlayerSnake(const byte playerID) {
-  // If we do not show dead players
-  if(deadPlayersRemain == 0) {
-    // And if the player is alive
-    if(players[playerID].isAlive == 1) {
-      // We display the snake
-        displaySnake(playerID);
+  if(players[playerID].isActive == 1) {
+    // If we do not show dead players
+    if(deadPlayersRemain == 0) {
+      // And if the player is alive
+      if(players[playerID].isAlive == 1) {
+        // We display the snake
+          displaySnake(playerID);
+      }
     }
-  }
-  // If dead players remain, then we keep on displaying all snakes, dead or alive
-  else if(deadPlayersRemain == 1) {
-          // We display the snake
-      displaySnake(playerID);
-    }    
-  
+    // If dead players remain, then we keep on displaying all snakes, dead or alive
+    else if(deadPlayersRemain == 1) {
+            // We display the snake
+        displaySnake(playerID);
+      }    
+  }  
 }
 
 
 
 void displayAllPlayerSnakes() {
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-    displayPlayerSnake(playerIndex);
+    if(players[playerIndex].isActive == 1) {
+      displayPlayerSnake(playerIndex);
+    }
   }
 }
 
@@ -347,6 +360,9 @@ void digitalOutputPlayer(const byte playerID) {
   Serial.print("Outputing for player ");
   Serial.print(playerID);
   Serial.print(": \n");
+  Serial.print("Is active: ");
+  Serial.print(players[playerID].isActive);
+  Serial.print("\n");
   Serial.print("Head colour: ");
   Serial.print(players[playerID].headColour);
   Serial.print("\n");
