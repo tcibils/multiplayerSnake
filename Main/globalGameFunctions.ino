@@ -69,3 +69,73 @@ void initializePlayers(const byte quantityOfPlayers) {
       }
     }
 }
+
+void checkIfAPlayerWon() {
+  if(players[0].isAlive == 1 &&
+     players[1].isAlive == 0 &&
+     players[2].isAlive == 0 &&
+     players[3].isAlive == 0) {
+      gameState = 2;
+      winningPlayer = 0;
+   }
+     
+  if(players[0].isAlive == 0 &&
+     players[1].isAlive == 1 &&
+     players[2].isAlive == 0 &&
+     players[3].isAlive == 0) {
+      gameState = 2;
+      winningPlayer = 1;
+   }
+     
+  if(players[0].isAlive == 0 &&
+     players[1].isAlive == 0 &&
+     players[2].isAlive == 1 &&
+     players[3].isAlive == 0) {
+      gameState = 2;
+      winningPlayer = 2;
+   }
+     
+  if(players[0].isAlive == 0 &&
+     players[1].isAlive == 0 &&
+     players[2].isAlive == 0 &&
+     players[3].isAlive == 1) {
+      gameState = 2;
+      winningPlayer = 3;
+   }
+}
+
+void displayWinningMessage(const byte playerID) {
+  
+  if(players[playerID].headColour == Blue) {
+    displayWordBlue(5,5);
+  }
+
+  if(players[playerID].headColour == Red) {
+    displayWordRed(5,5);
+  }
+
+  if(players[playerID].headColour == Green) {
+    displayWordGreen(5,5);
+  }
+
+  if(players[playerID].headColour == Yellow || players[playerID].headColour == Orange) {
+    displayWordYellow(5,5);
+  }
+
+  if(players[playerID].headColour == Purple) {
+    displayWordPurple(5,5);
+  }
+
+  displayWordWon(15,15);
+}
+
+void expectStartingGame() {
+  // If any player
+  for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
+    // Is pressing start button
+    if(playerButtonPushed[indexPlayer][4] == 1) {
+      // Then we start the game
+      gameState = 1;
+    }
+  }
+}

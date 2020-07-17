@@ -177,7 +177,8 @@ Contains the game status.
  - 2 means that we're showing the end-game screen or something
 */
 
-byte gameState = 0;                      
+byte gameState = 0;     
+byte winningPlayer = 5; // This will store the player who won                 
 
 unsigned long lastMillis = 0;
 
@@ -221,15 +222,7 @@ void loop() {
     // If we're in the pre-launch screen
     if(gameState == 0) {
       clearLEDMatrix();
-      // If any player
-      for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
-        // Is pressing start button
-        if(playerButtonPushed[indexPlayer][4] == 1) {
-          // Then we start the game
-          gameState = 1;
-        }
-      }
-
+      expectStartingGame();
       displaySnakeWord(5,5);
       
     }
@@ -242,6 +235,12 @@ void loop() {
       displayAllApples();
       moveAllPlayers();
       displayAllPlayerSnakes();
+      checkIfAPlayerWon();
+    }
+
+    if(gameState == 2) {
+      displayWinningMessage(winningPlayer);
+      expectStartingGame();
     }
     
     outputDisplay();
