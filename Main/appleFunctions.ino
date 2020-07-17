@@ -10,7 +10,8 @@ void generateApple(const byte replacedAppleID) {
   Serial.print("}. \n");
   */
   // And we set the apple to the coordinates created
-  apples[replacedAppleID] = {appleLineNumber, appleColumnNumber};
+  apples[replacedAppleID].applePosition.lineCoordinate = appleLineNumber;
+  apples[replacedAppleID].applePosition.columnCoordinate = appleColumnNumber;
 
   // We check that the apple didn't appear on the snake.
   // We scan the whole grid
@@ -25,6 +26,7 @@ void generateApple(const byte replacedAppleID) {
       }
     }
   }
+  
 }
 
 void displayAllApples() {
@@ -77,4 +79,18 @@ void checkIfAppleEated(const byte playerID) {
        generateApple(appleIndex);
     }
   }
+}
+
+void digitalOutputApple(const byte appleID) {
+  Serial.print("Outputing for apple ");
+  Serial.print(appleID);
+  Serial.print(": \n");
+  Serial.print("Apple position: (");
+  Serial.print(apples[appleID].applePosition.lineCoordinate);
+  Serial.print("; ");
+  Serial.print(apples[appleID].applePosition.columnCoordinate);
+  Serial.print(") \n");
+  Serial.print("Colour: ");
+  Serial.print(apples[appleID].colour);
+  Serial.print("\n");
 }
