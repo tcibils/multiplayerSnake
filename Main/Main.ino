@@ -101,6 +101,20 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 
 
 // ----------------------------------------------------------------------------------------------------
+// -----------------------------------------   SPRITES   ----------------------------------------------
+// ----------------------------------------------------------------------------------------------------
+
+
+const byte PROGMEM snakeLogo[5][20] = {
+{1,1,1,0,1,0,0,1,0,1,1,1,0,1,0,1,0,1,1,1},
+{1,0,0,0,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0},
+{1,1,1,0,1,0,1,1,0,1,1,1,0,1,1,0,0,1,1,1},
+{0,0,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,0},
+{1,1,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,1,1}
+};
+
+
+// ----------------------------------------------------------------------------------------------------
 // -------------------------------------   GAME PARAMETERS   ------------------------------------------
 // ----------------------------------------------------------------------------------------------------
 
@@ -208,23 +222,31 @@ void setup() {
 void loop() {
   
   if (millis() - lastMillis >= moveSpeed) {
-    clearLEDMatrix();
     checkAllButtons();
-
+    
     // If we're in the pre-launch screen
     if(gameState == 0) {
+      clearLEDMatrix();
       // If any player
-      for(byte playerIndex; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+      for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
         // Is pressing start button
-        if(playerButtonPushed[playerIndex][4] == 1) {
+        if(playerButtonPushed[indexPlayer][4] == 1) {
           // Then we start the game
           gameState = 1;
         }
       }
+
+      for(byte i = 0; i < 5; i++) {
+        for(byte j = 0; j < 20; j++) {
+          LEDMatrix[5+i][5+j] = pgm_read_word(&snakeLogo[i][j]);
+        }
+      }
+      
     }
 
     // If we're playing the game
     if(gameState == 1) {
+      clearLEDMatrix();
       // It gets played
       changeAllPlayerDirections();
       displayAllApples();
