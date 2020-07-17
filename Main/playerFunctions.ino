@@ -342,5 +342,54 @@ void displayAllPlayerSnakes() {
     displayPlayerSnake(playerIndex);
   }
 }
+
+void digitalOutputPlayer(const byte playerID) {
+  Serial.print("Outputing for player ");
+  Serial.print(playerID);
+  Serial.print(": \n");
+  Serial.print("Head colour: ");
+  Serial.print(players[playerID].headColour);
+  Serial.print("\n");
+  Serial.print("Colour: ");
+  Serial.print(players[playerID].colour);
+  Serial.print("\n");
+  Serial.print("is alive: ");
+  Serial.print(players[playerID].isAlive);
+  Serial.print("\n");
+  Serial.print("has caught an apple: ");
+  Serial.print(players[playerID].appleCaught);
+  Serial.print("\n");
+  Serial.print("Body position: ");
+  for(byte i = 0; i < maxSnakeSize; i++) {
+    if(players[playerID].bodyPosition[i].lineCoordinate != 255) {
+      Serial.print("(");
+      Serial.print(players[playerID].bodyPosition[i].lineCoordinate);
+      Serial.print("; ");
+      Serial.print(players[playerID].bodyPosition[i].columnCoordinate);
+      Serial.print("), ");
+    }
+  }
+  Serial.print("\n");
   
+  Serial.print("NewBody position: ");
+  for(byte i = 0; i < maxSnakeSize; i++) {
+    if(players[playerID].newBodyPosition[i].lineCoordinate != 255) {
+      Serial.print("(");
+      Serial.print(players[playerID].newBodyPosition[i].lineCoordinate);
+      Serial.print("; ");
+      Serial.print(players[playerID].newBodyPosition[i].columnCoordinate);
+      Serial.print("), ");
+    }
+  }
+  Serial.print("\n");
+}
+
+  pointOnMatrix bodyPosition[maxSnakeSize];
+  pointOnMatrix newBodyPosition[maxSnakeSize];
+  byte headColour;
+  byte colour;
+  byte goingDirection;
+  byte appleCaught;                               // 1 means apple eaten, 0 means no
+  byte isAlive;                                   // 1 means alive, 0 means dead
+
   

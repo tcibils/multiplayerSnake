@@ -61,5 +61,11 @@ void initializePlayers(const byte quantityOfPlayers) {
     for(byte playerIndex = 0; playerIndex < quantityOfPlayers; playerIndex++) {
       players[playerIndex].appleCaught = 0;
       players[playerIndex].isAlive = 1;
+      for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {
+        players[playerIndex].bodyPosition[bodyIndex].lineCoordinate = 255;
+        players[playerIndex].bodyPosition[bodyIndex].columnCoordinate = 255;
+        players[playerIndex].newBodyPosition[bodyIndex].lineCoordinate = 255;
+        players[playerIndex].newBodyPosition[bodyIndex].columnCoordinate = 255;
+      }
     }
 }
