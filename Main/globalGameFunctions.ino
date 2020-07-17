@@ -194,8 +194,6 @@ void initializePlayers() {
     players[2].newBodyPosition[0].lineCoordinate = initialPositionLinePlayerThree;
     players[2].newBodyPosition[0].columnCoordinate = initialPositionColumnPlayerThree;
     players[2].goingDirection = directionNorth;
-    players[2].headColour = Purple;
-    players[2].colour = LightPurple;
     players[2].appleCaught = 0;
     players[2].isAlive = 1;
     for(byte bodyIndex = 1; bodyIndex < maxSnakeSize; bodyIndex++) {

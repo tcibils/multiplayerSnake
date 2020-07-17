@@ -58,22 +58,22 @@ void changePlayerDirection(const byte playerID) {
   }
 
   if(playerID == 2) {
-    if(playerButtonPushed[2][0] == 1) {
+    if(playerButtonPushed[2][2] == 1) {
       if(players[2].goingDirection != directionSouth) {
       players[2].goingDirection = directionNorth;
       }
     }
-    if(playerButtonPushed[2][1] == 1) {
+    if(playerButtonPushed[2][3] == 1) {
       if(players[2].goingDirection != directionWest) {
       players[2].goingDirection = directionEast;
       }
     }
-    if(playerButtonPushed[2][2] == 1) {
+    if(playerButtonPushed[2][0] == 1) {
       if(players[2].goingDirection != directionNorth) {
       players[2].goingDirection = directionSouth;
       }
     }
-    if(playerButtonPushed[2][3] == 1) {
+    if(playerButtonPushed[2][1] == 1) {
       if(players[2].goingDirection != directionEast) {
       players[2].goingDirection = directionWest;
       }
