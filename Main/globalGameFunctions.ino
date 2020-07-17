@@ -126,7 +126,7 @@ void displayWinningMessage(const byte playerID) {
     displayWordPurple(5,5);
   }
 
-  displayWordWon(15,15);
+  displayWordWon(15,5);
 }
 
 void expectStartingGame() {

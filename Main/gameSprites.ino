@@ -24,7 +24,7 @@ void displayWordBlue(byte startingLine, byte startingColumn) {
   };
 
   for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 20; j++) {
+    for(byte j = 0; j < 15; j++) {
       LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordBlue[i][j]);
     }
   }
@@ -40,7 +40,7 @@ void displayWordRed(byte startingLine, byte startingColumn) {
   };
 
   for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 20; j++) {
+    for(byte j = 0; j < 11; j++) {
       LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordRed[i][j]);
     }
   }
@@ -48,15 +48,15 @@ void displayWordRed(byte startingLine, byte startingColumn) {
 
 void displayWordYellow(byte startingLine, byte startingColumn) {
   const static byte PROGMEM wordYellow[5][25] = {
-    {9,0,9,0,9,9,9,0,9,0,0,0,9,0,0,0,9,9,9,0,9,0,0,0,9},
-    {9,0,9,0,9,0,0,0,9,0,0,0,9,0,0,0,9,0,9,0,9,0,0,0,9},
-    {0,9,0,0,9,9,9,0,9,0,0,0,9,0,0,0,9,0,9,0,9,0,9,0,9},
-    {0,9,0,0,9,0,0,0,9,0,0,0,9,0,0,0,9,0,9,0,9,0,9,0,9},
-    {0,9,0,0,9,9,9,0,9,9,9,0,9,9,9,0,9,9,9,0,9,9,9,9,9}
+    {8,0,8,0,8,8,8,0,8,0,0,0,8,0,0,0,8,8,8,0,8,0,0,0,8},
+    {8,0,8,0,8,0,0,0,8,0,0,0,8,0,0,0,8,0,8,0,8,0,0,0,8},
+    {0,8,0,0,8,8,8,0,8,0,0,0,8,0,0,0,8,0,8,0,8,0,8,0,8},
+    {0,8,0,0,8,0,0,0,8,0,0,0,8,0,0,0,8,0,8,0,8,0,8,0,8},
+    {0,8,0,0,8,8,8,0,8,8,8,0,8,8,8,0,8,8,8,0,8,8,8,8,8}
   };
 
   for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 20; j++) {
+    for(byte j = 0; j < 25; j++) {
       LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordYellow[i][j]);
     }
   }
@@ -88,7 +88,7 @@ void displayWordPurple (byte startingLine, byte startingColumn) {
   };
 
   for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 20; j++) {
+    for(byte j = 0; j < 23; j++) {
       LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordPurple[i][j]);
     }
   }
@@ -104,7 +104,7 @@ void displayWordWon (byte startingLine, byte startingColumn) {
   };
 
   for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 20; j++) {
+    for(byte j = 0; j < 17; j++) {
       LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordWon[i][j]);
     }
   }

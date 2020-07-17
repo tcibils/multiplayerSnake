@@ -14,6 +14,8 @@
  *  - Experiment with more or less apples
  *  - Support various number of player from 1 to 4
  *  - Make start game and end game screens, with choices and or scores, that kind of stuff
+ *  - Make "snake" word froms tart slightly glow, Aurore found that cool
+ *  - Add little fireworks in the win screen
  *  - Have different speed per player, with a tradeoff speed vs long snake ???
  */
 
@@ -239,10 +241,11 @@ void loop() {
     }
 
     if(gameState == 2) {
+      clearLEDMatrix();
       displayWinningMessage(winningPlayer);
       expectStartingGame();
     }
-    
+
     outputDisplay();
     lastMillis = millis();
   }
