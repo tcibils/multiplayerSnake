@@ -127,7 +127,7 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define directionWest 7
 
 #define moveSpeed 100                 // In miliseconds. Can be used to make something happen every X miliseconds.
-#define initialPlayerMovingSpeed 200  // Base speed of all players, in miliseconds
+#define initialPlayerMovingSpeed 250  // Base speed of all players, in miliseconds
 #define playerMovingSpeedDecrease 20  // How quickly will the player speed improve if eating a quickening apple
 #define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
 #define numberOfApples 4              // Defines how many apples are present in the game
