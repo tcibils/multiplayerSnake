@@ -8,7 +8,9 @@ void initializeGame() {
 // While the game state is 0, that function manages the starting page
 void startPage() {
   // It displays the word "snake", centered
-  displaySnakeWord(13,7);
+  manageGreenGlooming();
+  displaySnakeWord(13,7, Glooming);
+
 
   // It display the 4 mock snakes around, using their colours and placement
   displayMockSnake(0);
@@ -261,6 +263,7 @@ void checkIfAPlayerWon() {
      players[3].isAlive == 0) {
       gameState = 2;
       winningPlayer = 0;
+      delay(timeOutVictory);
    }
      
   if(players[0].isAlive == 0 &&
@@ -269,6 +272,7 @@ void checkIfAPlayerWon() {
      players[3].isAlive == 0) {
       gameState = 2;
       winningPlayer = 1;
+      delay(timeOutVictory);
    }
      
   if(players[0].isAlive == 0 &&
@@ -277,6 +281,7 @@ void checkIfAPlayerWon() {
      players[3].isAlive == 0) {
       gameState = 2;
       winningPlayer = 2;
+      delay(timeOutVictory);
    }
      
   if(players[0].isAlive == 0 &&
@@ -285,6 +290,7 @@ void checkIfAPlayerWon() {
      players[3].isAlive == 1 && players[3].isActive == 1) {
       gameState = 2;
       winningPlayer = 3;
+      delay(timeOutVictory);
    }
 }
 

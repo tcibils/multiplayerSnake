@@ -11,24 +11,45 @@ void changePlayerDirection(const byte playerID) {
   // Each player is placed on a different side of the table
   // Hence, their perspective on the snake going "left" or "right" is different
   if(playerID == 0) {     
+    // If player 0 pushes "up" button
     if(playerButtonPushed[0][0] == 1) {
-      // We want to avoid the snake going back on itself
-      if(players[0].goingDirection != directionSouth) {
+      // If player 0 wants to go north, but one case north is where is body part 1 (just after his head) is:
+      if(players[0].bodyPosition[0].lineCoordinate - 1 == players[0].bodyPosition[1].lineCoordinate && players[0].bodyPosition[0].columnCoordinate == players[0].bodyPosition[1].columnCoordinate) {
+        // We stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
         players[0].goingDirection = directionNorth;
       }
     }
+    // If he pushes "right" button
     if(playerButtonPushed[0][1] == 1) {
-      if(players[0].goingDirection != directionWest) {
+      // If player 0 wants to go east, but one case east (one column right of his head) is where is his body part 1 (just after his head):
+      if(players[0].bodyPosition[0].lineCoordinate == players[0].bodyPosition[1].lineCoordinate && players[0].bodyPosition[0].columnCoordinate + 1 == players[0].bodyPosition[1].columnCoordinate) {
+        // We Stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
         players[0].goingDirection = directionEast;
       }
     }
+    // If he pushes the "down" button
     if(playerButtonPushed[0][2] == 1) {
-      if(players[0].goingDirection != directionNorth) {
+      // If player 0 wants to go south, but one case south (one line down of his head) is where is his body part 1 (just after his head):
+      if(players[0].bodyPosition[0].lineCoordinate + 1 == players[0].bodyPosition[1].lineCoordinate && players[0].bodyPosition[0].columnCoordinate == players[0].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
+      }
+      else {
         players[0].goingDirection = directionSouth;
       }
     }
+    // If he pushes the "left" button
     if(playerButtonPushed[0][3] == 1) {
-      if(players[0].goingDirection != directionEast) {
+      // If player 0 wants to go west, but one case west (one column left of his head) is where is his body part 1 (just after his head):
+      if(players[0].bodyPosition[0].lineCoordinate == players[0].bodyPosition[1].lineCoordinate && players[0].bodyPosition[0].columnCoordinate - 1 == players[0].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
+      }
+      else {
         players[0].goingDirection = directionWest;
       }
     }
@@ -36,69 +57,123 @@ void changePlayerDirection(const byte playerID) {
 
   if(playerID == 1) {
     if(playerButtonPushed[1][0] == 1) {
-      if(players[1].goingDirection != directionEast) {
-      players[1].goingDirection = directionWest;
+      // If player wants to go west, but one case west (one column left of his head) is where is his body part 1 (just after his head):
+      if(players[1].bodyPosition[0].lineCoordinate == players[1].bodyPosition[1].lineCoordinate && players[1].bodyPosition[0].columnCoordinate - 1 == players[1].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
       }
+      else {
+        players[1].goingDirection = directionWest;
+      }    
     }
     if(playerButtonPushed[1][1] == 1) {
-      if(players[1].goingDirection != directionSouth) {
-      players[1].goingDirection = directionNorth;
+      // If player wants to go north, but one case north is where is body part 1 (just after his head) is:
+      if(players[1].bodyPosition[0].lineCoordinate - 1 == players[1].bodyPosition[1].lineCoordinate && players[1].bodyPosition[0].columnCoordinate == players[1].bodyPosition[1].columnCoordinate) {
+        // We stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
+        players[1].goingDirection = directionNorth;
       }
     }
     if(playerButtonPushed[1][2] == 1) {
-      if(players[1].goingDirection != directionWest) {
-      players[1].goingDirection = directionEast;
+      // If player wants to go east, but one case east (one column right of his head) is where is his body part 1 (just after his head):
+      if(players[1].bodyPosition[0].lineCoordinate == players[1].bodyPosition[1].lineCoordinate && players[1].bodyPosition[0].columnCoordinate + 1 == players[1].bodyPosition[1].columnCoordinate) {
+        // We Stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
+        players[1].goingDirection = directionEast;
       }
     }
     if(playerButtonPushed[1][3] == 1) {
-      if(players[1].goingDirection != directionNorth) {
-      players[1].goingDirection = directionSouth;
+      // If player wants to go south, but one case south (one line down of his head) is where is his body part 1 (just after his head):
+      if(players[1].bodyPosition[0].lineCoordinate + 1 == players[1].bodyPosition[1].lineCoordinate && players[1].bodyPosition[0].columnCoordinate == players[1].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
+      }
+      else {
+        players[1].goingDirection = directionSouth;
       }
     }
   }
 
   if(playerID == 2) {
     if(playerButtonPushed[2][2] == 1) {
-      if(players[2].goingDirection != directionSouth) {
-      players[2].goingDirection = directionNorth;
+      // If player wants to go north, but one case north is where is body part 1 (just after his head) is:
+      if(players[2].bodyPosition[0].lineCoordinate - 1 == players[2].bodyPosition[1].lineCoordinate && players[2].bodyPosition[0].columnCoordinate == players[2].bodyPosition[1].columnCoordinate) {
+        // We stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
+        players[2].goingDirection = directionNorth;
       }
     }
     if(playerButtonPushed[2][3] == 1) {
-      if(players[2].goingDirection != directionWest) {
-      players[2].goingDirection = directionEast;
+      // If player wants to go east, but one case east (one column right of his head) is where is his body part 1 (just after his head):
+      if(players[2].bodyPosition[0].lineCoordinate == players[2].bodyPosition[1].lineCoordinate && players[2].bodyPosition[0].columnCoordinate + 1 == players[2].bodyPosition[1].columnCoordinate) {
+        // We Stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
+        players[2].goingDirection = directionEast;
       }
     }
     if(playerButtonPushed[2][0] == 1) {
-      if(players[2].goingDirection != directionNorth) {
-      players[2].goingDirection = directionSouth;
+      // If player wants to go south, but one case south (one line down of his head) is where is his body part 1 (just after his head):
+      if(players[2].bodyPosition[0].lineCoordinate + 1 == players[2].bodyPosition[1].lineCoordinate && players[2].bodyPosition[0].columnCoordinate == players[2].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
+      }
+      else {
+        players[2].goingDirection = directionSouth;
       }
     }
     if(playerButtonPushed[2][1] == 1) {
-      if(players[2].goingDirection != directionEast) {
-      players[2].goingDirection = directionWest;
+      // If player wants to go west, but one case west (one column left of his head) is where is his body part 1 (just after his head):
+      if(players[2].bodyPosition[0].lineCoordinate == players[2].bodyPosition[1].lineCoordinate && players[2].bodyPosition[0].columnCoordinate - 1 == players[2].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
       }
+      else {
+        players[2].goingDirection = directionWest;
+      }    
     }
   }
 
   if(playerID == 3) {
     if(playerButtonPushed[3][0] == 1) {
-      if(players[3].goingDirection != directionWest) {
-      players[3].goingDirection = directionEast;
+      // If player wants to go east, but one case east (one column right of his head) is where is his body part 1 (just after his head):
+      if(players[3].bodyPosition[0].lineCoordinate == players[3].bodyPosition[1].lineCoordinate && players[3].bodyPosition[0].columnCoordinate + 1 == players[3].bodyPosition[1].columnCoordinate) {
+        // We Stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
+        players[3].goingDirection = directionEast;
       }
     }
     if(playerButtonPushed[3][1] == 1) {
-      if(players[3].goingDirection != directionNorth) {
-      players[3].goingDirection = directionSouth;
+      // If player wants to go south, but one case south (one line down of his head) is where is his body part 1 (just after his head):
+      if(players[3].bodyPosition[0].lineCoordinate + 1 == players[3].bodyPosition[1].lineCoordinate && players[3].bodyPosition[0].columnCoordinate == players[3].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
+      }
+      else {
+        players[3].goingDirection = directionSouth;
       }
     }
     if(playerButtonPushed[3][2] == 1) {
-      if(players[3].goingDirection != directionEast) {
-      players[3].goingDirection = directionWest;
+      // If player wants to go west, but one case west (one column left of his head) is where is his body part 1 (just after his head):
+      if(players[3].bodyPosition[0].lineCoordinate == players[3].bodyPosition[1].lineCoordinate && players[3].bodyPosition[0].columnCoordinate - 1 == players[3].bodyPosition[1].columnCoordinate) {
+        // We don't allow it
       }
+      else {
+        players[3].goingDirection = directionWest;
+      }    
     }
     if(playerButtonPushed[3][3] == 1) {
-      if(players[3].goingDirection != directionSouth) {
-      players[3].goingDirection = directionNorth;
+      // If player wants to go north, but one case north is where is body part 1 (just after his head) is:
+      if(players[3].bodyPosition[0].lineCoordinate - 1 == players[3].bodyPosition[1].lineCoordinate && players[3].bodyPosition[0].columnCoordinate == players[3].bodyPosition[1].columnCoordinate) {
+        // We stop him to do so, and do nothing
+      }
+      else {
+        // We allow it
+        players[3].goingDirection = directionNorth;
       }
     }
   }

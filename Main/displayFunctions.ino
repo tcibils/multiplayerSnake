@@ -8,6 +8,21 @@ void clearLEDMatrix() {
   }
 }
 
+// Makes a simple variable vary withing boundaries to have a glooming colour
+void manageGreenGlooming() {
+  if(GroomingGreenIncrease == 1 && GloomingGreenAmount < GlowingMax) {
+    GloomingGreenAmount++;
+  }
+  if(GloomingGreenAmount == GlowingMax) {
+    GroomingGreenIncrease = 0;
+  }
+  if(GroomingGreenIncrease == 0 && GloomingGreenAmount > GlowingMin) {
+    GloomingGreenAmount--;
+  }
+  if(GloomingGreenAmount == GlowingMin) {
+    GroomingGreenIncrease++;
+  }
+}
 
 // We update the physical display of the LED matrix, based on the LEDMatrix
 void outputDisplay() {
@@ -65,6 +80,7 @@ void outputDisplay() {
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Orange) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::DarkOrange;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Yellow) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::LightYellow ;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightPurple) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::MediumPurple;}
+          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB(255-GloomingGreenAmount,255,255-GloomingGreenAmount);}
         }
         // If we're on an uneven column, we do a mathematical trick to invert it
         else if(columnIndex%2 == 0) {
@@ -79,6 +95,7 @@ void outputDisplay() {
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Orange) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::DarkOrange;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Yellow) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::LightYellow;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightPurple) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::MediumPurple;}
+          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB(255-GloomingGreenAmount,255,255-GloomingGreenAmount);}
         }
       }
     }

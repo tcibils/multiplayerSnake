@@ -57,8 +57,12 @@ const byte Pink = 7;
 const byte Orange = 8;
 const byte Yellow = 9;
 const byte LightPurple = 10;
+const byte Glooming = 11;
 
-
+#define GlowingMin 150
+#define GlowingMax 255
+byte GloomingGreenAmount = 150;
+byte GroomingGreenIncrease = 1; // 1 means it increases, 0 that it decreases
 
 // ----------------------------------------------------------------------------------------------------
 // -------------------------------   SNES CONTROLLERS CODE   ------------------------------------------
@@ -131,6 +135,7 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define numberOfApples 4              // Defines how many apples are present in the game
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
 #define chancesOfSpeedyApple 30       // chances, in percentage, that an apple is one that speeds the player
+#define timeOutVictory 1500           // How long is the timeout before showing the end-game victory screen, in ms
 
 #define initialPositionLinePlayerOne 0
 #define initialPositionColumnPlayerOne 0
