@@ -369,7 +369,7 @@ void movePlayer(const byte playerID) {
 
     // If the player did catch a speeding apple
     if(players[playerID].appleCaught == 2) {
-      players[playerID].movingSpeed -= playerMovingSpeedDecrease;
+      players[playerID].movingSpeed = (players[playerID].movingSpeed - ((players[playerID].movingSpeed  * playerMovingSpeedDecrease)/100));
     }
 
     // If the apple was caught, it did its job of making the snake longer, and thus we reset the parameter.
