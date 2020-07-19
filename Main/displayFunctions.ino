@@ -78,8 +78,9 @@ void outputDisplay() {
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightBlue) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::MidnightBlue;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Pink) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::HotPink;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Orange) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::DarkOrange;}
-          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Yellow) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::LightYellow ;}
+          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Yellow) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB(255,255,75) ;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightPurple) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::MediumPurple;}
+          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightGreen) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB::LightGreen;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][(columnIndex + 1)*singleMatrixDisplayNumberOfRows - rowIndex - 1] = CRGB(255-GloomingGreenAmount,255,255-GloomingGreenAmount);}
         }
         // If we're on an uneven column, we do a mathematical trick to invert it
@@ -93,8 +94,9 @@ void outputDisplay() {
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightBlue) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::MidnightBlue;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Pink) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::HotPink;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Orange) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::DarkOrange;}
-          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Yellow) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::LightYellow;}
+          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Yellow) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB(255,255,75);}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightPurple) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::MediumPurple;}
+          if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == LightGreen) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB::LightGreen ;}
           if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB(255-GloomingGreenAmount,255,255-GloomingGreenAmount);}
         }
       }

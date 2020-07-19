@@ -58,6 +58,7 @@ const byte Orange = 8;
 const byte Yellow = 9;
 const byte LightPurple = 10;
 const byte Glooming = 11;
+const byte LightGreen = 13;
 
 #define GlowingMin 150
 #define GlowingMax 255

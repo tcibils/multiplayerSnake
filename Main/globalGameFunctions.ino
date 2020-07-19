@@ -49,9 +49,9 @@ void playersChoices() {
     if(playerButtonPushed[playerIndex][9] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Green;
-      players[playerIndex].colour = Green;
+      players[playerIndex].colour = LightGreen;
       mockPlayers[playerIndex].headColour = Green;
-      mockPlayers[playerIndex].colour = Green;
+      mockPlayers[playerIndex].colour = LightGreen;
       
     }
         // Player 0 pushing button 8 (X), which is blue
