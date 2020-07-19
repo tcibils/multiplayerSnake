@@ -1,26 +1,66 @@
 void displayWinningMessage(const byte playerID) {
   
+  // Display winning message with the right word in the right colour
   if(players[playerID].headColour == Blue) {
-    displayWordBlue(5,5);
+    displayWordBlue(7,5);
   }
 
   if(players[playerID].headColour == Red) {
-    displayWordRed(5,5);
+    displayWordRed(7,5);
   }
 
   if(players[playerID].headColour == Green) {
-    displayWordGreen(5,5);
+    displayWordGreen(7,5);
   }
 
   if(players[playerID].headColour == Yellow || players[playerID].headColour == Orange) {
-    displayWordYellow(5,5);
+    displayWordYellow(7,5);
   }
 
   if(players[playerID].headColour == Purple) {
-    displayWordPurple(5,5);
+    displayWordPurple(7,5);
   }
 
-  displayWordWon(15,5);
+  displayWordWins(17,5);
+}
+
+void displayWinningFireworks(const byte playerID, const byte fireWorkIteration) {
+  // Adding fireworks
+  if(fireWorkIteration == 1) {
+    displayFireworkCrownOne(2, 2, players[playerID].headColour);
+    displayFireworkCrownOne(2, 20, players[playerID].headColour);
+
+    displayFireworkCrownOneInversed(25, 2, players[playerID].headColour);
+    displayFireworkCrownOneInversed(25, 20, players[playerID].headColour);
+
+    // displayFireworkStraightOne(26, 7, players[playerID].headColour);
+    // displayFireworkDiagonalOne(26, 23, players[playerID].headColour);
+  }
+
+  if(fireWorkIteration == 2) {
+    displayFireworkCrownTwo(2, 2, players[playerID].headColour);
+    displayFireworkCrownTwo(2, 20, players[playerID].headColour);
+    
+    displayFireworkCrownTwoInversed(25, 2, players[playerID].headColour);
+    displayFireworkCrownTwoInversed(25, 20, players[playerID].headColour);
+    
+    // displayFireworkStraightTwo(26, 7, players[playerID].headColour);
+    // displayFireworkDiagonalTwo(26, 23, players[playerID].headColour);
+    
+  }
+
+  if(fireWorkIteration == 3) {
+    displayFireworkCrownThree(2, 2, players[playerID].headColour);
+    displayFireworkCrownThree(2, 20, players[playerID].headColour);
+
+    
+    displayFireworkCrownThreeInversed(25, 2, players[playerID].headColour);
+    displayFireworkCrownThreeInversed(25, 20, players[playerID].headColour);
+    
+    // displayFireworkStraightThree(26, 7, players[playerID].headColour);
+    // displayFireworkDiagonalThree(26, 23, players[playerID].headColour);
+    
+  }
 }
 
 // ----------------------------------------------------------------------
@@ -123,24 +163,208 @@ void displayWordPurple (byte startingLine, byte startingColumn) {
   }
 }
 
-void displayWordWon (byte startingLine, byte startingColumn) {
-  const static byte PROGMEM wordWon[5][17] = {
-    {1,0,0,0,1,0,1,1,1,0,1,0,0,1,0,0,1},
-    {1,0,0,0,1,0,1,0,1,0,1,1,0,1,0,0,1},
-    {1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,0,1},
-    {1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0},
-    {1,1,1,1,1,0,1,1,1,0,1,0,0,1,0,0,1}
+void displayWordWins (byte startingLine, byte startingColumn) {
+  const static byte PROGMEM wordWon[5][18] = {
+    {1,0,0,0,1,0,1,0,1,0,0,1,0,1,1,1,0,1},
+    {1,0,0,0,1,0,1,0,1,1,0,1,0,1,0,0,0,1},
+    {1,0,1,0,1,0,1,0,1,0,1,1,0,1,1,1,0,1},
+    {1,0,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0},
+    {1,1,1,1,1,0,1,0,1,0,0,1,0,1,1,1,0,1}
   };
 
   for(byte i = 0; i < 5; i++) {
-    for(byte j = 0; j < 17; j++) {
+    for(byte j = 0; j < 18; j++) {
       LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordWon[i][j]);
     }
   }
 }
 
 // ----------------------------------------------------------------------
-// ----------------------------- SHAPES DISPLAYING SPRITES --------------
+// -------------------------- FIREWORKS DISPLAYING SPRITES --------------
+// ----------------------------------------------------------------------
+
+void displayFireworkStraightOne (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkStraightOne[5][5] = {
+    {0,0,0,0,0},
+    {0,0,0,0,0},
+    {0,0,1,0,0},
+    {0,0,0,0,0},
+    {0,0,0,0,0}
+  };
+
+  for(byte i = 0; i < 5; i++) {
+    for(byte j = 0; j < 5; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkStraightOne[i][j]);
+    }
+  }
+}
+
+void displayFireworkStraightTwo (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkStraightTwo[5][5] = {
+    {0,0,0,0,0},
+    {0,0,1,0,0},
+    {0,1,0,1,0},
+    {0,0,1,0,0},
+    {0,0,0,0,0}
+  };
+
+  for(byte i = 0; i < 5; i++) {
+    for(byte j = 0; j < 5; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkStraightTwo[i][j]);
+    }
+  }
+}
+
+void displayFireworkStraightThree (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkStraightThree[5][5] = {
+    {0,0,1,0,0},
+    {0,0,0,0,0},
+    {1,0,0,0,1},
+    {0,0,0,0,0},
+    {0,0,1,0,0}
+  };
+
+  for(byte i = 0; i < 5; i++) {
+    for(byte j = 0; j < 5; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkStraightThree[i][j]);
+    }
+  }
+}
+
+void displayFireworkDiagonalOne (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkDiagonalOne[5][5] = {
+    {0,0,0,0,0},
+    {0,0,0,0,0},
+    {0,0,1,0,0},
+    {0,0,0,0,0},
+    {0,0,0,0,0}
+  };
+
+  for(byte i = 0; i < 5; i++) {
+    for(byte j = 0; j < 5; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkDiagonalOne[i][j]);
+    }
+  }
+}
+
+void displayFireworkDiagonalTwo (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkDiagonalTwo[5][5] = {
+    {0,0,0,0,0},
+    {0,1,0,1,0},
+    {0,0,0,0,0},
+    {0,1,0,1,0},
+    {0,0,0,0,0}
+  };
+
+  for(byte i = 0; i < 5; i++) {
+    for(byte j = 0; j < 5; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkDiagonalTwo[i][j]);
+    }
+  }
+}
+
+void displayFireworkDiagonalThree (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkDiagonalThree[5][5] = {
+    {1,0,0,0,1},
+    {0,0,0,0,0},
+    {0,0,0,0,0},
+    {0,0,0,0,0},
+    {1,0,0,0,1}
+  };
+
+  for(byte i = 0; i < 5; i++) {
+    for(byte j = 0; j < 5; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkDiagonalThree[i][j]);
+    }
+  }
+}
+
+void displayFireworkCrownOne (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkCrownOne[3][9] = {
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,1,0,1,0,1,0,0}
+  };
+
+  for(byte i = 0; i < 3; i++) {
+    for(byte j = 0; j < 9; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkCrownOne[i][j]);
+    }
+  }
+}
+
+void displayFireworkCrownTwo (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkCrownTwo[3][9] = {
+    {0,0,0,0,0,0,0,0,0},
+    {0,1,0,0,1,0,0,1,0},
+    {0,0,1,0,1,0,1,0,0}
+  };
+
+  for(byte i = 0; i < 3; i++) {
+    for(byte j = 0; j < 9; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkCrownTwo[i][j]);
+    }
+  }
+}
+
+void displayFireworkCrownThree (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkCrownThree[3][9] = {
+    {1,0,0,0,1,0,0,0,1},
+    {0,1,0,0,1,0,0,1,0},
+    {0,0,1,0,1,0,1,0,0}
+  };
+
+  for(byte i = 0; i < 3; i++) {
+    for(byte j = 0; j < 9; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkCrownThree[i][j]);
+    }
+  }
+}
+
+void displayFireworkCrownOneInversed (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkCrownOneInversed[3][9] = {
+    {0,0,1,0,1,0,1,0,0},
+    {0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0}
+  };
+
+  for(byte i = 0; i < 3; i++) {
+    for(byte j = 0; j < 9; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkCrownOneInversed[i][j]);
+    }
+  }
+}
+
+void displayFireworkCrownTwoInversed (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkCrownTwoInversed[3][9] = {
+    {0,0,1,0,1,0,1,0,0},
+    {0,1,0,0,1,0,0,1,0},
+    {0,0,0,0,0,0,0,0,0}
+  };
+
+  for(byte i = 0; i < 3; i++) {
+    for(byte j = 0; j < 9; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkCrownTwoInversed[i][j]);
+    }
+  }
+}
+
+void displayFireworkCrownThreeInversed (byte startingLine, byte startingColumn, byte colour) {
+  const static byte PROGMEM fireworkCrownThreeInversed[3][9] = {
+    {0,0,1,0,1,0,1,0,0},
+    {0,1,0,0,1,0,0,1,0},
+    {1,0,0,0,1,0,0,0,1}
+  };
+
+  for(byte i = 0; i < 3; i++) {
+    for(byte j = 0; j < 9; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = colour * pgm_read_word(&fireworkCrownThreeInversed[i][j]);
+    }
+  }
+}
+
+// ----------------------------------------------------------------------
+// ------------------------ MOCK SNAKES DISPLAYING SPRITES --------------
 // ----------------------------------------------------------------------
 
 void defineMockSnakesInitialColour() {

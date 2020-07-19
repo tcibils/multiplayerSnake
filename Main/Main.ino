@@ -193,6 +193,9 @@ Apple apples[numberOfApples];             // Contains the apples
 Player players[NUMBER_PLAYERS];           // Contains the players
 MockPlayer mockPlayers[NUMBER_PLAYERS];
 unsigned int applesEaten = 0;             // Counts how many apples were eaten in total
+unsigned int previousFireworkMillis = 0;
+byte fireWorkIndicator = 1;
+#define fireWorkRotation 500
 
 /*
 Contains the game status.
@@ -272,8 +275,18 @@ void loop() {
 
    // If the game is over
    if(gameState == 2) {
-      clearLEDMatrix();
-      displayWinningMessage(winningPlayer);
+      if(millis() - previousFireworkMillis > fireWorkRotation) {
+        clearLEDMatrix();
+        displayWinningMessage(winningPlayer);
+        displayWinningFireworks(winningPlayer, fireWorkIndicator);
+        if(fireWorkIndicator == 3) {
+          fireWorkIndicator = 1;
+        }
+        else {
+          fireWorkIndicator++;
+        }
+        previousFireworkMillis = millis();
+      }
       expectStartingGame();
    }
 
