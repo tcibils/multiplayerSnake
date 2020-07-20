@@ -2,54 +2,67 @@ void displayWinningMessage(const byte playerID) {
   
   // Display winning message with the right word in the right colour
   if(players[playerID].headColour == Blue) {
-    displayWordBlue(7,5);
+    displayWordBlue(10,9);
   }
 
   if(players[playerID].headColour == Red) {
-    displayWordRed(7,5);
+    displayWordRed(10,11);
   }
 
   if(players[playerID].headColour == Green) {
-    displayWordGreen(7,5);
+    displayWordGreen(10,7);
   }
 
   if(players[playerID].headColour == Yellow || players[playerID].headColour == Orange) {
-    displayWordYellow(7,5);
+    displayWordYellow(10,5);
   }
 
   if(players[playerID].headColour == Purple) {
-    displayWordPurple(7,5);
+    displayWordPurple(10,5);
   }
 
-  displayWordWins(17,5);
+  displayWordWins(18,8);
 }
 
 void displayWinningFireworks(const byte playerID, const byte fireWorkIteration) {
   // Adding fireworks
   if(fireWorkIteration == 1) {
+    /*
     displayFireworkCrownOne(2, 2, players[playerID].headColour);
     displayFireworkCrownOne(2, 20, players[playerID].headColour);
 
     displayFireworkCrownOneInversed(25, 2, players[playerID].headColour);
     displayFireworkCrownOneInversed(25, 20, players[playerID].headColour);
 
-    // displayFireworkStraightOne(26, 7, players[playerID].headColour);
-    // displayFireworkDiagonalOne(26, 23, players[playerID].headColour);
+    displayFireworkStraightOne(26, 7, players[playerID].headColour);
+    displayFireworkDiagonalOne(26, 23, players[playerID].headColour);
+    */
+    displayFireworkCrownOneDiagonalUpLeft(3,3,players[playerID].headColour);
+    displayFireworkCrownOneDiagonalDownLeft(26,3,players[playerID].headColour);
+    displayFireworkCrownOneDiagonalUpRight(3,26,players[playerID].headColour);
+    displayFireworkCrownOneDiagonalDownRight(26,26,players[playerID].headColour);
   }
 
   if(fireWorkIteration == 2) {
+    /*
     displayFireworkCrownTwo(2, 2, players[playerID].headColour);
     displayFireworkCrownTwo(2, 20, players[playerID].headColour);
     
     displayFireworkCrownTwoInversed(25, 2, players[playerID].headColour);
     displayFireworkCrownTwoInversed(25, 20, players[playerID].headColour);
     
-    // displayFireworkStraightTwo(26, 7, players[playerID].headColour);
-    // displayFireworkDiagonalTwo(26, 23, players[playerID].headColour);
+    displayFireworkStraightTwo(26, 7, players[playerID].headColour);
+    displayFireworkDiagonalTwo(26, 23, players[playerID].headColour);
+    */
+    displayFireworkCrownTwoDiagonalUpLeft(3,3,players[playerID].headColour);
+    displayFireworkCrownTwoDiagonalDownLeft(26,3,players[playerID].headColour);
+    displayFireworkCrownTwoDiagonalUpRight(3,26,players[playerID].headColour);
+    displayFireworkCrownTwoDiagonalDownRight(26,26,players[playerID].headColour);
     
   }
 
   if(fireWorkIteration == 3) {
+    /*
     displayFireworkCrownThree(2, 2, players[playerID].headColour);
     displayFireworkCrownThree(2, 20, players[playerID].headColour);
 
@@ -57,8 +70,13 @@ void displayWinningFireworks(const byte playerID, const byte fireWorkIteration) 
     displayFireworkCrownThreeInversed(25, 2, players[playerID].headColour);
     displayFireworkCrownThreeInversed(25, 20, players[playerID].headColour);
     
-    // displayFireworkStraightThree(26, 7, players[playerID].headColour);
-    // displayFireworkDiagonalThree(26, 23, players[playerID].headColour);
+    displayFireworkStraightThree(26, 7, players[playerID].headColour);
+    displayFireworkDiagonalThree(26, 23, players[playerID].headColour);
+    */
+    displayFireworkCrownThreeDiagonalUpLeft(3,3,players[playerID].headColour);
+    displayFireworkCrownThreeDiagonalDownLeft(26,3,players[playerID].headColour);
+    displayFireworkCrownThreeDiagonalUpRight(3,26,players[playerID].headColour);
+    displayFireworkCrownThreeDiagonalDownRight(26,26,players[playerID].headColour);
     
   }
 }
@@ -368,8 +386,8 @@ void displayFireworkCrownOneDiagonalUpLeft (byte startingLine, byte startingColu
     {0,0,0,0,0},
     {0,0,0,0,0},
     {0,0,0,0,1},
-    {0,0,0,1,0}
-    {0,0,1,0,0},
+    {0,0,0,1,0},
+    {0,0,1,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -384,8 +402,8 @@ void displayFireworkCrownTwoDiagonalUpLeft (byte startingLine, byte startingColu
     {0,0,0,0,0},
     {0,0,0,0,1},
     {0,0,1,0,1},
-    {0,0,0,1,0}
-    {0,1,1,0,0},
+    {0,0,0,1,0},
+    {0,1,1,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -400,8 +418,8 @@ void displayFireworkCrownThreeDiagonalUpLeft (byte startingLine, byte startingCo
     {0,0,0,0,1},
     {0,1,0,0,1},
     {0,0,1,0,1},
-    {0,0,0,1,0}
-    {1,1,1,0,0},
+    {0,0,0,1,0},
+    {1,1,1,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -416,8 +434,8 @@ void displayFireworkCrownOneDiagonalUpRight (byte startingLine, byte startingCol
     {0,0,0,0,0},
     {0,0,0,0,0},
     {1,0,0,0,0},
-    {0,1,0,0,0}
-    {0,0,1,0,0},
+    {0,1,0,0,0},
+    {0,0,1,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -432,8 +450,8 @@ void displayFireworkCrownTwoDiagonalUpRight (byte startingLine, byte startingCol
     {0,0,0,0,0},
     {1,0,0,0,0},
     {1,0,1,0,0},
-    {0,1,0,0,0}
-    {0,0,1,1,0},
+    {0,1,0,0,0},
+    {0,0,1,1,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -448,8 +466,8 @@ void displayFireworkCrownThreeDiagonalUpRight (byte startingLine, byte startingC
     {1,0,0,0,0},
     {1,0,0,1,0},
     {1,0,1,0,0},
-    {0,1,0,1,0}
-    {0,0,1,1,1},
+    {0,1,0,1,0},
+    {0,0,1,1,1}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -464,8 +482,8 @@ void displayFireworkCrownOneDiagonalDownRight (byte startingLine, byte startingC
     {0,0,1,0,0},
     {0,1,0,0,0},
     {1,0,0,0,0},
-    {0,0,0,0,0}
     {0,0,0,0,0},
+    {0,0,0,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -480,8 +498,8 @@ void displayFireworkCrownTwoDiagonalDownRight (byte startingLine, byte startingC
     {0,0,1,1,0},
     {0,1,0,0,0},
     {1,0,1,0,0},
-    {1,0,0,0,0}
-    {0,0,0,0,0},
+    {1,0,0,0,0},
+    {0,0,0,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -496,8 +514,8 @@ void displayFireworkCrownThreeDiagonalDownRight (byte startingLine, byte startin
     {0,0,1,1,1},
     {0,1,0,0,0},
     {1,0,1,0,0},
-    {1,0,0,1,0}
-    {1,0,0,0,0},
+    {1,0,0,1,0},
+    {1,0,0,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -512,8 +530,8 @@ void displayFireworkCrownOneDiagonalDownLeft (byte startingLine, byte startingCo
     {0,0,1,0,0},
     {0,0,0,1,0},
     {0,0,0,0,1},
-    {0,0,0,0,0}
     {0,0,0,0,0},
+    {0,0,0,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -528,8 +546,8 @@ void displayFireworkCrownTwoDiagonalDownLeft (byte startingLine, byte startingCo
     {0,1,1,0,0},
     {0,0,0,1,0},
     {0,0,1,0,1},
-    {0,0,0,0,1}
-    {0,0,0,0,0},
+    {0,0,0,0,1},
+    {0,0,0,0,0}
   };
 
   for(byte i = 0; i < 5; i++) {
@@ -544,8 +562,8 @@ void displayFireworkCrownThreeDiagonalDownLeft (byte startingLine, byte starting
     {1,1,1,0,0},
     {0,0,0,1,0},
     {0,0,1,0,1},
-    {0,1,0,0,1}
-    {0,0,0,0,1},
+    {0,1,0,0,1},
+    {0,0,0,0,1}
   };
 
   for(byte i = 0; i < 5; i++) {
