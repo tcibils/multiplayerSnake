@@ -193,7 +193,7 @@ Apple apples[numberOfApples];             // Contains the apples
 Player players[NUMBER_PLAYERS];           // Contains the players
 MockPlayer mockPlayers[NUMBER_PLAYERS];
 unsigned int applesEaten = 0;             // Counts how many apples were eaten in total
-unsigned int previousFireworkMillis = 0;
+unsigned long previousFireworkMillis = 0;
 byte fireWorkIndicator = 1;
 #define fireWorkRotation 500
 
