@@ -197,6 +197,9 @@ unsigned long previousFireworkMillis = 0;
 byte fireWorkIndicator = 1;
 #define fireWorkRotation 500
 
+// For each colour (Blue, Red, Green, Yellow, Purple), lets the user know if it's available to be chosen (1 for available, 0 for no)
+byte colourAvailable[5] = {1,1,1,1,1};
+
 /*
 Contains the game status.
  - 0 means the game is starting with welcome screen and all

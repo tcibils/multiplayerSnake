@@ -25,11 +25,43 @@ void startPage() {
   expectStartingGame();
 }
 
+void checkAvailableColours() {
+  // Blue, Red, Green, Yellow, Purple
+  colourAvailable[0] = 1;
+  colourAvailable[1] = 1;
+  colourAvailable[2] = 1;
+  colourAvailable[3] = 1;
+  colourAvailable[4] = 1;
+  
+  for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
+    if(players[indexPlayer].headColour == Blue) {
+      colourAvailable[0] = 0;
+    }
+    
+    if(players[indexPlayer].headColour == Red) {
+      colourAvailable[1] = 0;
+    }    
+    
+    if(players[indexPlayer].headColour == Green) {
+      colourAvailable[2] = 0;
+    }    
+    
+    if(players[indexPlayer].headColour == Orange) {
+      colourAvailable[3] = 0;
+    }    
+    
+    if(players[indexPlayer].headColour == Purple) {
+      colourAvailable[4] = 0;
+    }    
+  }  
+}
+
 void playersChoices() {
+  checkAvailableColours();
 
   for(byte playerIndex = 0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
     // Player 0 pushing button 6 (A), which is red
-    if(playerButtonPushed[playerIndex][6] == 1) {
+    if(playerButtonPushed[playerIndex][6] == 1 && colourAvailable[1] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Red;
       players[playerIndex].colour = Pink;
@@ -37,7 +69,7 @@ void playersChoices() {
       mockPlayers[playerIndex].colour = Pink;
     }
         // Player 0 pushing button 7 (B), which is yellow
-    if(playerButtonPushed[playerIndex][7] == 1) {
+    if(playerButtonPushed[playerIndex][7] == 1 && colourAvailable[3] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Orange;
       players[playerIndex].colour = Yellow;
@@ -46,7 +78,7 @@ void playersChoices() {
       
     }
         // Player 0 pushing button 9 (Y), which is green
-    if(playerButtonPushed[playerIndex][9] == 1) {
+    if(playerButtonPushed[playerIndex][9] == 1 && colourAvailable[2] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Green;
       players[playerIndex].colour = LightGreen;
@@ -55,7 +87,7 @@ void playersChoices() {
       
     }
         // Player 0 pushing button 8 (X), which is blue
-    if(playerButtonPushed[playerIndex][8] == 1) {
+    if(playerButtonPushed[playerIndex][8] == 1 && colourAvailable[0] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Blue;
       players[playerIndex].colour = LightBlue;
@@ -65,7 +97,7 @@ void playersChoices() {
     }
 
      // Player 0 pushing button 10 and 11 (L and R), secret coulour !
-     if(playerButtonPushed[playerIndex][11] == 1 && playerButtonPushed[playerIndex][10] == 1) {
+     if(playerButtonPushed[playerIndex][11] == 1 && playerButtonPushed[playerIndex][10] == 1 && colourAvailable[4] == 1) {
       players[playerIndex].isActive = 1;
       players[playerIndex].headColour = Purple;
       players[playerIndex].colour = LightPurple;
