@@ -1,6 +1,6 @@
 void initializeGame() {
   initializePlayers();
-  initializeApples(numberOfApples);
+  initializeApples(countActivePlayers());
 }
 
 
@@ -326,6 +326,16 @@ void checkIfAPlayerWon() {
    }
 }
 
+byte countActivePlayers() {
+  byte counter = 0;
+  for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
+    if(players[indexPlayer].isActive == 1) {
+      counter++;
+    }
+  }
+  return counter;
+}
+
 void expectStartingGame() {
   // If any player
   // Serial.print("we're expecting game start \n");
@@ -341,8 +351,7 @@ void expectStartingGame() {
     if(playerButtonPushed[indexPlayer][4] == 1) {
       // Then we start the game
       gameState = 1;
-      initializePlayers();
-      initializeApples(numberOfApples);
+      initializeGame();
     }
   }
 }

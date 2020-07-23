@@ -1,4 +1,17 @@
 void initializeApples(const byte quantityOfApples) {
+
+  // We activate as many apples as required
+  for(byte appleID = 0; appleID < quantityOfApples; appleID++) {
+    apples[appleID].isActive = 1;
+  }
+
+  // And deactivate the rest
+  for(byte appleID = quantityOfApples; appleID < maxNumberOfApples; appleID++) {
+    apples[appleID].isActive = 0;
+  }
+
+  // We setup data for all apples anyway
+
   apples[0].applePosition.lineCoordinate = 9;
   apples[0].applePosition.columnCoordinate = 9;
   apples[0].colour = White;
@@ -63,8 +76,10 @@ void generateApple(const byte replacedAppleID) {
 }
 
 void displayAllApples() {
-  for(byte displayAppleID = 0; displayAppleID < numberOfApples; displayAppleID++) {
-    LEDMatrix[apples[displayAppleID].applePosition.lineCoordinate][apples[displayAppleID].applePosition.columnCoordinate] = apples[displayAppleID].colour;
+  for(byte displayAppleID = 0; displayAppleID < maxNumberOfApples; displayAppleID++) {
+    if(apples[displayAppleID].isActive == 1) {
+      LEDMatrix[apples[displayAppleID].applePosition.lineCoordinate][apples[displayAppleID].applePosition.columnCoordinate] = apples[displayAppleID].colour;
+    }
   }
 }
 
@@ -82,7 +97,7 @@ void checkIfAppleEated(const byte playerID) {
   Serial.print("\n");
   */
   // for a given player, for each apple
-  for(byte appleIndex=0; appleIndex < numberOfApples; appleIndex++) {
+  for(byte appleIndex=0; appleIndex < maxNumberOfApples; appleIndex++) {
     // We check if the snake head is on the apple
     /*
     Serial.print("For player ");
@@ -104,13 +119,14 @@ void checkIfAppleEated(const byte playerID) {
     Serial.print("\n");
     Serial.print("\n");
     */
-    
-    if(players[playerID].newBodyPosition[0].columnCoordinate == apples[appleIndex].applePosition.columnCoordinate && players[playerID].newBodyPosition[0].lineCoordinate == apples[appleIndex].applePosition.lineCoordinate) {
-      // In which case, we set the apple caught parameter of this player to 1 if the apple is a "normal one"
-      // And set parameter to 2 if the apple is a speeding one
-       players[playerID].appleCaught = apples[appleIndex].appleType;
-       // And we generate a new apple straight away
-       generateApple(appleIndex);
+    if(apples[appleIndex].isActive == 1) {
+      if(players[playerID].newBodyPosition[0].columnCoordinate == apples[appleIndex].applePosition.columnCoordinate && players[playerID].newBodyPosition[0].lineCoordinate == apples[appleIndex].applePosition.lineCoordinate) {
+        // In which case, we set the apple caught parameter of this player to 1 if the apple is a "normal one"
+        // And set parameter to 2 if the apple is a speeding one
+         players[playerID].appleCaught = apples[appleIndex].appleType;
+         // And we generate a new apple straight away
+         generateApple(appleIndex);
+      }
     }
   }
 }
@@ -126,5 +142,8 @@ void digitalOutputApple(const byte appleID) {
   Serial.print(") \n");
   Serial.print("Colour: ");
   Serial.print(apples[appleID].colour);
+  Serial.print("\n");
+  Serial.print("IsActive: ");
+  Serial.print(apples[appleID].isActive);
   Serial.print("\n");
 }
