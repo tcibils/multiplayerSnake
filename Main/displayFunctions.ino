@@ -11,15 +11,15 @@ void clearLEDMatrix() {
 // Makes a simple variable vary withing boundaries to have a glooming colour
 void manageGreenGlooming() {
   if(GroomingGreenIncrease == 1 && GloomingGreenAmount < GlowingMax) {
-    GloomingGreenAmount++;
+    GloomingGreenAmount += 3;
   }
-  if(GloomingGreenAmount == GlowingMax) {
+  if(GloomingGreenAmount >= GlowingMax) {
     GroomingGreenIncrease = 0;
   }
   if(GroomingGreenIncrease == 0 && GloomingGreenAmount > GlowingMin) {
-    GloomingGreenAmount--;
+    GloomingGreenAmount -= 3;
   }
-  if(GloomingGreenAmount == GlowingMin) {
+  if(GloomingGreenAmount <= GlowingMin) {
     GroomingGreenIncrease++;
   }
 }
