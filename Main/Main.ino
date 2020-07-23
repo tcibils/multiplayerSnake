@@ -62,7 +62,7 @@ const byte LightGreen = 13;
 
 #define GlowingMin 150
 #define GlowingMax 255
-byte GloomingGreenAmount = 150;
+unsigned int GloomingGreenAmount = 150;
 byte GroomingGreenIncrease = 1; // 1 means it increases, 0 that it decreases
 
 // ----------------------------------------------------------------------------------------------------
