@@ -144,7 +144,6 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define initialPositionLinePlayerTwo 1
 #define initialPositionColumnPlayerTwo 30
 
-#define initialPositionColumnPlayerThree 0
 #define initialPositionLinePlayerThree 30
 #define initialPositionColumnPlayerThree 1
 
