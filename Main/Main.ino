@@ -136,7 +136,7 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 #define numberOfApples 4              // Defines how many apples are present in the game
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
 #define chancesOfSpeedyApple 30       // chances, in percentage, that an apple is one that speeds the player
-#define timeOutVictory 1500           // How long is the timeout before showing the end-game victory screen, in ms
+#define timeOutVictory 3000           // How long is the timeout before showing the end-game victory screen, in ms
 
 #define initialPositionLinePlayerOne 0
 #define initialPositionColumnPlayerOne 0
