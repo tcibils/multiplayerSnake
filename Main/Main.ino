@@ -60,10 +60,11 @@ const byte LightPurple = 10;
 const byte Glooming = 11;
 const byte LightGreen = 13;
 
-#define GlowingMin 150
-#define GlowingMax 255
-unsigned int GloomingGreenAmount = 150;
-byte GroomingGreenIncrease = 1; // 1 means it increases, 0 that it decreases
+#define GloomingMin 150
+#define GloomingMax 255
+#define GloomingColour 2                  // Glooming can currently be red, blue or green only
+unsigned int GloomingAmount = 150;
+byte GroomingIncrease = 1; // 1 means it increases, 0 that it decreases
 
 // ----------------------------------------------------------------------------------------------------
 // -------------------------------   SNES CONTROLLERS CODE   ------------------------------------------
