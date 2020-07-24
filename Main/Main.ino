@@ -275,6 +275,7 @@ void loop() {
       // It gets played
       changeAllPlayerDirections();
       displayAllApples();
+      displayObstacles();
       moveAllPlayers();
       displayAllPlayerSnakes();
       checkIfAPlayerWon();

@@ -1,3 +1,26 @@
+// This function is to be called at the start of a game, to define which obstacles will be used for that game.
+void initializeGameObstacles() {
+  // First we clear any existing obstacles
+  clearObstacles();
+
+  // Then we use a random number to define what obstacles we'll deal with
+  byte randomNumber = random(0,100);
+
+  // In 30% of the cases
+  if(randomNumber < 30) {
+    // We do not put any obstacles, simply.
+  }
+
+  // In 30% of the cases
+  if(randomNumber >= 30 && randomNumber < 60)  {
+    // We only put walls
+    defineObstacleWalls();
+  }
+
+  // Other cases yet TBD
+  
+}
+
 // Put four walls around the map, so that players cannot pass through
 void defineObstacleWalls() {
   // Top wall

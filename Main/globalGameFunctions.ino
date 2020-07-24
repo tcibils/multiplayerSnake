@@ -1,6 +1,7 @@
 void initializeGame() {
   initializePlayers();
   initializeApples(countActivePlayers());
+  initializeGameObstacles();
 }
 
 
