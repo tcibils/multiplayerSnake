@@ -63,6 +63,7 @@ const byte LightGreen = 13;
 #define GloomingMin 150
 #define GloomingMax 255
 #define GloomingColour 2                  // Glooming can currently be red, blue or green only
+#define gloomingIncreaseRate 3            // Defines glooming speed
 unsigned int GloomingAmount = 150;
 byte GroomingIncrease = 1; // 1 means it increases, 0 that it decreases
 
