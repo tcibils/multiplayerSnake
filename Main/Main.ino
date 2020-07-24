@@ -106,10 +106,13 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 
 
 // ----------------------------------------------------------------------------------------------------
-// -----------------------------------------   SPRITES   ----------------------------------------------
+// -----------------------------------------   OBSTACLES  ---------------------------------------------
 // ----------------------------------------------------------------------------------------------------
 
 
+// We will store all obstacles in a dedicated matrix, which is the same size as LED Matrix
+// As LEDMatrix is for display only, this will be a table that'll be checked for the logic etc.
+byte Obstacles[totalDisplayNumberOfRows][totalDisplayNumberOfColumns];
 
 
 
@@ -120,16 +123,6 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 // Should be equal or lower than 255, as iterators on body size are "byte" type !
 // Should be bigger or equal to 30, due to mock snake sprites
 #define maxSnakeSize 40             
-
-#define directionUp 0
-#define directionRight 1
-#define directionDown 2
-#define directionLeft 3
-
-#define directionNorth 4
-#define directionEast 5
-#define directionSouth 6
-#define directionWest 7
 
 #define moveSpeed 100                 // In miliseconds. Can be used to make something happen every X miliseconds.
 #define initialPlayerMovingSpeed 250  // Base speed of all players, in miliseconds
@@ -155,6 +148,16 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 // ----------------------------------------------------------------------------------------------------
 // -------------------------------------   OTHER TECHNICALS   -----------------------------------------
 // ----------------------------------------------------------------------------------------------------
+
+#define directionUp 0
+#define directionRight 1
+#define directionDown 2
+#define directionLeft 3
+
+#define directionNorth 4
+#define directionEast 5
+#define directionSouth 6
+#define directionWest 7
 
 // Useful struct
 struct pointOnMatrix {
@@ -195,7 +198,6 @@ struct Apple {
 Apple apples[maxNumberOfApples];             // Contains the apples
 Player players[NUMBER_PLAYERS];           // Contains the players
 MockPlayer mockPlayers[NUMBER_PLAYERS];
-unsigned int applesEaten = 0;             // Counts how many apples were eaten in total
 unsigned long previousFireworkMillis = 0;
 byte fireWorkIndicator = 1;
 #define fireWorkRotation 500
