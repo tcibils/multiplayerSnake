@@ -124,7 +124,6 @@ byte Obstacles[totalDisplayNumberOfRows][totalDisplayNumberOfColumns];
 // Should be bigger or equal to 30, due to mock snake sprites
 #define maxSnakeSize 40             
 
-#define moveSpeed 100                 // In miliseconds. Can be used to make something happen every X miliseconds.
 #define initialPlayerMovingSpeed 250  // Base speed of all players, in miliseconds
 #define playerMovingSpeedDecrease 20  // How quickly will the player speed improve if eating a quickening apple
 #define mapIsWalled 0                 // If 1, then the map is a square, and hitting a wall kills you. If 0, then you can go through map borders to get on the other side. Only option 0 is implemented so far.
@@ -132,6 +131,7 @@ byte Obstacles[totalDisplayNumberOfRows][totalDisplayNumberOfColumns];
 #define deadPlayersRemain 0           // If 0, then dead players are erased from the map. If 1, then they remain displayed. Currently, only 0 is implemented.
 #define chancesOfSpeedyApple 30       // chances, in percentage, that an apple is one that speeds the player
 #define timeOutVictory 3000           // How long is the timeout before showing the end-game victory screen, in ms
+#define fireWorkRotation 500          // Speed at which fireworks flash
 
 #define initialPositionLinePlayerOne 1
 #define initialPositionColumnPlayerOne 1
@@ -200,7 +200,6 @@ Player players[NUMBER_PLAYERS];           // Contains the players
 MockPlayer mockPlayers[NUMBER_PLAYERS];
 unsigned long previousFireworkMillis = 0;
 byte fireWorkIndicator = 1;
-#define fireWorkRotation 500
 
 // For each colour (Blue, Red, Green, Yellow, Purple), lets the user know if it's available to be chosen (1 for available, 0 for no)
 byte colourAvailable[5] = {1,1,1,1,1};
