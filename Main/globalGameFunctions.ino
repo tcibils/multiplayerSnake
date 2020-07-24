@@ -8,7 +8,7 @@ void initializeGame() {
 // While the game state is 0, that function manages the starting page
 void startPage() {
   // It displays the word "snake", centered
-  manageGreenGlooming();
+  manageGlooming();
   displaySnakeWord(13,7, Glooming);
 
 
