@@ -161,6 +161,16 @@ void checkIfPlayerDied(const byte playerID) {
         }
       }
     }
+    // We also check if the player head hit an obstacle
+    checkIfPlayerHeadHitObstacle(playerID);
+  }
+}
+
+void checkIfPlayerHeadHitObstacle(const byte playerID) {
+  // If the new player head has ended up on an obstacle
+  if(Obstacles[players[playerID].newBodyPosition[0].lineCoordinate][players[playerID].newBodyPosition[0].columnCoordinate] > 0) {
+    // Then indeed, the player hit an obstacle, and he's now dead.
+    players[playerID].isAlive = 0;
   }
 }
 
