@@ -337,21 +337,24 @@ byte countActivePlayers() {
 }
 
 void expectStartingGame() {
-  // If any player
   // Serial.print("we're expecting game start \n");
-  for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
-    // Is pressing start button
-    /*
-    Serial.print("player ");
-    Serial.print(indexPlayer);
-    Serial.print(" button playerButtonPushed[indexPlayer][4]: ");
-    Serial.print(playerButtonPushed[indexPlayer][4]);
-    Serial.print("\n");
-    */
-    if(playerButtonPushed[indexPlayer][4] == 1) {
-      // Then we start the game
-      gameState = 1;
-      initializeGame();
+  // If enough player chosed their colours
+  if(countActivePlayers() > 1) {
+    // If any player
+    for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
+      // Is pressing start button
+      /*
+      Serial.print("player ");
+      Serial.print(indexPlayer);
+      Serial.print(" button playerButtonPushed[indexPlayer][4]: ");
+      Serial.print(playerButtonPushed[indexPlayer][4]);
+      Serial.print("\n");
+      */
+      if(playerButtonPushed[indexPlayer][4] == 1) {
+        // Then we start the game
+        gameState = 1;
+        initializeGame();
+      }
     }
   }
 }
