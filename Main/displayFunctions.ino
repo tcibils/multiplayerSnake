@@ -103,7 +103,7 @@ void outputDisplay() {
           
           if(GloomingColour == Green) {if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB(255-GloomingAmount,255,255-GloomingAmount);}}
           if(GloomingColour == Blue)  {if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB(255-GloomingAmount,255-GloomingAmount,255);}}
-          if(GloomingCOlour == Red)   {if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB(255,255-GloomingAmount,255-GloomingAmount);}}
+          if(GloomingColour == Red)   {if(LEDMatrix[rowIndex + indexRowArtificialIncrement][columnIndex + indexColumnArtificialIncrement] == Glooming) {leds[displayMatrixIndex][columnIndex*singleMatrixDisplayNumberOfColumns + rowIndex] = CRGB(255,255-GloomingAmount,255-GloomingAmount);}}
         }
       }
     }
