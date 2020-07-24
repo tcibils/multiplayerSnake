@@ -17,6 +17,12 @@ void initializeGameObstacles() {
     defineObstacleWalls();
   }
 
+  // In 20% of the cases
+  if(randomNumber >= 60 && randomNumber < 80) {
+    // We put walls on the corners only, so players will have gates to pass through
+    defineObstacleCorners();
+  }
+
   // Other cases yet TBD
   
 }
@@ -34,6 +40,24 @@ void defineObstacleWalls() {
 
   // Right wall
   defineObstacle(0,31,1,32,White);
+}
+
+void defineObstacleCorners() {
+   // Top wall
+  defineObstacle(0,0,10,1,White);
+  defineObstacle(0,21,10,1,White);
+
+  // Left wall
+  defineObstacle(0,0,1,10,White);
+  defineObstacle(21,0,1,10,White);
+
+  // Bottom wall
+  defineObstacle(31,0,10,1,White);
+  defineObstacle(31,21,10,1,White);
+
+  // Right wall
+  defineObstacle(0,31,1,10,White);
+  defineObstacle(21,31,1,10,White);
 }
 
 
