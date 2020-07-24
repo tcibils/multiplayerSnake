@@ -72,6 +72,11 @@ void generateApple(const byte replacedAppleID) {
       }
     }
   }
+  // Also, if the apple was spawned in an obstacle
+  if(Obstacles[apples[replacedAppleID].applePosition.lineCoordinate][apples[replacedAppleID].applePosition.columnCoordinate] > 0) {
+    // We re-generate a new apple, hopefully somewhere else
+    generateApple(replacedAppleID);
+  }
   
 }
 
