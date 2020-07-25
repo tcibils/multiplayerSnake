@@ -59,6 +59,7 @@ const byte Yellow = 9;
 const byte LightPurple = 10;
 const byte Glooming = 11;
 const byte LightGreen = 13;
+const byte LightestBlue = 14;
 
 #define GloomingMin 150
 #define GloomingMax 255
@@ -132,6 +133,7 @@ byte Obstacles[totalDisplayNumberOfRows][totalDisplayNumberOfColumns];
 #define chancesOfSpeedyApple 30       // chances, in percentage, that an apple is one that speeds the player
 #define timeOutVictory 3000           // How long is the timeout before showing the end-game victory screen, in ms
 #define fireWorkRotation 500          // Speed at which fireworks flash
+#define obstacleColour 14             // Defines the obstacle colour
 
 #define initialPositionLinePlayerOne 1
 #define initialPositionColumnPlayerOne 1

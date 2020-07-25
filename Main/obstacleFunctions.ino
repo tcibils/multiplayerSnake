@@ -6,24 +6,24 @@ void initializeGameObstacles() {
   // Then we use a random number to define what obstacles we'll deal with
   byte randomNumber = random(0,100);
 
-
   // In 25% of the cases
   if(randomNumber < 25)  {
     // We only put walls
-    defineObstacleWalls();
+    defineObstacleWalls(obstacleColour);
   }
 
   // In 20% of the cases
   else if(randomNumber >= 25 && randomNumber < 50) {
     // We put walls on the corners only, so players will have gates to pass through
-    defineObstacleCorners();
+    defineObstacleCorners(obstacleColour);
   }
 
   // Below is the fun part, should be around 30%, so up 75
 
   else if(randomNumber >= 55 && randomNumber < 65 ) {
-    defineObstacleCentralBars();
+    defineObstacleCentralBars(obstacleColour);
   }
+  
 /*
   else if(randomNumber >= 60 && randomNumber < 65) {
     // That won't work, because of the player starting positions
@@ -32,18 +32,18 @@ void initializeGameObstacles() {
   */
 
   else if(randomNumber >= 65 && randomNumber < 70) {
-    defineObstacleBigPlus();
+    defineObstacleBigPlus(obstacleColour);
   }
 
   else if(randomNumber >= 70 && randomNumber < 75) {
-    defineObstacleCentralSquare();
+    defineObstacleCentralSquare(obstacleColour);
   }
 
     // All remaining cases (should be around 25%)
   else {
     // We do nothing and do not put any wall up
   }
-  
+
 }
 
 
@@ -62,76 +62,77 @@ un seul gros bloc -> 2%
 */
 
 
-void defineObstacleCentralBars() {
-  defineObstacle(9,6,1,16,White);
+void defineObstacleCentralBars(byte displayColour) {
+  defineObstacle(9,6,1,16,displayColour);
   // Initial apples are between those walls
-  defineObstacle(9,10,1,16,White);  
+  defineObstacle(9,12,1,16,displayColour);  
 
   // Big central corridor
   
-  defineObstacle(9,21,1,16,White);
+  defineObstacle(9,19,1,16,displayColour);
   // Initial apples are between those walls
-  defineObstacle(9,25,1,16,White);
+  defineObstacle(9,25,1,16,displayColour);
 }
 
 /*
 // That won't work, because of the player starting positions
-void defineObstacleSmallerMap() {
+void defineObstacleSmallerMap(byte displayColour) {
   // Top wall
-  defineObstacle(0,0,32,5,White);
+  defineObstacle(0,0,32,5,displayColour);
 
   // Left wall
-  defineObstacle(0,0,5,32,White);
+  defineObstacle(0,0,5,32,displayColour);
 
   // Bottom wall
-  defineObstacle(31,0,32,5,White);
+  defineObstacle(31,0,32,5,displayColour);
 
   // Right wall
-  defineObstacle(0,31,5,32,White);
+  defineObstacle(0,31,5,32,displayColour);
   
 }
 */
 
-void defineObstacleBigPlus() {
-  defineObstacle(15,0,32,1,White);
-  defineObstacle(0,15,1,32,White);
+void defineObstacleBigPlus(byte displayColour) {
+  defineObstacle(15,0,32,1,displayColour);
+  defineObstacle(0,15,1,32,displayColour);
 }
 
-void defineObstacleCentralSquare() {
-  defineObstacle(12,12,8,8,White);
+void defineObstacleCentralSquare(byte displayColour) {
+  defineObstacle(12,12,8,8,displayColour);
 }
 
 // Put four walls around the map, so that players cannot pass through
-void defineObstacleWalls() {
+void defineObstacleWalls(byte displayColour) {
   // Top wall
-  defineObstacle(0,0,32,1,White);
+  defineObstacle(0,0,32,1,displayColour);
 
   // Left wall
-  defineObstacle(0,0,1,32,White);
+  defineObstacle(0,0,1,32,displayColour);
 
   // Bottom wall
-  defineObstacle(31,0,32,1,White);
+  defineObstacle(31,0,32,1,displayColour);
 
   // Right wall
-  defineObstacle(0,31,1,32,White);
+  defineObstacle(0,31,1,32,displayColour);
+  
 }
 
-void defineObstacleCorners() {
+void defineObstacleCorners(byte displayColour) {
    // Top wall
-  defineObstacle(0,0,10,1,White);
-  defineObstacle(0,21,10,1,White);
+  defineObstacle(0,0,10,1,displayColour);
+  defineObstacle(0,21,10,1,displayColour);
 
   // Left wall
-  defineObstacle(0,0,1,10,White);
-  defineObstacle(21,0,1,10,White);
+  defineObstacle(0,0,1,10,displayColour);
+  defineObstacle(21,0,1,10,displayColour);
 
   // Bottom wall
-  defineObstacle(31,0,10,1,White);
-  defineObstacle(31,21,10,1,White);
+  defineObstacle(31,0,10,1,displayColour);
+  defineObstacle(31,21,10,1,displayColour);
 
   // Right wall
-  defineObstacle(0,31,1,10,White);
-  defineObstacle(21,31,1,10,White);
+  defineObstacle(0,31,1,10,displayColour);
+  defineObstacle(21,31,1,10,displayColour);
 }
 
 
@@ -145,7 +146,7 @@ void defineObstacle(const byte startingLine, const byte startingColumn, const by
   
   for(byte horizontalIterator = 0; horizontalIterator < horizontalLength; horizontalIterator++) {
     for(byte verticalIterator = 0; verticalIterator < verticalLength; verticalIterator++) {
-      Obstacles[startingLine + horizontalIterator][startingColumn + verticalIterator] = colourChoice;
+      Obstacles[startingLine + verticalIterator][startingColumn + horizontalIterator] = colourChoice;
     }
   }
 }
