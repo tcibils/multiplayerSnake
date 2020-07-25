@@ -356,6 +356,9 @@ void expectStartingGame() {
         gameState = 1;
         initializeGame();
       }
+      if(playerButtonPushed[indexPlayer][5] == 1) {
+        gameState = 0;
+      }
     }
   }
 }
