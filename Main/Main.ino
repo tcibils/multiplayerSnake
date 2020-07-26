@@ -288,7 +288,6 @@ void loop() {
       if(millis() - previousFireworkMillis > fireWorkRotation) {
         clearLEDMatrix();
         displayWinningMessage(winningPlayer);
-        displayWinningFireworks(winningPlayer, fireWorkIndicator);
         if(fireWorkIndicator == 3) {
           fireWorkIndicator = 1;
         }

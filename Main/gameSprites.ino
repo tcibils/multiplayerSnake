@@ -1,27 +1,44 @@
 void displayWinningMessage(const byte playerID) {
   
   // Display winning message with the right word in the right colour
-  if(players[playerID].headColour == Blue) {
+  if(players[playerID].headColour == Blue && playerID != 5) {
     displayWordBlue(10,9);
+    displayWordWins(18,8);        
+    displayWinningFireworks(playerID, fireWorkIndicator);
+
   }
 
-  if(players[playerID].headColour == Red) {
+  if(players[playerID].headColour == Red && playerID != 5) {
     displayWordRed(10,11);
+    displayWordWins(18,8);
+    displayWinningFireworks(playerID, fireWorkIndicator);
   }
 
-  if(players[playerID].headColour == Green) {
+  if(players[playerID].headColour == Green && playerID != 5) {
     displayWordGreen(10,7);
+    displayWordWins(18,8);
+    displayWinningFireworks(playerID, fireWorkIndicator);
   }
 
   if(players[playerID].headColour == Yellow || players[playerID].headColour == Orange) {
-    displayWordYellow(10,5);
+    if(playerID != 5) {
+      displayWordYellow(10,5);
+      displayWordWins(18,8);
+    displayWinningFireworks(playerID, fireWorkIndicator);
+    }
   }
 
-  if(players[playerID].headColour == Purple) {
+  if(players[playerID].headColour == Purple && playerID != 5) {
     displayWordPurple(10,5);
+    displayWordWins(18,8);
+    displayWinningFireworks(playerID, fireWorkIndicator);
   }
 
-  displayWordWins(18,8);
+  // If no-one won
+  if(playerID == 5) {
+    displayWordDraw(14,9);
+  }
+
 }
 
 void displayWinningFireworks(const byte playerID, const byte fireWorkIteration) {
@@ -195,6 +212,23 @@ void displayWordWins (byte startingLine, byte startingColumn) {
       LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordWon[i][j]);
     }
   }
+}
+
+void displayWordDraw(byte startingLine, byte startingColumn) {
+  const static byte PROGMEM wordDraw[5][19] = {    
+    {1,1,0,0,1,1,1,0,1,1,1,0,1,0,0,0,1,0,0},
+    {1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,0},
+    {1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,0,0},
+    {1,0,1,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,0},
+    {1,1,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1}
+
+  };
+
+  for(byte i = 0; i < 5; i++) {
+    for(byte j = 0; j < 19; j++) {
+      LEDMatrix[startingLine+i][startingColumn+j] = pgm_read_word(&wordDraw[i][j]);
+    }
+  }  
 }
 
 // ----------------------------------------------------------------------

@@ -290,6 +290,16 @@ void initializePlayers() {
 }
 
 void checkIfAPlayerWon() {
+  // If everyone is dead
+  if(players[0].isAlive == 0 &&
+     players[1].isAlive == 0 &&
+     players[2].isAlive == 0 &&
+     players[3].isAlive == 0) {
+      gameState = 2;
+      winningPlayer = 5;    // No one won
+      delay(timeOutVictory);
+   }
+  
   if(players[0].isAlive == 1 && players[0].isActive == 1 &&
      players[1].isAlive == 0 &&
      players[2].isAlive == 0 &&
