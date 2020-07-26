@@ -253,7 +253,7 @@ void setup() {
   defineMockSnakesTwoPositions();
   defineMockSnakesThreePositions();
   
-  initializeApples(countActivePlayers());
+  initializeApples();
 
   // By default, all players aren't active
   for(byte i = 0; i < NUMBER_PLAYERS; i++) {
