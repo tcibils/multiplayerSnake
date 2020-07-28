@@ -141,6 +141,8 @@ void moveAllPlayers() {
   }
 }
 
+
+    
 // Checks if player "playerID" has hit any player's snake body, including life/death logic of the players
 void checkIfPlayerDied(const byte playerID) {
   // We only make the check if the player we're talking about isn't dead already
@@ -168,7 +170,7 @@ void checkIfPlayerDied(const byte playerID) {
 
 void checkIfPlayerHeadHitObstacle(const byte playerID) {
   // If the new player head has ended up on an obstacle
-  if(Obstacles[players[playerID].newBodyPosition[0].lineCoordinate][players[playerID].newBodyPosition[0].columnCoordinate] > 0) {
+  if(Obstacles[players[playerID].bodyPosition[0].lineCoordinate][players[playerID].bodyPosition[0].columnCoordinate] > 0) {
     // Then indeed, the player hit an obstacle, and he's now dead.
     players[playerID].isAlive = 0;
   }
@@ -191,7 +193,7 @@ void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
         // If the head of the snake is on the same position as one of the body parts, we end the game.
         // In the direction changes, there is some logic to avoid the player to get back on itself
         if(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate != 255 && players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate!= 255) {
-          if (players[playerID].newBodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].newBodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
+          if (players[playerID].bodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].bodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
             players[playerID].isAlive = 0;
             /*
               Serial.print("playerID :");
@@ -307,9 +309,8 @@ void movePlayer(const byte playerID) {
       players[playerID].newBodyPosition[0].lineCoordinate = players[playerID].bodyPosition[0].lineCoordinate;
     }
   
-    // Checking if an apple was eaten or if the player died
+    // Checking if an apple was eaten
     checkIfAppleEatedAllPlayers();
-    checkIfAnyPlayerDied();
   
     // We copy the previous snake in the new snake
     for(byte playerBodyIndex = 0; playerBodyIndex < maxSnakeSize - 1; playerBodyIndex++) {

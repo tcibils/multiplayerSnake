@@ -279,6 +279,7 @@ void loop() {
       displayAllApples();
       displayObstacles();
       moveAllPlayers();
+      checkIfAnyPlayerDied();
       displayAllPlayerSnakes();
       checkIfAPlayerWon();
    }
