@@ -1,6 +1,7 @@
 void initializeGame() {
   initializePlayers();
-  initializeApples(countActivePlayers());
+  initializeApples();
+  initializeGameObstacles();
 }
 
 
@@ -8,7 +9,7 @@ void initializeGame() {
 // While the game state is 0, that function manages the starting page
 void startPage() {
   // It displays the word "snake", centered
-  manageGreenGlooming();
+  manageGlooming();
   displaySnakeWord(13,7, Glooming);
 
 
@@ -289,6 +290,16 @@ void initializePlayers() {
 }
 
 void checkIfAPlayerWon() {
+  // If everyone is dead
+  if(players[0].isAlive == 0 &&
+     players[1].isAlive == 0 &&
+     players[2].isAlive == 0 &&
+     players[3].isAlive == 0) {
+      gameState = 2;
+      winningPlayer = 5;    // No one won
+      delay(timeOutVictory);
+   }
+  
   if(players[0].isAlive == 1 && players[0].isActive == 1 &&
      players[1].isAlive == 0 &&
      players[2].isAlive == 0 &&
@@ -337,21 +348,27 @@ byte countActivePlayers() {
 }
 
 void expectStartingGame() {
-  // If any player
   // Serial.print("we're expecting game start \n");
-  for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
-    // Is pressing start button
-    /*
-    Serial.print("player ");
-    Serial.print(indexPlayer);
-    Serial.print(" button playerButtonPushed[indexPlayer][4]: ");
-    Serial.print(playerButtonPushed[indexPlayer][4]);
-    Serial.print("\n");
-    */
-    if(playerButtonPushed[indexPlayer][4] == 1) {
-      // Then we start the game
-      gameState = 1;
-      initializeGame();
+  // If enough player chosed their colours
+  if(countActivePlayers() > 1) {
+    // If any player
+    for(byte indexPlayer = 0; indexPlayer < NUMBER_PLAYERS; indexPlayer++) {
+      // Is pressing start button
+      /*
+      Serial.print("player ");
+      Serial.print(indexPlayer);
+      Serial.print(" button playerButtonPushed[indexPlayer][4]: ");
+      Serial.print(playerButtonPushed[indexPlayer][4]);
+      Serial.print("\n");
+      */
+      if(playerButtonPushed[indexPlayer][4] == 1) {
+        // Then we start the game
+        gameState = 1;
+        initializeGame();
+      }
+      if(playerButtonPushed[indexPlayer][5] == 1) {
+        gameState = 0;
+      }
     }
   }
 }

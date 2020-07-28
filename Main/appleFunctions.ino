@@ -1,14 +1,4 @@
-void initializeApples(const byte quantityOfApples) {
-
-  // We activate as many apples as required
-  for(byte appleID = 0; appleID < quantityOfApples; appleID++) {
-    apples[appleID].isActive = 1;
-  }
-
-  // And deactivate the rest
-  for(byte appleID = quantityOfApples; appleID < maxNumberOfApples; appleID++) {
-    apples[appleID].isActive = 0;
-  }
+void initializeApples() {
 
   // We setup data for all apples anyway
 
@@ -17,20 +7,32 @@ void initializeApples(const byte quantityOfApples) {
   apples[0].colour = White;
   apples[0].appleType = 1;
   
+  if(players[0].isActive == 1) {apples[0].isActive = 1;}
+  else                         {apples[0].isActive = 0;}
+  
   apples[1].applePosition.lineCoordinate = 9;
   apples[1].applePosition.columnCoordinate = 22;
   apples[1].colour = White;
   apples[1].appleType = 1;  
 
+  if(players[1].isActive == 1) {apples[1].isActive = 1;}
+  else                         {apples[1].isActive = 0;}
+
   apples[2].applePosition.lineCoordinate = 22;
   apples[2].applePosition.columnCoordinate = 9;
   apples[2].colour = White;
   apples[2].appleType = 1;
+  
+  if(players[2].isActive == 1) {apples[2].isActive = 1;}
+  else                         {apples[2].isActive = 0;}
 
   apples[3].applePosition.lineCoordinate = 22;
   apples[3].applePosition.columnCoordinate = 22;
   apples[3].colour = White;
   apples[3].appleType = 1;
+  
+  if(players[3].isActive == 1) {apples[3].isActive = 1;}
+  else                         {apples[3].isActive = 0;}
 
 }
 
@@ -71,6 +73,11 @@ void generateApple(const byte replacedAppleID) {
   
       }
     }
+  }
+  // Also, if the apple was spawned in an obstacle
+  if(Obstacles[apples[replacedAppleID].applePosition.lineCoordinate][apples[replacedAppleID].applePosition.columnCoordinate] > 0) {
+    // We re-generate a new apple, hopefully somewhere else
+    generateApple(replacedAppleID);
   }
   
 }
