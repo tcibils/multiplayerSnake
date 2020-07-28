@@ -143,8 +143,10 @@ void moveAllPlayers() {
 
 
     
-// Checks if player "playerID" has hit any player's snake body, including life/death logic of the players
-void checkIfPlayerDied(const byte playerID) {
+// Checks if player "playerID" has hit any player's snake body or an obstacle
+// Returns 1 if indeed the player hit something, 0 if not
+byte checkIfPlayerDied(const byte playerID) {
+  byte returnValue = 0;
   // We only make the check if the player we're talking about isn't dead already
   if(players[playerID].isAlive == 1) {
     // we check if we've hit any player
@@ -154,30 +156,39 @@ void checkIfPlayerDied(const byte playerID) {
         if(deadPlayersRemain == 0) {
           // Then we check that we haven't hit an alive player
           if(players[playerIndex].isAlive == 1) {
-            checkIfPlayerHeadHitSnake(playerID, playerIndex);
+            returnValue = checkIfPlayerHeadHitSnake(playerID, playerIndex);
           }
         }
         // If dead players can be hit
         else if(deadPlayersRemain == 1) {
-            checkIfPlayerHeadHitSnake(playerID, playerIndex);
+            returnValue = checkIfPlayerHeadHitSnake(playerID, playerIndex);
         }
       }
     }
-    // We also check if the player head hit an obstacle
-    checkIfPlayerHeadHitObstacle(playerID);
+    // If the player isn't dead already
+    if(returnValue != 1) {
+      // We also check if the player head hit an obstacle
+      returnValue = checkIfPlayerHeadHitObstacle(playerID);
+    }
   }
+  return returnValue;
 }
 
-void checkIfPlayerHeadHitObstacle(const byte playerID) {
+// Returns 1 if indeed the player hit an obstacle, 0 if not
+byte checkIfPlayerHeadHitObstacle(const byte playerID) {
+  byte returnValue = 0;
   // If the new player head has ended up on an obstacle
   if(Obstacles[players[playerID].bodyPosition[0].lineCoordinate][players[playerID].bodyPosition[0].columnCoordinate] > 0) {
-    // Then indeed, the player hit an obstacle, and he's now dead.
-    players[playerID].isAlive = 0;
+    // Then indeed, the player hit an obstacle.
+    returnValue = 1;
   }
+  return returnValue;
 }
 
 // checks if the head of player "playerID" has hit the body of player "playerIndex", without life/death logic of the players
-void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
+// Returns 1 if indeed the player hit another player, 0 if not
+byte checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
+  byte returnValue = 0;
   if(players[playerID].isActive == 1 && players[playerIndex].isActive == 1) {
     // We iterate on each snake body
     for (int snakeBodyIterator = 0; snakeBodyIterator < maxSnakeSize; snakeBodyIterator++) {
@@ -194,7 +205,7 @@ void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
         // In the direction changes, there is some logic to avoid the player to get back on itself
         if(players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate != 255 && players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate!= 255) {
           if (players[playerID].bodyPosition[0].lineCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].lineCoordinate && players[playerID].bodyPosition[0].columnCoordinate == players[playerIndex].bodyPosition[snakeBodyIterator].columnCoordinate) {
-            players[playerID].isAlive = 0;
+            returnValue = 1;
             /*
               Serial.print("playerID :");
               Serial.print(playerID);
@@ -219,15 +230,31 @@ void checkIfPlayerHeadHitSnake(const byte playerID, const byte playerIndex) {
       }
     }
   }
+  return returnValue;
 }
 
 
 void checkIfAnyPlayerDied() {
+  // First we check if players have hit something
+  byte playerDied[4] = {0,0,0,0};
+
   for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
     if(players[playerIndex].isActive == 1) {
-      checkIfPlayerDied(playerIndex);
+      // This function includes the logic to make all checks
+      playerDied[playerIndex] = checkIfPlayerDied(playerIndex);
     }
   }
+
+  // Only once we've made the checks for all players, we set the "alive" value
+  // If we didn't do that, if players hit eachother, the first one would die, and the second one then wouldn't detect the hit
+  for(byte playerIndex=0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+    if(players[playerIndex].isActive == 1) {
+      // The player is alive if he didn't die, thus the 1 - x. 
+      players[playerIndex].isAlive = 1 - playerDied[playerIndex];
+    }
+  }
+
+  
 }
 
 void movePlayer(const byte playerID) {
