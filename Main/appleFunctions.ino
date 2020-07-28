@@ -37,49 +37,50 @@ void initializeApples() {
 }
 
 void generateApple(const byte replacedAppleID) {
-  const byte appleLineNumber = random(totalDisplayNumberOfRows);
-  const byte appleColumnNumber = random (totalDisplayNumberOfColumns);
-  const byte randomNumberForAppleType = random(100);
-  /*
-  Serial.print("The apple will be in ");
-  Serial.print("{");
-  Serial.print(appleLineNumber);
-  Serial.print(", ");
-  Serial.print(appleColumnNumber);
-  Serial.print("}. \n");
-  */
-  // And we set the apple to the coordinates created
-  apples[replacedAppleID].applePosition.lineCoordinate = appleLineNumber;
-  apples[replacedAppleID].applePosition.columnCoordinate = appleColumnNumber;
-
-  if(randomNumberForAppleType < chancesOfSpeedyApple) {
-    apples[replacedAppleID].appleType = 2;
-    apples[replacedAppleID].colour = Purple;
-  }
-  else {
-    apples[replacedAppleID].appleType = 1;
-    apples[replacedAppleID].colour = White;
-  }
-
-  // We check that the apple didn't appear on the snake.
-  // We scan the whole grid
-  for (int i = 0; i < maxSnakeSize; i++) {
-    // and if the apple drops on any snake
-    for(int snakeID = 0; snakeID < NUMBER_PLAYERS; snakeID++) {
-      if (apples[replacedAppleID].applePosition.lineCoordinate == players[snakeID].bodyPosition[i].lineCoordinate && apples[replacedAppleID].applePosition.columnCoordinate == players[snakeID].bodyPosition[i].columnCoordinate) {
-        // We re-create a new apple, hopefully somewhere else - in the worst case, we will again generate a new one.
-        generateApple(replacedAppleID);
-        // Serial.print("But the snake was already there, so we re-generate an apple. \n");
+  if(apples[replacedAppleID].isActive == 1) {
+    const byte appleLineNumber = random(totalDisplayNumberOfRows);
+    const byte appleColumnNumber = random (totalDisplayNumberOfColumns);
+    const byte randomNumberForAppleType = random(100);
+    /*
+    Serial.print("The apple will be in ");
+    Serial.print("{");
+    Serial.print(appleLineNumber);
+    Serial.print(", ");
+    Serial.print(appleColumnNumber);
+    Serial.print("}. \n");
+    */
+    // And we set the apple to the coordinates created
+    apples[replacedAppleID].applePosition.lineCoordinate = appleLineNumber;
+    apples[replacedAppleID].applePosition.columnCoordinate = appleColumnNumber;
   
+    if(randomNumberForAppleType < chancesOfSpeedyApple) {
+      apples[replacedAppleID].appleType = 2;
+      apples[replacedAppleID].colour = Purple;
+    }
+    else {
+      apples[replacedAppleID].appleType = 1;
+      apples[replacedAppleID].colour = White;
+    }
+  
+    // We check that the apple didn't appear on the snake.
+    // We scan the whole grid
+    for (int i = 0; i < maxSnakeSize; i++) {
+      // and if the apple drops on any snake
+      for(int snakeID = 0; snakeID < NUMBER_PLAYERS; snakeID++) {
+        if (apples[replacedAppleID].applePosition.lineCoordinate == players[snakeID].bodyPosition[i].lineCoordinate && apples[replacedAppleID].applePosition.columnCoordinate == players[snakeID].bodyPosition[i].columnCoordinate) {
+          // We re-create a new apple, hopefully somewhere else - in the worst case, we will again generate a new one.
+          generateApple(replacedAppleID);
+          // Serial.print("But the snake was already there, so we re-generate an apple. \n");
+    
+        }
       }
     }
-  }
-  // Also, if the apple was spawned in an obstacle
-  if(Obstacles[apples[replacedAppleID].applePosition.lineCoordinate][apples[replacedAppleID].applePosition.columnCoordinate] > 0) {
-    // We re-generate a new apple, hopefully somewhere else
-    generateApple(replacedAppleID);
-  }
-  
+    // Also, if the apple was spawned in an obstacle
+    if(Obstacles[apples[replacedAppleID].applePosition.lineCoordinate][apples[replacedAppleID].applePosition.columnCoordinate] > 0) {
+      // We re-generate a new apple, hopefully somewhere else
+      generateApple(replacedAppleID);
+    }
+  }  
 }
 
 void displayAllApples() {
