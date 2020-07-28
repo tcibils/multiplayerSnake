@@ -20,7 +20,7 @@ void initializeGameObstacles() {
 
   // Below is the fun part, should be around 30%, so up 75
 
-  else if(randomNumber >= 55 && randomNumber < 65 ) {
+  else if(randomNumber >= 50 && randomNumber < 52 ) {
     defineObstacleCentralBars(obstacleColour);
   }
   
@@ -31,11 +31,11 @@ void initializeGameObstacles() {
   }
   */
 
-  else if(randomNumber >= 65 && randomNumber < 70) {
+  else if(randomNumber >= 55 && randomNumber < 60) {
     defineObstacleBigPlus(obstacleColour);
   }
 
-  else if(randomNumber >= 70 && randomNumber < 75) {
+  else if(randomNumber >= 60 && randomNumber < 65) {
     defineObstacleCentralSquare(obstacleColour);
   }
 
