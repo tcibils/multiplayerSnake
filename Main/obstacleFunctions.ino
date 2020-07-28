@@ -128,11 +128,11 @@ void defineObstacleCorners(byte displayColour) {
 
   // Bottom wall
   defineObstacle(31,0,10,1,displayColour);
-  defineObstacle(31,21,10,1,displayColour);
+  defineObstacle(31,21,11,1,displayColour);
 
   // Right wall
   defineObstacle(0,31,1,10,displayColour);
-  defineObstacle(21,31,1,10,displayColour);
+  defineObstacle(21,31,1,11,displayColour);
 }
 
 
