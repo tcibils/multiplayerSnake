@@ -49,24 +49,19 @@ void initializeGameObstacles() {
   if(difficultyLevel == 1) {
     
     if(randomNumber >= 0 && randomNumber < 10) {
-      defineObstacleBigPlus(obstacleColour);
-      defineObstacleCorners(obstacleColour);
+      defineObstacleSingleWall(obstacleColour);
     }
     else if(randomNumber >= 10 && randomNumber < 20) {
-      defineObstacleBigPlus(obstacleColour);
-      defineObstacleCorners(obstacleColour);
+    defineObstacleSingleWall(obstacleColour);
     }
     else if(randomNumber >= 20 && randomNumber < 30) {
-      defineObstacleBigPlus(obstacleColour);
-    defineObstacleEmptyCorners(obstacleColour);
+      defineObstacleEmptyCorners(obstacleColour);
     }
     else if(randomNumber >= 30 && randomNumber < 40) {
-      defineObstacleBigPlus(obstacleColour);
-    defineObstacleEmptyCorners(obstacleColour);
+      defineObstacleEmptyCorners(obstacleColour);
     }
     else if(randomNumber >= 40 && randomNumber < 50) {
-      defineObstacleBigPlus(obstacleColour);
-    defineObstacleEmptyCorners(obstacleColour); 
+     defineObstacleEmptyCorners(obstacleColour); 
     }
     else if(randomNumber >= 50 && randomNumber < 60) {
       defineObstacleCorners(obstacleColour);
@@ -77,15 +72,14 @@ void initializeGameObstacles() {
       defineObstacleCentralSquare(obstacleColour);            
     }
     else if(randomNumber >= 70 && randomNumber < 80) {
-      defineObstacleCorners(obstacleColour);
-      defineObstacleCentralSquare(obstacleColour);            
+      defineObstacleTopBottomWalls(obstacleColour); 
     }
     else if(randomNumber >= 80 && randomNumber < 90) {
-      defineObstacleCorners(obstacleColour);
+      defineObstacleCentralSquare(obstacleColour);
       defineObstacleEmptyCorners(obstacleColour);       
     }
     else if(randomNumber >= 90 && randomNumber < 100) {
-      defineObstacleCorners(obstacleColour);
+      defineObstacleCentralSquare(obstacleColour);
      defineObstacleEmptyCorners(obstacleColour);         
     }
     
@@ -121,6 +115,11 @@ void defineObstacleCentralBars(byte displayColour) {
   defineObstacle(9,25,1,16,displayColour);
 }
 
+void defineObstacleSingleWall(byte displayColour) {
+  // Top wall
+  defineObstacle(12,0,32,5,displayColour);  
+}
+
 /*
 // That won't work, because of the player starting positions
 void defineObstacleSmallerMap(byte displayColour) {
@@ -146,6 +145,15 @@ void defineObstacleBigPlus(byte displayColour) {
 
 void defineObstacleCentralSquare(byte displayColour) {
   defineObstacle(12,12,8,8,displayColour);
+}
+
+// Put four walls around the map, so that players cannot pass through
+void defineObstacleTopBottomWalls(byte displayColour) {
+  // Top wall
+  defineObstacle(0,0,32,1,displayColour);
+
+  // Bottom wall
+  defineObstacle(31,0,32,1,displayColour);  
 }
 
 // Put four walls around the map, so that players cannot pass through
