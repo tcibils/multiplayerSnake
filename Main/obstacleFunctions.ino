@@ -47,6 +47,7 @@ void initializeGameObstacles() {
   }
 
   if(difficultyLevel == 1) {
+    
     if(randomNumber >= 0 && randomNumber < 10) {
       defineObstacleBigPlus(obstacleColour);
       defineObstacleCorners(obstacleColour);
@@ -57,15 +58,15 @@ void initializeGameObstacles() {
     }
     else if(randomNumber >= 20 && randomNumber < 30) {
       defineObstacleBigPlus(obstacleColour);
-      defineObstacleCorners(obstacleColour);
+    defineObstacleEmptyCorners(obstacleColour);
     }
     else if(randomNumber >= 30 && randomNumber < 40) {
       defineObstacleBigPlus(obstacleColour);
-      defineObstacleCorners(obstacleColour);
+    defineObstacleEmptyCorners(obstacleColour);
     }
     else if(randomNumber >= 40 && randomNumber < 50) {
       defineObstacleBigPlus(obstacleColour);
-      defineObstacleCorners(obstacleColour);   
+    defineObstacleEmptyCorners(obstacleColour); 
     }
     else if(randomNumber >= 50 && randomNumber < 60) {
       defineObstacleCorners(obstacleColour);
@@ -81,13 +82,13 @@ void initializeGameObstacles() {
     }
     else if(randomNumber >= 80 && randomNumber < 90) {
       defineObstacleCorners(obstacleColour);
-      defineObstacleCentralSquare(obstacleColour);            
+      defineObstacleEmptyCorners(obstacleColour);       
     }
     else if(randomNumber >= 90 && randomNumber < 100) {
       defineObstacleCorners(obstacleColour);
-      defineObstacleCentralSquare(obstacleColour);            
+     defineObstacleEmptyCorners(obstacleColour);         
     }
-
+    
   }
 }
 
@@ -163,7 +164,38 @@ void defineObstacleWalls(byte displayColour) {
   
 }
 
+void defineObstacleEmptyCorners(byte displayColour) {
+  // Top wall
+  defineObstacle(0, 5, 21, 1, displayColour);
+  // Bottom wall
+  defineObstacle(31, 6, 21, 1, displayColour);
+
+  // Left wall
+  defineObstacle(5, 0, 1, 21, displayColour);
+  // Right wall
+  defineObstacle(5, 31, 1, 21, displayColour); 
+}
+
 void defineObstacleCorners(byte displayColour) {
+
+   // Top wall
+  defineObstacle(0,0,12,1,displayColour);
+  defineObstacle(0,19,12,1,displayColour);
+
+  // Left wall
+  defineObstacle(0,0,1,12,displayColour);
+  defineObstacle(19,0,1,12,displayColour);
+
+  // Bottom wall
+  defineObstacle(31,0,12,1,displayColour);
+  defineObstacle(31,19,13,1,displayColour);
+
+  // Right wall
+  defineObstacle(0,31,1,12,displayColour);
+  defineObstacle(19,31,1,13,displayColour);
+
+  
+  /*
    // Top wall
   defineObstacle(0,0,10,1,displayColour);
   defineObstacle(0,21,10,1,displayColour);
@@ -179,6 +211,7 @@ void defineObstacleCorners(byte displayColour) {
   // Right wall
   defineObstacle(0,31,1,10,displayColour);
   defineObstacle(21,31,1,11,displayColour);
+  */
 }
 
 

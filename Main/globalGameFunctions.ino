@@ -120,18 +120,36 @@ void playersChoices() {
 void choseDifficultyLevel() {
   
   // If we have not updated the difficulty level since a bit of time
-  if(millis() - lastDifficultyLevelUpdate >= difficultyLevelUpdateSpeed) {
+  
+
     // Then we allow it to be updated
-    for(byte playerIndex = 0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
-       // If a player is pushing button 10 and 11 (L and R), change difficulty
-       if(playerButtonPushed[playerIndex][11] == 1 && playerButtonPushed[playerIndex][10] == 1 && colourAvailable[4] == 1) {
-        if(difficultyLevel == 1) {difficultyLevel = 0;}
-        if(difficultyLevel == 0) {difficultyLevel = 1;}
-      }
+    
+    if(difficultyLevel == 0) {
+//      if(millis() - lastDifficultyLevelUpdate >= difficultyLevelUpdateSpeed) {
+          for(byte playerIndex = 0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+             // If a player is pushing button 11 (R), change difficulty
+             if(playerButtonPushed[playerIndex][11] == 1) {
+              difficultyLevel = 1;
+            }
+          }
+        // And we update our last time of update counter :)
+//        lastDifficultyLevelUpdate = millis();
+//      }
     }
-    // And we update our last time of update counter :)
-    lastDifficultyLevelUpdate = millis();
-  }
+  
+    if(difficultyLevel == 1) {
+//      if(millis() - lastDifficultyLevelUpdate >= difficultyLevelUpdateSpeed) {
+        for(byte playerIndex = 0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+           // If a player is pushing button 10 (L), change difficulty
+           if(playerButtonPushed[playerIndex][10] == 1) {
+             difficultyLevel = 0;
+          }
+        }
+        // And we update our last time of update counter :)
+//        lastDifficultyLevelUpdate = millis();
+//      }
+    }
+    
 }
 
 void displayMockSnake(const byte playerID) {
