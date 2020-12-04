@@ -10,8 +10,12 @@ void initializeGame() {
 void startPage() {
   // It displays the word "snake", centered
   manageGlooming();
-  displaySnakeWord(13,7, Glooming);
+  
+  // And makes it glow in Blue if the game is on easy, and red if hard
+  if     (difficultyLevel == 0) {GloomingColour = Blue;}
+  else if(difficultyLevel == 1) {GloomingColour = Red;}
 
+  displaySnakeWord(13,7, Glooming);
 
   // It display the 4 mock snakes around, using their colours and placement
   displayMockSnake(0);
@@ -19,8 +23,9 @@ void startPage() {
   displayMockSnake(2);
   displayMockSnake(3);
 
-  // It keeps player choices open for colours and game-entering
+  // It keeps player choices open for colours and game-entering difficulty
   playersChoices();
+  choseDifficultyLevel();
 
   // And finally, if a player presses start, then the game starts
   expectStartingGame();
@@ -97,15 +102,6 @@ void playersChoices() {
       
     }
 
-     // Player 0 pushing button 10 and 11 (L and R), secret coulour !
-     if(playerButtonPushed[playerIndex][11] == 1 && playerButtonPushed[playerIndex][10] == 1 && colourAvailable[4] == 1) {
-      players[playerIndex].isActive = 1;
-      players[playerIndex].headColour = Purple;
-      players[playerIndex].colour = LightPurple;
-      mockPlayers[playerIndex].headColour = Purple;
-      mockPlayers[playerIndex].colour = LightPurple;
-    }
-
     // Player 0 pushing button 5 (Select)
     if(playerButtonPushed[playerIndex][5] == 1) {
       players[playerIndex].isActive = 0;
@@ -119,6 +115,23 @@ void playersChoices() {
 
   // Use a global "available colour" arrow to let the player chose only available colour
   // And all this is until an active player clicks on start, in which case the game starts with a gamestate change
+}
+
+void choseDifficultyLevel() {
+  
+  // If we have not updated the difficulty level since a bit of time
+  if(millis() - lastDifficultyLevelUpdate >= difficultyLevelUpdateSpeed) {
+    // Then we allow it to be updated
+    for(byte playerIndex = 0; playerIndex < NUMBER_PLAYERS; playerIndex++) {
+       // If a player is pushing button 10 and 11 (L and R), change difficulty
+       if(playerButtonPushed[playerIndex][11] == 1 && playerButtonPushed[playerIndex][10] == 1 && colourAvailable[4] == 1) {
+        if(difficultyLevel == 1) {difficultyLevel = 0;}
+        if(difficultyLevel == 0) {difficultyLevel = 1;}
+      }
+    }
+    // And we update our last time of update counter :)
+    lastDifficultyLevelUpdate = millis();
+  }
 }
 
 void displayMockSnake(const byte playerID) {

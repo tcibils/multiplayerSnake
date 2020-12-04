@@ -63,7 +63,7 @@ const byte LightestBlue = 14;
 
 #define GloomingMin 150
 #define GloomingMax 255
-#define GloomingColour 2                  // Glooming can currently be red, blue or green only
+byte GloomingColour = 2;                  // Glooming can currently be red, blue or green only
 #define gloomingIncreaseRate 3            // Defines glooming speed
 unsigned int GloomingAmount = 150;
 byte GroomingIncrease = 1; // 1 means it increases, 0 that it decreases
@@ -115,7 +115,11 @@ byte playerButtonPushed[NUMBER_PLAYERS][12] = {
 // As LEDMatrix is for display only, this will be a table that'll be checked for the logic etc.
 byte Obstacles[totalDisplayNumberOfRows][totalDisplayNumberOfColumns];
 
-
+// 0 by default, 1 if the players chose so in first phase
+// will pilot the difficulty of the maps
+byte difficultyLevel = 0;
+unsigned long lastDifficultyLevelUpdate = 0;
+#define difficultyLevelUpdateSpeed 500
 
 // ----------------------------------------------------------------------------------------------------
 // -------------------------------------   GAME PARAMETERS   ------------------------------------------

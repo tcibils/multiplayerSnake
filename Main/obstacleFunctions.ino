@@ -6,45 +6,91 @@ void initializeGameObstacles() {
   // Then we use a random number to define what obstacles we'll deal with
   byte randomNumber = random(0,100);
 
-  // In 25% of the cases
-  if(randomNumber < 25)  {
-    // We only put walls
-    defineObstacleWalls(obstacleColour);
-  }
-
-  // In 20% of the cases
-  else if(randomNumber >= 25 && randomNumber < 50) {
-    // We put walls on the corners only, so players will have gates to pass through
-    defineObstacleCorners(obstacleColour);
-  }
-
-  // Below is the fun part, should be around 30%, so up 75
-
-  else if(randomNumber >= 50 && randomNumber < 52 ) {
-    defineObstacleCentralBars(obstacleColour);
-  }
+  if(difficultyLevel == 0) {
+    // In 25% of the cases
+    if(randomNumber < 25)  {
+      // We only put walls
+      defineObstacleWalls(obstacleColour);
+    }
   
-/*
-  else if(randomNumber >= 60 && randomNumber < 65) {
-    // That won't work, because of the player starting positions
-    // defineObstacleSmallerMap();
+    // In 20% of the cases
+    else if(randomNumber >= 25 && randomNumber < 50) {
+      // We put walls on the corners only, so players will have gates to pass through
+      defineObstacleCorners(obstacleColour);
+    }
+  
+    // Below is the fun part, should be around 30%, so up 75
+  
+    else if(randomNumber >= 50 && randomNumber < 52 ) {
+      
+    }
+    
+  /*
+    else if(randomNumber >= 60 && randomNumber < 65) {
+      // That won't work, because of the player starting positions
+      // defineObstacleSmallerMap();
+    }
+    */
+  
+    else if(randomNumber >= 55 && randomNumber < 60) {
+      defineObstacleBigPlus(obstacleColour);
+    }
+  
+    else if(randomNumber >= 60 && randomNumber < 65) {
+      defineObstacleCentralSquare(obstacleColour);
+    }
+  
+      // All remaining cases (should be around 25%)
+    else {
+      // We do nothing and do not put any wall up
+    }
   }
-  */
 
-  else if(randomNumber >= 55 && randomNumber < 60) {
-    defineObstacleBigPlus(obstacleColour);
+  if(difficultyLevel == 1) {
+    if(randomNumber >= 0 && randomNumber < 10) {
+      defineObstacleBigPlus(obstacleColour);
+      defineObstacleCorners(obstacleColour);
+    }
+    else if(randomNumber >= 10 && randomNumber < 20) {
+      defineObstacleBigPlus(obstacleColour);
+      defineObstacleCorners(obstacleColour);
+    }
+    else if(randomNumber >= 20 && randomNumber < 30) {
+      defineObstacleBigPlus(obstacleColour);
+      defineObstacleCorners(obstacleColour);
+    }
+    else if(randomNumber >= 30 && randomNumber < 40) {
+      defineObstacleBigPlus(obstacleColour);
+      defineObstacleCorners(obstacleColour);
+    }
+    else if(randomNumber >= 40 && randomNumber < 50) {
+      defineObstacleBigPlus(obstacleColour);
+      defineObstacleCorners(obstacleColour);   
+    }
+    else if(randomNumber >= 50 && randomNumber < 60) {
+      defineObstacleCorners(obstacleColour);
+      defineObstacleCentralSquare(obstacleColour);            
+    }
+    else if(randomNumber >= 60 && randomNumber < 70) {
+      defineObstacleCorners(obstacleColour);
+      defineObstacleCentralSquare(obstacleColour);            
+    }
+    else if(randomNumber >= 70 && randomNumber < 80) {
+      defineObstacleCorners(obstacleColour);
+      defineObstacleCentralSquare(obstacleColour);            
+    }
+    else if(randomNumber >= 80 && randomNumber < 90) {
+      defineObstacleCorners(obstacleColour);
+      defineObstacleCentralSquare(obstacleColour);            
+    }
+    else if(randomNumber >= 90 && randomNumber < 100) {
+      defineObstacleCorners(obstacleColour);
+      defineObstacleCentralSquare(obstacleColour);            
+    }
+
   }
-
-  else if(randomNumber >= 60 && randomNumber < 65) {
-    defineObstacleCentralSquare(obstacleColour);
-  }
-
-    // All remaining cases (should be around 25%)
-  else {
-    // We do nothing and do not put any wall up
-  }
-
 }
+
 
 
 
